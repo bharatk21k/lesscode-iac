@@ -18,14 +18,6 @@ resource "aws_cloudfront_distribution" "default" {
     cached_methods   = ["HEAD"]
     target_origin_id = var.alb_dns_name
 
-    forwarded_values {
-      query_string = yes
-
-      cookies {
-        forward = "all"
-      }
-    }
-
     viewer_protocol_policy = "allow-all"
     min_ttl                = 0
     default_ttl            = 3600
