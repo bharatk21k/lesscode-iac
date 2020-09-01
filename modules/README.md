@@ -6,8 +6,8 @@ Contain all the terraform scripts to create a complete microservice environment.
 ## In AWS
 ### Cluster
 1. Create an empty fargate cluster. 
-2. Adds an application load. 
-3. Installs a SNI cerficate for the specified domain.
+2. Create and attach an application load balancer. 
+3. Create and install a SNI cerficate for the specified domain.
 
 ### routing
 1. Map route 53 mapping to cluster.
