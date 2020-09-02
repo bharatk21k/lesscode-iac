@@ -40,9 +40,6 @@ module "cluster" {
     # domain name like dev.example.com
     domain = var.domain
     
-    # zone id of the hosted domain in route 53
-    zoneid = var.zoneid
-
     # aws region, in whihc this cluster will be created. e.g. "us-west-1"
     aws_region = var.aws_region
 
