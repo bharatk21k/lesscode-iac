@@ -136,7 +136,7 @@ Cluster module create a brand new fargate cluster.
 
 1. Creates an empty fargate cluster. No task or service definition yet. 
 2. Creates and attach an application load balancer. 
-3. Creates and installs a SNI cerficate for the specified domain.
+3. Installs sepcified SNI cerficate.
 
 #### routing
 Routing module maps the domain name via Route53 to CF/ ALB.
