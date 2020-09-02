@@ -19,7 +19,7 @@ resource "aws_alb_listener" "default" {
 
     fixed_response {
       content_type = "text/plain"
-      message_body = "Lesscode!"
+      message_body = "Powered by Lesscode!"
       status_code  = "200"
     }
   }
