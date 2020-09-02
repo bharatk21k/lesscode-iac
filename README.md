@@ -8,7 +8,7 @@ build and deployment of apis, UIs and Q services.
 
 # Under the hood
 ## Microservice
-Contain all the terraform scripts to create a complete microservice environment.
+Contain all the terraform scripts to create a complete microservice environment from scratch.
 ### In AWS
 ![IAC](IAC.png)
 #### cert
