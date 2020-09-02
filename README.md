@@ -12,7 +12,7 @@ Contain all the terraform scripts to create a complete microservice environment.
 ### In AWS
 ![IAC](IAC.png)
 #### cert
-Cert module helps create a valid ACM. If you are going to use 'Route' module, which used cloufront to route requests voa Route53 to ALB, you will habe to create certificate in "US_EAST_1" region only.
+Cert module helps create a valid ACM. If you are going to use 'route' module, which uses cloufront to route requests to ALB, you will have to create certificate in "US_EAST_1" region only.
 
 1. It create ACM in the specified region
 2. It uodate Route53 entries to auto verify the created cert.
