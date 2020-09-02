@@ -77,6 +77,47 @@ module "routing" {
 
 }
 ```
+
+vars.tf
+```
+variable "aws_region" {
+    type = string
+    default = "us-east-1"
+}
+
+variable "aws_cert_region" {
+    type = string
+    default = "us-east-1"
+}
+variable "env" {
+    type = string
+    default = "dev"
+}
+
+
+variable "zoneid" {
+    type = string
+    default = "Z3DW7T7D7J20Z4"
+}
+
+variable "domain" {
+    type =  string 
+    default = "dev.vethospital.io"
+}
+
+variable "ecs_cluster_name" {
+    type = string
+    default = "main-dev-us-west-1"
+}
+```
+
+outputs.tf
+```
+output "alb_dns_name" {
+  value = "${module.ms-cluster.alb_dns_name}"
+}
+```
+
 # Under the hood
 ## Microservice
 Contain all the terraform scripts to create a complete microservice environment from scratch.
