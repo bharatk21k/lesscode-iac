@@ -1,4 +1,9 @@
+# Background
+Lesscode is a playground for me to explore tools and techniques for writing less code to solve complex problems.
+
+
 # Overview
+With the advancemet in cloud technlogies, IAC (Infrascructire As Code) was inveitable. 
 The goal of this repo is to provide terraform modules to create microservice and serverless infrastructure. 
 It is an opinionated framework that helps user create a simple/ single region (multiple AZ) infrastructure for quick
 build and deployment of apis, UIs and Q services.
