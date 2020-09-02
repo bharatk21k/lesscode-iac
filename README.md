@@ -3,7 +3,6 @@ The goal of this repo is to provide terraform modules to create microservice and
 It is an opinionated framework that helps user create a simple/ single region (multiple AZ) infrastructure for quick
 build and deployment of apis, UIs and Q services.
 
-![IAC](IAC.png)
 
 # Usage
 
@@ -11,7 +10,7 @@ build and deployment of apis, UIs and Q services.
 ## module : microservice
 Contain all the terraform scripts to create a complete microservice environment.
 ### In AWS
-
+![IAC](IAC.png)
 #### cert
 Cert module helps create a valid ACM. If you are going to use 'Route' module, which used cloufront to route requests voa Route53 to ALB, you will habe to create certificate in "US_EAST_1" region only.
 
