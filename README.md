@@ -10,7 +10,73 @@ build and deployment of apis, UIs and Q services.
 
 
 # Usage
+main.tf
+```
+# 1st create a valid cert. Since we are using CF to map custom domain (via route module), we have to create it in us-east-1 region.
+module "cert" {
+    source = "github.com/van001/lciac//microservice/aws/cert"
+    
+    # domain name like dev.example.com
+    domain = var.domain
+    
+    # zone id of the hosted domain in route 53
+    zoneid = var.zoneid
 
+    # aws region, in whihc this cluster will be created. e.g. "us-west-1"
+    aws_region = var.aws_cert_region
+
+    # development environment .e.g dev, stage, prod etc
+    env = var.env
+
+}
+
+# Then create a new fargate cluster
+module "ms-cluster" {
+    source = "github.com/van001/lciac//microservice/aws/cluster"
+    
+    # domain name like dev.example.com
+    domain = var.domain
+    
+    # zone id of the hosted domain in route 53
+    zoneid = var.zoneid
+
+    # aws region, in whihc this cluster will be created. e.g. "us-west-1"
+    aws_region = var.aws_region
+
+    # development environment .e.g dev, stage, prod etc
+    env = var.env
+
+    # cluster name
+    ecs_cluster_name = var.ecs_cluster_name
+
+    # cert
+    acm_certificate = module.cert.acm_certificate
+}
+
+# Then map the routing via route 53
+module "routing" {
+    source = "github.com/van001/lciac//microservice/aws/routing"
+    
+    # domain name like dev.example.com
+    domain = var.domain
+    
+    # zone id of the hosted domain in route 53
+    zoneid = var.zoneid
+
+    # aws region, in whihc this cluster will be created. e.g. "us-west-1"
+    aws_region = var.aws_region
+
+    # development environment .e.g dev, stage, prod etc
+    env = var.env
+
+    # Alb name
+    alb_dns_name = module.ms-cluster.alb_dns_name
+
+    # ACM certificate id
+    acm_certificate = module.cert.acm_certificate
+
+}
+```
 # Under the hood
 ## Microservice
 Contain all the terraform scripts to create a complete microservice environment from scratch.
