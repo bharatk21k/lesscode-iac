@@ -5,7 +5,7 @@ output "alb_dns_name" {
 }
 
 output "acm_certificate"{
-  value = "${aws_acm_certificate.default.id}
+  value = "${aws_acm_certificate.default.id}"
 }
 
 
