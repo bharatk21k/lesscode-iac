@@ -1,9 +1,3 @@
-provider "aws" {
-  shared_credentials_file = "$HOME/.aws/credentials"
-  profile                 = "certs"
-  region                  = "us-east-1"
-}
-
 resource "aws_acm_certificate" "default"{
   domain_name       = var.domain
   validation_method = "DNS"
