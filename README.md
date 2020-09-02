@@ -122,7 +122,7 @@ output "alb_dns_name" {
 
 # Under the hood
 ## Microservice
-Contain all the terraform scripts to create a complete microservice environment from scratch.
+Contain all the terraform scripts to create a complete microservice environment from scratch. 
 ### In AWS
 ![IAC](IAC.png)
 #### cert
@@ -134,7 +134,7 @@ Cert module helps create a valid ACM. If you are going to use 'route' module, wh
 #### cluster
 Cluster module create a brand new fargate cluster.
 
-1. Creates an empty fargate cluster. 
+1. Creates an empty fargate cluster. No task or service definition yet. 
 2. Creates and attach an application load balancer. 
 3. Creates and installs a SNI cerficate for the specified domain.
 
