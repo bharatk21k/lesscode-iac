@@ -129,15 +129,15 @@ Contain all the terraform scripts to create a complete microservice environment 
 #### cert
 Cert module helps create a valid ACM. If you are going to use 'route' module, which uses cloufront to route requests to ALB, you will have to create certificate in "US_EAST_1" region only.
 
-1. It create ACM in the specified region
-2. It uodate Route53 entries to auto verify the created cert.
+1. Creates an ACM in the specified region
+2. Updates Route53 entries to auto verify the created cert.
 
 #### cluster
 Cluster module create a brand new fargate cluster.
 
-1. Create an empty fargate cluster. 
-2. Create and attach an application load balancer. 
-3. Create and install a SNI cerficate for the specified domain.
+1. Creates an empty fargate cluster. 
+2. Creates and attach an application load balancer. 
+3. Creates and installs a SNI cerficate for the specified domain.
 
 #### routing
 Routing module maps the domain name via Route53 to CF/ ALB.
@@ -147,6 +147,6 @@ Routing module maps the domain name via Route53 to CF/ ALB.
 #### service
 Service module helps you create a brand new service. Service can be API or MQ (Message Q listeners).
 
-1. Create a new service.
-2. Create a task definition in the secified argate cluster
+1. Creates a new service.
+2. Creates a task definition in the specified fargate cluster
 
