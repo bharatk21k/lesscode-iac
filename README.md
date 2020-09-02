@@ -3,6 +3,8 @@ The goal of this repo is to provide terraform modules to create microservice and
 It is an opinionated framework that helps user create a simple/ single region (multiple AZ) infrastructure for quick
 build and deployment of apis, UIs and Q services.
 
+![IAC](IAC.png)
+
 # Usage
 
 # Under the hood

@@ -9,7 +9,6 @@ variable "zoneid" {
 
 variable "domain" {
     type = string
-    default = "main.dev.vethospital.io"
 }
 
 variable "env" {
