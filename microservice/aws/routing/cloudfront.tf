@@ -26,10 +26,10 @@ resource "aws_cloudfront_distribution" "default" {
 
     forwarded_values {
       query_string = true
-      headers      = ["Origin"]
+      headers      = ["Origin","Accept-Encoding","Authorization","Host","CloudFront-Viewer-Country"]
 
       cookies {
-        forward = "none"
+        forward = "all"
       }
     }
 
