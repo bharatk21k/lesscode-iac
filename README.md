@@ -10,6 +10,9 @@ build and deployment of apis, UIs and Q services.
 
 
 # Usage
+
+Currently it only supports building a microservice in AWS. So create the follwoing terraform scripts for a new cluster deloyment.
+
 main.tf
 ```
 # 1st create a valid cert. Since we are using CF to map custom domain (via route module), we have to create it in us-east-1 region.
