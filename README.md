@@ -10,13 +10,13 @@ build and deployment of apis, UIs and Q services.
 Contain all the terraform scripts to create a complete microservice environment.
 ### In AWS
 
-#### Cert
+#### cert
 Cert module helps create a valid ACM. If you are going to use 'Route' module, which used cloufront to route requests voa Route53 to ALB, you will habe to create certificate in "US_EAST_1" region only.
 
 1. It create ACM in the specified region
 2. It uodate Route53 entries to auto verify the created cert.
 
-#### Cluster
+#### cluster
 Cluster module create a brand new fargate cluster.
 
 1. Create an empty fargate cluster. 
