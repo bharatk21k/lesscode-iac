@@ -31,7 +31,7 @@ module "cert" {
 }
 
 # Then create a new fargate cluster
-module "ms-cluster" {
+module "cluster" {
     source = "github.com/van001/lciac//microservice/aws/cluster"
     
     # domain name like dev.example.com
