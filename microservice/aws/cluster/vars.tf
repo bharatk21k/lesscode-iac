@@ -20,6 +20,10 @@ variable "ecs_cluster_name" {
     type = string
 }
 
+variable "acm_certificate" {
+    type = string
+}
+
 variable "az_count" {
     default = 2
 }
