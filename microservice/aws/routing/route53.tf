@@ -8,6 +8,6 @@ resource "aws_route53_record" "default" {
     weight = 10
   }
 
-  set_identifier = aws_cloudfront_distribution.default.id
-  records = [aws_cloudfront_distribution.default.id]
+  set_identifier = aws_cloudfront_distribution.default.domain_name
+  records = [aws_cloudfront_distribution.default.domain_name]
 }
