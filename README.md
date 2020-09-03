@@ -33,6 +33,7 @@ The **microservice** stack conatains :
 #### 1. Create empty microservice 
 
 If you want to create an empty microservice stack and deploy API, MQ services (later), create the scripts below. 
+
 This project is a part of bigger initiative on how to build a brand new micro services with contract 1st development.
 
 Currently it only supports building a microservice in AWS.
