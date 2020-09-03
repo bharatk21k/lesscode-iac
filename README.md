@@ -8,8 +8,11 @@ Lesscode is a playground for me to explore tools and techniques for writing less
 The goal of this repo is to provide terraform modules to create/ destroy a microservice and serverless infrastructure stack. 
 It does not create/destroy any data stack (yet). Feel free to clone n add modules to do that.
 
-It is an opinionated framework that helps user create a simple/ single region (multiple AZ) infrastructure for quick
+It is an opinionated framework, which helps to automate the creation and destruction of a microservice/ serverless, single region (multiple AZ) infrastructure for quick
 build and deployment of apis, UIs and Q services.
+
+If you are not writing a monolithic application then you are either writing a service oriented (SOA) or microservice applications. The microservice it builds uses :
+1. **AWS Fargate** for orchestration and management of containers & alb for service discovery 
 
 
 # Usage
