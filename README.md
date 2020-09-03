@@ -14,8 +14,13 @@ build and deployment of apis, UIs and Q services.
 If you are not writing a monolithic application then you are either writing a service oriented (SOA) or microservice applications. 
 
 The **microservice** it builds uses :
+
 1. **AWS Fargate** for orchestration and management of containers. It assumes that you are doing container (docker) based deployment.
-2. **AWS ALB (Application load balancer)** for routing (via path) and service discovery (using DNS and path)
+2. **AWS ALB (Application load balancer)** for availibility, routing (via path) and service discovery (using DNS and path). Again, assumption here is that you are building a small to mid-size applications with 10s-100s of servers.
+3. **Route53** and **Cloudfront** for external discovery and CDN routing.
+
+
+
 
 
 # Usage
