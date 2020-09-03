@@ -11,7 +11,8 @@ It does not create/destroy any data stack (yet). Feel free to clone n add module
 It is an opinionated framework, which helps to automate the creation and destruction of a microservice/ serverless, single region (multiple AZ) infrastructure for quick
 build and deployment of apis, UIs and Q services.
 
-If you are not writing a monolithic application then you are either writing a service oriented (SOA) or microservice applications. The microservice it builds uses :
+If you are not writing a monolithic application then you are either writing a service oriented (SOA) or microservice applications. 
+The **microservice** it builds uses :
 1. **AWS Fargate** for orchestration and management of containers
 2. **AWS ALB (Application load balancer)** for routing (via path) and service discovery (using DNS and path)
 
