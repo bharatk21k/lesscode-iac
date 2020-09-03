@@ -19,6 +19,8 @@ The **microservice** it builds uses :
 2. **AWS ALB (Application load balancer)** for availibility, routing (via path) and service discovery (using DNS and path). Again, assumption here is that you are building a small to mid-size applications with 10s-100s of servers.
 3. **Route53** and **Cloudfront** for external discovery and CDN routing.
 
+![IAC](IAC.png)
+
 
 
 
@@ -138,7 +140,7 @@ output "alb_dns_name" {
 ## Microservice
 Contain all the terraform scripts to create a complete microservice environment from scratch. 
 ### In AWS
-![IAC](IAC.png)
+
 #### cert
 Cert module helps create a valid ACM. If you are going to use 'route' module, which uses cloufront to route requests to ALB, you will have to create certificate in "US_EAST_1" region only.
 
