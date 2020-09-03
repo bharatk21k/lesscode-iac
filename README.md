@@ -12,7 +12,7 @@ It does not create/destroy any messaging, data n obervability (yet) stack. Feel 
 It is an opinionated framework/stack, which helps to automate the creation and destruction of a microservice/ serverless infrastructure for quick
 build and deployment of APIs, UIs and MQ(Message Q) services. It is currently limited to single region for availibility.
 
-If you are not writing a **monolithic** application then you are either writing a service oriented **(SOA)** or a **microservice** or a **serverless** applications. 
+If you are not writing a **monolithic** application then you are either writing a service oriented **(SOA)** or a **microservice** or a **serverless** application. Wouldn't it be nice if you could create/destroy those infrastructure on demand? That's the motivation behid this project.
 
 The **microservice** stack conatains :
 
