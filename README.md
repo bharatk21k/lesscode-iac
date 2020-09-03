@@ -1,5 +1,6 @@
 # Background
-Lesscode is a playground for me to explore tools and techniques for writing less code to solve complex problems.
+Lesscode is a playground for me to explore tools and techniques for writing less code to solve complex problems. 
+Please feel free to share your comments.
 
 
 # Overview
