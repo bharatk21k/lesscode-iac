@@ -48,7 +48,7 @@ module "cert" {
     # zone id of the hosted domain in route 53
     zoneid = var.zoneid
 
-    # aws region, in whihc this cluster will be created. e.g. "us-west-1"
+    # aws region, in which this cluster will be created. e.g. "us-west-1"
     region = var.cert_region
 
     # development environment .e.g dev, stage, prod etc
@@ -63,7 +63,7 @@ module "cluster" {
     # domain name like dev.example.com
     domain = var.domain
     
-    # aws region, in whihc this cluster will be created. e.g. "us-west-1"
+    # aws region, in which this cluster will be created. e.g. "us-west-1"
     region = var.region
 
     # development environment .e.g dev, stage, prod etc
