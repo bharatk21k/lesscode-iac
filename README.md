@@ -3,7 +3,7 @@ Lesscode is a playground for me to explore tools and techniques for writing less
 
 
 # Overview
-*With the advancemet in cloud technologies, IAC (Infrascructire As Code) was inveitable.*
+*With the advancemet in cloud technology, IAC (Infrascructire As Code) was inveitable.*
 
 The goal of this repo is to provide terraform modules to create/ destroy a microservice and serverless infrastructure stack. 
 It does not create/destroy any data stack (yet). Feel free to clone n add modules to do that.
