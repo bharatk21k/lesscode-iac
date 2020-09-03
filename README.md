@@ -14,12 +14,15 @@ build and deployment of APIs, UIs and MQ(Message Q) services.
 
 If you are not writing a **monolithic** application then you are either writing a service oriented **(SOA)** or a **microservice** or a **serverless** applications. 
 
-The **microservice** it builds uses :
+The **microservice** stack conatains :
 
 1. **AWS Fargate** for orchestration and management of containers. It assumes that you are doing container (docker) based deployment.
 2. **AWS ALB (Application load balancer)** for availibility, routing (via path) and service discovery (using DNS and path). Again, assumption here is that you are building a small to mid-size applications with 10s-100s of servers.
 3. **Route53** and **Cloudfront** for external discovery and CDN routing.
 4. **VPC**, **ACM**, **SecurityGroups**, **IAM** for isolation and security.
+
+#### Assumptions:
+1. You are only using AWS managed resources like : dynamodb, rds, sqs, sns etc..
 
 ![IAC](IAC.png)
 
