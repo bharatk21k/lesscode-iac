@@ -12,7 +12,7 @@ It does not create/destroy any messaging, data n obervability (yet) stack. Feel 
 It is an opinionated framework/stack, which helps to automate the creation and destruction of a microservice/ serverless infrastructure for quick
 build and deployment of APIs, UIs and MQ(Message Q) services. It is currently limited to single region for availibility.
 
-If you are not writing a **monolithic** application then you are either writing a service oriented **(SOA)** or a **microservice** or a **serverless** application. Wouldn't it be nice if you could create/destroy those infrastructures on demand? That's the motivation behid this project.
+If you are not writing a **monolithic** application then you are either writing a service oriented **(SOA)** or a **microservice** or a **serverless** application. Wouldn't it be nice if you could create/destroy those infrastructures on demand? That's the motivation behind this project.
 
 The **microservice** stack conatains :
 
@@ -20,6 +20,7 @@ The **microservice** stack conatains :
 2. **AWS ALB (Application load balancer)** for availibility, routing (via path) and service discovery (using DNS and path). Again, assumption here is that you are building a small to mid-size applications with 10s-100s of servers.
 3. **Route53** and **Cloudfront** for external discovery and CDN routing.
 4. **VPC**, **ACM**, **SecurityGroups**, **IAM** for isolation and security.
+5. ***Cloudwatch*** for monitoring logs & metrics.
 
 #### Assumptions:
 1. You are only using AWS managed resources like : dynamodb, rds, sqs, sns etc..
