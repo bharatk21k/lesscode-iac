@@ -5,7 +5,7 @@ Please feel free to share your comments.
 # Overview
 *With the advancemet in cloud technology, IAC (Infrascructire As Code) was inveitable.*
 
-The goal of this repo is to provide terraform modules to create/ destroy a simple microservice and serverless infrastructure stack. 
+The goal of this project is to provide terraform modules to create/ destroy a simple microservice and serverless infrastructure stack. 
 It does not create/destroy any messaging, data n obervability (yet) stack. Feel free to clone n add modules to do that.
 
 It is an opinionated framework/stack, which helps to automate the creation and destruction of a microservice/ serverless infrastructure for quick
