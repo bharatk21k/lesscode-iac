@@ -29,8 +29,8 @@ The **microservice** stack conatains :
 
 # Usage
 
-## For mecroservice creation & deployment
-### Create empty microservice 
+### For mecroservice creation & deployment
+#### Create empty microservice 
 
 If you want to create an empty microservice stack and deploy API, MQ services (later), create the scripts below.
 Currently it only supports building a microservice in AWS.
@@ -145,7 +145,7 @@ terraform init
 terraform apply
 ```
 
-### Add services
+#### Add services
 Coming soon...
 
 # Modules
