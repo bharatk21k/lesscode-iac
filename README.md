@@ -31,10 +31,10 @@ The **microservice** stack conatains :
 
 ### Empty Microservice 
 
-If you want to create an empty microservice stack and deploy API, MQ services (later), use the scripts below.
+If you want to create an empty microservice stack and deploy API, MQ services (later), create the scripts below.
 Currently it only supports building a microservice in AWS.
 
-main.tf
+**main.tf**
 ```
 # 1st create a valid cert. Since we are using CF to map custom domain (via route module), we have to create it in us-east-1 region.
 module "cert" {
@@ -99,7 +99,7 @@ module "routing" {
 }
 ```
 
-vars.tf
+**vars.tf**
 ```
 variable "region" {
     type = string
@@ -132,7 +132,7 @@ variable "ecs_cluster_name" {
 }
 ```
 
-outputs.tf
+**outputs.tf**
 ```
 output "alb_dns_name" {
   value = "${module.ms-cluster.alb_dns_name}"
