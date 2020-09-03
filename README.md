@@ -138,6 +138,12 @@ output "alb_dns_name" {
   value = "${module.ms-cluster.alb_dns_name}"
 }
 ```
+To run :
+```
+terraform init
+terraform apply
+```
+
 ### Adding services
 Coming soon...
 
