@@ -12,7 +12,8 @@ It is an opinionated framework, which helps to automate the creation and destruc
 build and deployment of apis, UIs and Q services.
 
 If you are not writing a monolithic application then you are either writing a service oriented (SOA) or microservice applications. The microservice it builds uses :
-1. **AWS Fargate** for orchestration and management of containers & alb for service discovery 
+1. **AWS Fargate** for orchestration and management of containers
+2. **AWS ALB (Application load balancer)** for routing (via path) and service discovery (using DNS and path)
 
 
 # Usage
