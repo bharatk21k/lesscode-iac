@@ -31,7 +31,8 @@ The **microservice** stack conatains :
 
 ### Microservice 
 
-Currently it only supports building a microservice in AWS. So create the follwoing terraform scripts for a new cluster deloyment.
+If you want to create a microservice infrastruture and deploy API, MQ service, use the scripts below.
+Currently it only supports building a microservice in AWS.
 
 main.tf
 ```
@@ -138,32 +139,34 @@ output "alb_dns_name" {
 }
 ```
 
-# Under the hood
+# Modules
 ## Microservice
 Contain all the terraform scripts to create a complete microservice environment from scratch. 
 ### In AWS
 
-#### cert
+#### [cert](https://github.com/van001/lciac/tree/master/microservice/aws/cert)
 Cert module helps create a valid ACM. If you are going to use 'route' module, which uses cloufront to route requests to ALB, you will have to create certificate in "US_EAST_1" region only.
 
 1. Creates an ACM in the specified region
 2. Updates Route53 entries to auto verify the created cert.
 
-#### cluster
+#### [cluster](https://github.com/van001/lciac/tree/master/microservice/aws/cluster)
 Cluster module create a brand new fargate cluster.
 
 1. Creates an empty fargate cluster. No task or service definition yet. 
 2. Creates and attach an application load balancer. 
 3. Installs sepcified SNI certificate.
 
-#### routing
+#### [routing](https://github.com/van001/lciac/tree/master/microservice/aws/routing)
 Routing module maps the domain name via Route53 to CF/ ALB.
 
 1. Map route 53 mapping to cluster.
 
-#### service
+#### [service/api](https://github.com/van001/lciac/tree/master/microservice/aws/service/api)
 Service module helps you create a brand new service. Service can be API or MQ (Message Q listeners).
 
 1. Creates a new service.
-2. Creates a task definition in the specified fargate cluster
+2. Creates a task definition in the specified fargate cluster.
+3. Create a ECS repository for the specified service.
+
 
