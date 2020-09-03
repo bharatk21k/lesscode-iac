@@ -21,7 +21,7 @@ The **microservice** stack conatains :
 3. **Route53** and **Cloudfront** for external discovery and CDN routing.
 4. **VPC**, **ACM**, **SecurityGroups**, **IAM** for isolation and security.
 5. **Cloudwatch** for monitoring logs, metrics and dashboards.
-6. For **Configuration** management, we recommend you bake then into your container and for **Asyn communication** we recommend using sns/sqs.
+6. For **Configuration** management, it is recommended you bake them into the container.
 
 
 ![IAC](IAC.png)
