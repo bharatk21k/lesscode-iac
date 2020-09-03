@@ -6,12 +6,12 @@ Lesscode is a playground for me to explore tools and techniques for writing less
 *With the advancemet in cloud technology, IAC (Infrascructire As Code) was inveitable.*
 
 The goal of this repo is to provide terraform modules to create/ destroy a simple microservice and serverless infrastructure stack. 
-It does not create/destroy any data stack (yet). Feel free to clone n add modules to do that.
+It does not create/destroy any messaging, data n obervability (yet) stack. Feel free to clone n add modules to do that.
 
 It is an opinionated framework, which helps to automate the creation and destruction of a microservice/ serverless, single region (multiple AZ) infrastructure for quick
 build and deployment of APIs, UIs and MQ(Message Q) services.
 
-If you are not writing a **monolithic** application then you are either writing a service oriented **(SOA)** or **microservice** or **serverless** applications. 
+If you are not writing a **monolithic** application then you are either writing a service oriented **(SOA)** or a **microservice** or a **serverless** applications. 
 
 The **microservice** it builds uses :
 
