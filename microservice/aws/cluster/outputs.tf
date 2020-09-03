@@ -5,7 +5,7 @@ output "alb_dns_name" {
 }
 
 output "cluster_arn" {
-  value = "${aws_ecs_cluster.main.arn}
+  value = "${aws_ecs_cluster.main.arn}"
 }
 
 
