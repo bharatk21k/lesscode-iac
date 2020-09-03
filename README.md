@@ -37,7 +37,8 @@ Currently it only supports building a microservice in AWS.
 
 **main.tf**
 ```
-# 1st create a valid cert. Since we are using CF to map custom domain (via route module), we have to create it in us-east-1 region.
+# 1st create a valid cert suing ACM. 
+# Since we are using Clodfront to map custom domain (via route module), we have to create it in "US_EAST_1" region.
 module "cert" {
     source = "github.com/van001/lciac//microservice/aws/cert"
     
@@ -55,7 +56,7 @@ module "cert" {
 
 }
 
-# Then create a new fargate cluster
+# Then create a new Fargate cluster
 module "cluster" {
     source = "github.com/van001/lciac//microservice/aws/cluster"
     
@@ -75,7 +76,7 @@ module "cluster" {
     acm_certificate = module.cert.acm_certificate
 }
 
-# Then map the routing via route 53
+# Then map the routing via Route 53/ Cloudfront.
 module "routing" {
     source = "github.com/van001/lciac//microservice/aws/routing"
     
