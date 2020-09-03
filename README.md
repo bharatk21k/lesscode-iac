@@ -9,8 +9,8 @@ Please feel free to share your comments.
 The goal of this repo is to provide terraform modules to create/ destroy a simple microservice and serverless infrastructure stack. 
 It does not create/destroy any messaging, data n obervability (yet) stack. Feel free to clone n add modules to do that.
 
-It is an opinionated framework, which helps to automate the creation and destruction of a microservice/ serverless, single region (multiple AZ) infrastructure for quick
-build and deployment of APIs, UIs and MQ(Message Q) services.
+It is an opinionated framework/stack, which helps to automate the creation and destruction of a microservice/ serverless infrastructure for quick
+build and deployment of APIs, UIs and MQ(Message Q) services. It is currently limited to single region for availibility.
 
 If you are not writing a **monolithic** application then you are either writing a service oriented **(SOA)** or a **microservice** or a **serverless** applications. 
 
