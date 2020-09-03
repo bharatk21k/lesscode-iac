@@ -29,9 +29,9 @@ The **microservice** stack conatains :
 
 # Usage
 
-### Microservice 
+### Empty Microservice 
 
-If you want to create a microservice infrastruture and deploy API, MQ service, use the scripts below.
+If you want to create an empty microservice stack and deploy API, MQ services (later), use the scripts below.
 Currently it only supports building a microservice in AWS.
 
 main.tf
@@ -138,6 +138,8 @@ output "alb_dns_name" {
   value = "${module.ms-cluster.alb_dns_name}"
 }
 ```
+### Adding services
+Coming soon...
 
 # Modules
 ## Microservice
