@@ -47,7 +47,7 @@ module "cert" {
     zoneid = var.zoneid
 
     # aws region, in whihc this cluster will be created. e.g. "us-west-1"
-    aws_region = var.aws_cert_region
+    region = var.cert_region
 
     # development environment .e.g dev, stage, prod etc
     env = var.env
@@ -62,7 +62,7 @@ module "cluster" {
     domain = var.domain
     
     # aws region, in whihc this cluster will be created. e.g. "us-west-1"
-    aws_region = var.aws_region
+    region = var.region
 
     # development environment .e.g dev, stage, prod etc
     env = var.env
@@ -85,7 +85,7 @@ module "routing" {
     zoneid = var.zoneid
 
     # aws region, in whihc this cluster will be created. e.g. "us-west-1"
-    aws_region = var.aws_region
+    region = var.region
 
     # development environment .e.g dev, stage, prod etc
     env = var.env
@@ -101,7 +101,7 @@ module "routing" {
 
 vars.tf
 ```
-variable "aws_region" {
+variable "region" {
     type = string
     default = "us-east-1"
 }

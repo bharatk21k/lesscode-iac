@@ -23,7 +23,7 @@ data "template_file" "api_store" {
     app_port       = var.app_port
     fargate_cpu    = var.fargate_cpu
     fargate_memory = var.fargate_memory
-    aws_region     = var.aws_region
+    region     = var.region
   }
 }
 

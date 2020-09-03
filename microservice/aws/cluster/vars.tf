@@ -1,5 +1,5 @@
 # variables
-variable "aws_region" {
+variable "region" {
     type = string
 }
 

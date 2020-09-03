@@ -3,7 +3,7 @@ variable "env"{
     type = string
 }
 
-variable "aws_region" {
+variable "region" {
     type = string
 }
 
@@ -20,6 +20,6 @@ variable "alb_dns_name" {
 }
 
 
-variable "acm_certificate"{
+variable "acm_certificate" {
     type = string
 }

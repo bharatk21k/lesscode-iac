@@ -18,7 +18,7 @@ resource "aws_cloudwatch_dashboard" "main" {
              "stacked": false,
              "period": 60,
              "stat": "Sum",
-             "region":"${var.aws_region}",
+             "region":"${var.region}",
              "title":"200_latency"
           }
        },
@@ -34,7 +34,7 @@ resource "aws_cloudwatch_dashboard" "main" {
                   [ { "expression": "SUM(METRICS())", "label": "200_count", "id": "e3" } ]
                ],
                "view": "timeSeries",
-               "region": "${var.aws_region}",
+               "region": "${var.region}",
                "period": 60,
                "stacked": false,
                "stat": "Sum",
