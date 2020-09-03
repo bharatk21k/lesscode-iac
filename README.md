@@ -22,8 +22,6 @@ The **microservice** stack conatains :
 4. **VPC**, **ACM**, **SecurityGroups**, **IAM** for isolation and security.
 5. **Cloudwatch** for monitoring logs, metrics and dashboards.
 
-#### Assumptions:
-1. You are only using AWS managed resources like : dynamodb, rds, sqs, sns etc..
 
 ![IAC](IAC.png)
 
