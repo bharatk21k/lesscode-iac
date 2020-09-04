@@ -18,7 +18,7 @@ output "aws_alb_listener_arn" {
 }
 
 output "subnets_ids" {
-  value = [aws_subnet.main.*.id]
+  value = [aws_subnet.private.*.id]
 }
 
 
