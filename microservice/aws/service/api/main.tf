@@ -16,7 +16,7 @@ resource "aws_cloudwatch_log_stream" "service_log_stream" {
 
 
 data "template_file" "service" {
-  template = file("./templates/ecs/svc-service.json.tpl")
+  template = file("./templates/ecs/taskdef.json.tpl")
 
   vars = {
     app_image      = var.app_image
@@ -57,7 +57,7 @@ resource "aws_ecs_service" "service" {
     container_port   = 8080
   }
 
-  depends_on = [aws_alb_listener.front_end, aws_iam_role_policy_attachment.ecs_task_execution_role]
+  depends_on = [aws_iam_role_policy_attachment.ecs_task_execution_role]
 }
 
 resource "aws_alb_target_group" "service" {
@@ -80,7 +80,7 @@ resource "aws_alb_target_group" "service" {
 
 resource "aws_lb_listener_rule" "service" {
   
-  listener_arn = "${aws_alb_listener.front_end.arn}"
+  listener_arn = "${var.aws_alb_listener_arn}"
   priority     = 99
 
   action {
@@ -90,7 +90,7 @@ resource "aws_lb_listener_rule" "service" {
 
   condition {
     path_pattern {
-      values = ["${var.path}*]
+      values = ["${var.path}*"]
     }
   }
 }

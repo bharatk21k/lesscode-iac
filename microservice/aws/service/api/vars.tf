@@ -1,6 +1,15 @@
+variable "region" {
+    type = string
+    default ="us-east-1"
+}
+
+variable "env" {
+    type = string
+    default = "dev"
+}
 variable "name" {
     type = string
-    default = "test"
+    default = "test-api"
 }
 
 variable "ecs_cluster_name" {
@@ -8,9 +17,9 @@ variable "ecs_cluster_name" {
     default = "main-dev-us-west-1-load-balancer-2104505543.us-east-1.elb.amazonaws.com"
 }
 
-variable "ecs_cluster_arn" {
+variable "aws_alb_listener_arn" {
     type = string
-    default = "arn:aws:ecs:us-east-1:284832936816:cluster/main-dev-us-west-1-cluste"
+    default = "arn:aws:elasticloadbalancing:us-east-1:284832936816:listener/app/main-dev-us-west-1-load-balancer/8ea98e2ffd48c3dc/a6b1a3bdfcf66899"
 }
 
 variable "app_image" {
