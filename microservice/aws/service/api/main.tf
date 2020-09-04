@@ -1,6 +1,6 @@
 # Set up CloudWatch group and log stream and retain logs for 30 days
-resource "aws_cloudwatch_log_group" "api_store_log_group" {
-  name              = "service/${var.name}"
+resource "aws_cloudwatch_log_group" "service_log_group" {
+  name              = "service/${var.ecs_cluster_name}/${var.name}"
   retention_in_days = 30
 
   tags = {
@@ -8,15 +8,15 @@ resource "aws_cloudwatch_log_group" "api_store_log_group" {
   }
 }
 
-resource "aws_cloudwatch_log_stream" "api_store_log_stream" {
-  name           = "${var.ecs_cluster_name}-api-store-log-stream"
-  log_group_name = aws_cloudwatch_log_group.api_store_log_group.name
+resource "aws_cloudwatch_log_stream" "service_log_stream" {
+  name           = "${var.ecs_cluster_name}-${var.name}-log-stream"
+  log_group_name = aws_cloudwatch_log_group.service_log_group.name
 }
 
 
 
-data "template_file" "api_store" {
-  template = file("./templates/ecs/svc-api-store.json.tpl")
+data "template_file" "service" {
+  template = file("./templates/ecs/svc-service.json.tpl")
 
   vars = {
     app_image      = var.app_image
@@ -27,20 +27,20 @@ data "template_file" "api_store" {
   }
 }
 
-resource "aws_ecs_task_definition" "api-store" {
-  family                   = "${var.ecs_cluster_name}-api-store-task"
+resource "aws_ecs_task_definition" "service" {
+  family                   = "${var.ecs_cluster_name}-${var.name}-task"
   execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu                      = var.fargate_cpu
   memory                   = var.fargate_memory
-  container_definitions    = data.template_file.api_store.rendered
+  container_definitions    = data.template_file.service.rendered
 }
 
-resource "aws_ecs_service" "api_store" {
-  name            = "${var.ecs_cluster_name}-api-store-service"
+resource "aws_ecs_service" "service" {
+  name            = "${var.ecs_cluster_name}-${var.name}-service"
   cluster         = aws_ecs_cluster.main.id
-  task_definition = aws_ecs_task_definition.api-store.arn
+  task_definition = aws_ecs_task_definition.service.arn
   desired_count   = var.app_count
   launch_type     = "FARGATE"
   force_new_deployment = "true"
@@ -52,16 +52,16 @@ resource "aws_ecs_service" "api_store" {
   }
 
   load_balancer {
-    target_group_arn = aws_alb_target_group.api_store.id
-    container_name   = "api-store"
+    target_group_arn = aws_alb_target_group.service.id
+    container_name   = "service"
     container_port   = 8080
   }
 
   depends_on = [aws_alb_listener.front_end, aws_iam_role_policy_attachment.ecs_task_execution_role]
 }
 
-resource "aws_alb_target_group" "api_store" {
-  name        = "${var.ecs_cluster_name}-api-store-tg"
+resource "aws_alb_target_group" "service" {
+  name        = "${var.ecs_cluster_name}-service-tg"
   port        = 8080
   protocol    = "HTTP"
   vpc_id      = aws_vpc.main.id
@@ -78,19 +78,19 @@ resource "aws_alb_target_group" "api_store" {
   }
 }
 
-resource "aws_lb_listener_rule" "api_store" {
+resource "aws_lb_listener_rule" "service" {
   
   listener_arn = "${aws_alb_listener.front_end.arn}"
   priority     = 99
 
   action {
     type             = "forward"
-    target_group_arn = "${aws_alb_target_group.api_store.arn}"
+    target_group_arn = "${aws_alb_target_group.service.arn}"
   }
 
   condition {
     path_pattern {
-      values = ["/api/store*"]
+      values = ["${var.path}*]
     }
   }
 }

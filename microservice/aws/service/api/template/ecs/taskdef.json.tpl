@@ -1,22 +1,22 @@
 [
     {
-      "name": "",
-      "image": "612974682886.dkr.ecr.us-west-2.amazonaws.com/api-store:66ac656efd9b763a9d0acbd7fed9855f064b60d3",
+      "name": "${name}",
+      "image": "nginx:latest",
       "cpu": ${fargate_cpu},
       "memory": ${fargate_memory},
       "networkMode": "awsvpc",
       "logConfiguration": {
           "logDriver": "awslogs",
           "options": {
-            "awslogs-group": "/ecs/api-store",
+            "awslogs-group": "${ecs_cluster_name}/ecs/${name}",
             "awslogs-region": "${aws_region}",
-            "awslogs-stream-prefix": "ecs"
+            "awslogs-stream-prefix": "lc"
           }
       },
       "portMappings": [
         {
-          "containerPort": 8080,
-          "hostPort": 8080
+          "containerPort": ${app_port},
+          "hostPort": ${app_port}
         }
       ]
     }
