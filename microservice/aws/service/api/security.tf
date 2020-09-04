@@ -2,13 +2,13 @@
 resource "aws_security_group" "ecs_tasks" {
   name        = "${var.ecs_cluster_name}-ecs-tasks-security-group"
   description = "allow inbound access from the ALB only"
-  vpc_id      = aws_vpc.main.id
+  vpc_id      = var.vpc_id
 
   ingress {
     protocol        = "tcp"
     from_port       = var.app_port
     to_port         = var.app_port
-    security_groups = [aws_security_group.lb.id]
+    security_groups = [var.aws_security_group_lb_id]
   }
 
   egress {

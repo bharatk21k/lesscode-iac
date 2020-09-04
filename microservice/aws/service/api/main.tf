@@ -64,7 +64,7 @@ resource "aws_alb_target_group" "service" {
   name        = "${var.ecs_cluster_name}-service-tg"
   port        = 8080
   protocol    = "HTTP"
-  vpc_id      = aws_vpc.main.id
+  vpc_id      = var.vpc_id
   target_type = "ip"
 
   health_check {

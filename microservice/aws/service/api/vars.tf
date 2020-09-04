@@ -12,9 +12,17 @@ variable "name" {
     default = "test-api"
 }
 
+variable "vpc_id" {
+  default = "vpc-0c1aad88a9d302cf8"
+}
+
 variable "ecs_cluster_name" {
     type = string
     default = "main-dev-us-west-1-load-balancer-2104505543.us-east-1.elb.amazonaws.com"
+}
+
+variable "aws_security_group_lb_id" {
+  default ="sg-07c3c2059b7f4b4e7"
 }
 
 variable "aws_alb_listener_arn" {
@@ -40,6 +48,11 @@ variable "fargate_cpu" {
 variable "fargate_memory" {
     type = string
     default = "2048"
+}
+
+variable "path" {
+    type = string
+    default = "/"
 }
 
 variable "health_check_path" {
