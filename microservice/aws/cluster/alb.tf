@@ -26,7 +26,4 @@ resource "aws_alb_listener" "default" {
       status_code  = "200"
     }
   }
-  tags = {
-    Name = var.ecs_cluster_name
-  }
 }
