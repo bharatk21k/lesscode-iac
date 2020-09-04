@@ -9,7 +9,7 @@ output "aws_security_group_lb_id" {
   value ="${aws_security_group.lb.id}"
 }
 
-output "aws_ecs_cluster.arn" {
+output "ecs_cluster.arn" {
   value = "${aws_ecs_cluster.main.id}"
 }
 
