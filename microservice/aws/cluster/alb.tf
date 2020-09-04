@@ -2,7 +2,7 @@
 
 resource "aws_alb" "main" {
   name            = "${var.ecs_cluster_name}-load-balancer"
-  subnets         = aws_subnet.private.*.id
+  subnets         = aws_subnet.public.*.id
   security_groups = [aws_security_group.lb.id]
   tags = {
     Name = var.ecs_cluster_name
