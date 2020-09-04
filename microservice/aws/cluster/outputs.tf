@@ -6,10 +6,10 @@ output "vpc_id" {
 }
 
 output "aws_security_group_lb_id" {
-  value ="${aws_security_group.lb.id}"
+  value = "${aws_security_group.lb.id}"
 }
 
-output "ecs_cluster.arn" {
+output "ecs_cluster_arn" {
   value = "${aws_ecs_cluster.main.id}"
 }
 
