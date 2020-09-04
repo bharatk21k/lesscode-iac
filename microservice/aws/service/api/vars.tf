@@ -59,3 +59,12 @@ variable "health_check_path" {
     type = string
     default = "/"
 }
+
+variable "subnets_privates_ids" {
+    default = [
+  [
+    "subnet-06b5cc64d8e16bcbf",
+    "subnet-090b6d1ba1f500fba",
+  ],
+]
+}
