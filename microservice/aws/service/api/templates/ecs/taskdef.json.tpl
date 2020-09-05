@@ -1,15 +1,15 @@
 [
     {
       "name": "${name}",
-      "image": "nginx:latest",
+      "image": "${app_image}",
       "cpu": ${fargate_cpu},
       "memory": ${fargate_memory},
       "networkMode": "awsvpc",
       "logConfiguration": {
           "logDriver": "awslogs",
           "options": {
-            "awslogs-group": "${ecs_cluster_name}/ecs/${name}",
-            "awslogs-region": "${aws_region}",
+            "awslogs-group": "${aws_log_group}",
+            "awslogs-region": "${region}",
             "awslogs-stream-prefix": "lc"
           }
       },
