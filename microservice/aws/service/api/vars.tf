@@ -37,7 +37,7 @@ variable "aws_alb_listener_arn" {
 
 variable "app_image" {
     type = string
-    default = "284832936816.dkr.ecr.us-east-1.amazonaws.com/vethospital-api:589e88c587703276951e32ac7bb4b4845c5f8a50"
+    default = "284832936816.dkr.ecr.us-east-1.amazonaws.com/vethospital-api:838dddcc93de10f7599ad96e3f9bcac99470a067"
 }
 
 variable "app_port" {
