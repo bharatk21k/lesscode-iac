@@ -1,3 +1,26 @@
+data "aws_ecs_cluster" "ecs" {
+  cluster_name = "${var.ecs_cluster_name}-cluster"
+
+}
+
+data "aws_alb" "alb" {
+  name = "${var.ecs_cluster_name}-load-balancer"
+}
+
+data "aws_lb_listener" "listener" {
+  load_balancer_arn = data.aws_alb.alb.arn
+  port = var.tls_port
+}
+
+data "aws_subnet_ids" "private" {
+  vpc_id = data.aws_alb.alb.vpc_id
+  tags = {
+    Name = "${var.ecs_cluster_name}"
+  }
+}
+
+
+
 # Set up CloudWatch group and log stream and retain logs for 30 days
 resource "aws_cloudwatch_log_group" "service_log_group" {
   name              = "service/${var.ecs_cluster_name}/${var.name}"
@@ -23,8 +46,8 @@ data "template_file" "service" {
   vars = {
     name                = var.name
     ecs_cluster_name    = var.ecs_cluster_name
-    app_image           = var.app_image
-    app_port            = var.app_port
+    service_image           = var.service_image
+    service_port            = var.service_port
     fargate_cpu         = var.fargate_cpu
     fargate_memory      = var.fargate_memory
     region              = var.region
@@ -45,22 +68,22 @@ resource "aws_ecs_task_definition" "service" {
 
 resource "aws_ecs_service" "service" {
   name            = "${var.ecs_cluster_name}-${var.name}-service"
-  cluster         = var.ecs_cluster_arn
+  cluster         = data.aws_ecs_cluster.ecs.arn
   task_definition = aws_ecs_task_definition.service.arn
-  desired_count   = var.app_count
+  desired_count   = var.service_count
   launch_type     = "FARGATE"
   force_new_deployment = "true"
 
   network_configuration {
     security_groups  = [aws_security_group.ecs_tasks.id]
-    subnets          = var.subnets_privates_ids
+    subnets          = data.aws_subnet_ids.private.ids
     assign_public_ip = true
   }
 
   load_balancer {
     target_group_arn = aws_alb_target_group.service.id
     container_name   = var.name
-    container_port   = var.app_port
+    container_port   = var.service_port
   }
 
   #depends_on = [aws_iam_role_policy_attachment.ecs_task_execution_role]
@@ -68,9 +91,9 @@ resource "aws_ecs_service" "service" {
 
 resource "aws_alb_target_group" "service" {
   name        = "${var.ecs_cluster_name}-${var.name}-tg"
-  port        = var.app_port
+  port        = var.service_port
   protocol    = "HTTP"
-  vpc_id      = var.vpc_id
+  vpc_id      = data.aws_alb.alb.vpc_id
   target_type = "ip"
 
   health_check {
@@ -86,7 +109,7 @@ resource "aws_alb_target_group" "service" {
 
 resource "aws_lb_listener_rule" "service" {
   
-  listener_arn = var.aws_alb_listener_arn
+  listener_arn = data.aws_lb_listener.listener.arn
   priority     = 99
 
   action {

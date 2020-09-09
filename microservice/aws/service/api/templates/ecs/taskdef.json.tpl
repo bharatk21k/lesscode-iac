@@ -1,7 +1,7 @@
 [
     {
       "name": "${name}",
-      "image": "${app_image}",
+      "image": "${service_image}",
       "cpu": ${fargate_cpu},
       "memory": ${fargate_memory},
       "networkMode": "awsvpc",
@@ -15,8 +15,8 @@
       },
       "portMappings": [
         {
-          "containerPort": ${app_port},
-          "hostPort": ${app_port}
+          "containerPort": ${service_port},
+          "hostPort": ${service_port}
         }
       ]
     }
