@@ -93,7 +93,7 @@ resource "aws_ecs_service" "service" {
 }
 
 resource "aws_alb_target_group" "service" {
-  name        = "${var.ecs_cluster_name}-${var.name}-tg"
+  name        = "${var.env}-${var.name}-tg"
   port        = var.service_port
   protocol    = "HTTP"
   vpc_id      = data.aws_alb.alb.vpc_id
