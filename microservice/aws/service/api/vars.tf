@@ -58,3 +58,7 @@ variable "health_check_path" {
     #default = "/api/v1/tennants/123"
 }
 
+variable "dependencies" {
+    type = list
+}
+
