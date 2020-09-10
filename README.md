@@ -27,16 +27,18 @@ The **microservice** stack conatains :
 
 ![IAC](IAC.png)
 
+This project is a part of bigger initiative on how to build a brand new micro services with contract 1st development.
+
+Currently it only supports building a microservice in AWS.
+
 # Usage
 
 ### For microservice creation & deployment
 #### 1. Create empty microservice 
 
-If you want to create an empty microservice stack and deploy API, MQ services (later), create the scripts below. 
+If you want to create an empty microservice stack and deploy API, MQ services (later), create the following script files in a separate directory. 
 
-This project is a part of bigger initiative on how to build a brand new micro services with contract 1st development.
 
-Currently it only supports building a microservice in AWS.
 
 **main.tf**
 ```
