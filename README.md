@@ -148,6 +148,22 @@ To run :
 terraform init
 terraform apply
 ```
+Sample output :
+```
+Outputs:
+
+alb_dns_name = dev-load-balancer-1628960179.us-east-1.elb.amazonaws.com
+aws_alb_listener_arn = arn:aws:elasticloadbalancing:us-east-1:284832936816:listener/app/dev-load-balancer/825d0ad0d22536a5/880ebd191c8409a5
+aws_security_group_lb_id = sg-044677092282bc549
+ecs_cluster_arn = arn:aws:ecs:us-east-1:284832936816:cluster/dev-cluster
+subnets_privates_ids = [
+  [
+    "subnet-0e0eb669084e83414",
+    "subnet-0da006150bd80e07b",
+  ],
+]
+vpc_id = vpc-06fa1b6c91ef0f332
+```
 
 #### 2. Add services
 Coming soon...
