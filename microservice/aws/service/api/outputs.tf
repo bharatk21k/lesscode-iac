@@ -1,15 +1,8 @@
-output "ecs" {
-    value = data.aws_ecs_cluster.ecs
+output "ecs_task" {
+    value = aws_ecs_task_definition.task
 }
 
-output "alb" {
-    value = data.aws_alb.alb
+output "ecs_service" {
+    value = aws_ecs_service.service
 }
 
-output "listener" {
-    value = data.aws_lb_listener.listener
-}
-
-output "subnet" {
-    value = data.aws_subnet_ids.private
-}
