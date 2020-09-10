@@ -60,5 +60,6 @@ variable "health_check_path" {
 
 variable "dependencies" {
     type = list
+    default =[]
 }
 
