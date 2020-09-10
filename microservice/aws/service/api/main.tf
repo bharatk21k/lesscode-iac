@@ -19,6 +19,9 @@ data "aws_subnet_ids" "private" {
   }
 }
 
+data "aws_security_group" "lb_security_group" {
+  name = "${var.ecs_cluster_name}-load-balancer-security-group"
+}
 
 
 # Set up CloudWatch group and log stream and retain logs for 30 days
@@ -41,7 +44,7 @@ resource "docker_image" "mydockerimage" {
 }
 
 data "template_file" "service" {
-  template = file("./templates/ecs/taskdef.json.tpl")
+  template = file("${path.module}/templates/ecs/taskdef.json.tpl")
 
   vars = {
     name                = var.name

@@ -1,25 +1,21 @@
 variable "region" {
     type = string
-    default ="us-east-1"
+    #default ="us-east-1"
 }
 
 variable "env" {
     type = string
-    default = "dev"
-}
-variable "name" {
-    type = string
-    default = "test-api"
+    #default = "dev"
 }
 
 variable "ecs_cluster_name" {
     type = string
-    default = "main-dev-us-west-1"
+    #default = "main-dev-us-west-1"
 }
 
-
-variable "aws_security_group_lb_id" {
-  default ="sg-0760b0162253aaa3b"
+variable "name" {
+    type = string
+    #default = "test-api"
 }
 
 variable "tls_port" {
@@ -29,12 +25,12 @@ variable "tls_port" {
 
 variable "service_image" {
     type = string
-    default = "284832936816.dkr.ecr.us-east-1.amazonaws.com/vethospital-api:1cc4f28e15fede7647db2ce5177f93fe1ef32e49"
+    #default = "284832936816.dkr.ecr.us-east-1.amazonaws.com/vethospital-api:1cc4f28e15fede7647db2ce5177f93fe1ef32e49"
 }
 
 variable "service_port" {
     type = string
-    default = "8090"
+    #default = "8090"
 }
 
 variable "service_count" {
@@ -54,11 +50,11 @@ variable "fargate_memory" {
 
 variable "path" {
     type = string
-    default = "/api"
+    #default = "/api"
 }
 
 variable "health_check_path" {
     type = string
-    default = "/api/v1/tennants/123"
+    #default = "/api/v1/tennants/123"
 }
 
