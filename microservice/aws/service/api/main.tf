@@ -68,7 +68,7 @@ resource "aws_ecs_task_definition" "service" {
   memory                   = var.fargate_memory
   container_definitions    = data.template_file.service.rendered
 
-  depends_on =[data.aws_ecs_cluster.cluster, data.aws_lb_listener.listener]
+  depends_on =[data.aws_ecs_cluster.ecs, data.aws_lb_listener.listener]
 }
 
 resource "aws_ecs_service" "service" {
