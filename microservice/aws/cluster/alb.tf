@@ -21,7 +21,7 @@ resource "aws_alb_listener" "default" {
     type = "fixed-response"
 
     fixed_response {
-      content_type = "text/html."
+      content_type = "text/html"
       message_body = "<html><h2>Powered by <a href='https://github.com/van001/lesscode-iac'> Lesscode! </a></h2></html>"
       status_code  = "200"
     }
