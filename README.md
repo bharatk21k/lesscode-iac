@@ -34,10 +34,12 @@ Currently it only supports building a microservice in AWS.
 # Usage
 
 ### For microservice creation & deployment
-#### 1. Create empty microservice 
+
+#### 1. Create an empty microservice cluster.
 
 If you want to create an empty microservice stack and deploy API, MQ services (later), create the following script files in a separate directory. 
-
+We recommend creating a separte directory for each environmnet/ cluster. Male sure to prefix cluster name with 'env' for readibility sake. Have 
+default cluster for each envs like dev, stage, prod etc.
 
 
 **main.tf**
@@ -167,7 +169,10 @@ subnets_privates_ids = [
 vpc_id = vpc-06fa1b6c91ef0f332
 ```
 
-#### 2. Add services
+#### 2. Create services
+
+For each service, we recommend you create a new directory under each cluster/env name that you created above.
+
 Coming soon...
 
 # Modules
