@@ -174,7 +174,7 @@ vpc_id = vpc-06fa1b6c91ef0f332
 For each service, create a new directory under each cluster/env name that you created above. 
 For each service, create the following scripts : 
 
-main.tf
+**main.tf******
 
 ```
 module "vetoffice-api" {
@@ -220,7 +220,7 @@ module "vetoffice-api" {
 }
 ```
 
-vars.tf
+**vars.tf**
 
 ```
 variable "region" {
@@ -284,7 +284,7 @@ variable "health_check_path" {
 }
 ```
 
-outputs.tf
+**outputs.tf**
 
 ```
 output "ecs_task_arn" {
@@ -295,6 +295,8 @@ output "ecs_service_arn" {
     value = module.vetoffice-api.ecs_service.id
 }
 ```
+
+#### All together :
 
 | Dir                   | Cluster                 | Tasks               |
 |-----------------------|-------------------------|---------------------|
