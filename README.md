@@ -1,6 +1,6 @@
 # Background
 Lesscode is a playground for me to explore tools and techniques for writing less code. 
-Click here to visit my other work under [lesscode](https://github.com/van001)
+Click here to visit my other work under [lesscode](https://github.com/van001).
 
 # Overview
 *With the advancemet in cloud technology, IAC (Infrascructire As Code) was inveitable.*
