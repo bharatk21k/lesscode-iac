@@ -27,7 +27,7 @@ The **microservice** stack conatains :
 
 ![IAC](IAC.png)
 
-This project is a part of bigger initiative on how to build a brand new micro services with [contract 1st development](https://github.com/van001/lesscode-development).
+This project is a part of bigger initiative on how to build a brand new micro services with [contract 1st development](https://github.com/van001/lesscode-architecture).
 
 Currently it only supports building a microservice in AWS.
 
