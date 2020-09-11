@@ -171,9 +171,130 @@ vpc_id = vpc-06fa1b6c91ef0f332
 
 #### 2. Create services
 
-For each service, we recommend you create a new directory under each cluster/env name that you created above.
+For each service, we recommend you create a new directory under each cluster/env name that you created above. 
+For each service, create the following scripts : 
 
-Coming soon...
+main.tf
+
+```
+module "vetoffice-api" {
+  
+    source = "github.com/van001/lciac//microservice/aws/service/api"
+
+    # aws region, in whihc this cluster will be created. e.g. "us-west-1"
+    region = var.region
+
+    # development environment .e.g dev, stage, prod etc
+    env = var.env
+
+    # cluster name
+    ecs_cluster_name = var.ecs_cluster_name
+
+    # service name 
+    name = var.service_name
+
+    # TLS port
+    tls_port = var.tls_port
+
+    # Service Image
+    service_image = var.service_image
+
+    # Service port
+    service_port = var.service_port
+
+    # Service Count
+    service_count = var.service_count
+
+    # Path
+    path = var.path
+
+    # Healtcheck Path
+    health_check_path = var.health_check_path
+
+    # Fargate CPU
+    fargate_cpu = var.fargate_cpu
+
+    # Fargate Memorty
+    fargate_memory = var.fargate_memory
+
+}
+```
+
+vars.tf
+
+```
+variable "region" {
+    type = string
+    default = "us-east-1"
+}
+
+variable "env" {
+    type = string
+    default = "dev"
+}
+
+variable "ecs_cluster_name" {
+    type = string
+    default = "dev"
+}
+
+variable "service_name" {
+    type = string
+    default = "api-vethospital"
+}
+
+variable "service_image" {
+    type = string
+    default = "284832936816.dkr.ecr.us-east-1.amazonaws.com/vethospital-api:1cc4f28e15fede7647db2ce5177f93fe1ef32e49"
+}
+
+variable "tls_port" {
+  description = "LB port"
+  default     = 443
+}
+
+variable "service_port" {
+    type = string
+    default = "8090"
+}
+
+variable "service_count" {
+    type = string
+    default = "2"
+}
+
+variable "fargate_cpu" {
+    type = string
+    default = "1024"
+}
+
+variable "fargate_memory" {
+    type = string
+    default = "2048"
+}
+
+variable "path" {
+    type = string
+    default = "/api/v1"
+}
+
+variable "health_check_path" {
+    type = string
+    default = "/api/v1/tennants/123"
+}
+```
+
+outputs.tf
+
+```
+output "ecs_task_arn" {
+    value = module.vetoffice-api.ecs_task.arn
+}
+
+output "ecs_service_arn" {
+    value = module.vetoffice-api.ecs_service.id
+}
+```
 
 # Modules
 ## Microservice
