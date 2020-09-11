@@ -296,6 +296,7 @@ output "ecs_service_arn" {
 }
 ```
 
+![dir](code-org.png)
 # Modules
 ## Microservice
 Contain all the terraform scripts to create a complete microservice environment from scratch. 
