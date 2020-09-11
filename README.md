@@ -171,7 +171,7 @@ vpc_id = vpc-06fa1b6c91ef0f332
 
 #### 2. Create services
 
-For each service, we recommend you create a new directory under each cluster/env name that you created above. 
+For each service, create a new directory under each cluster/env name that you created above. 
 For each service, create the following scripts : 
 
 main.tf
