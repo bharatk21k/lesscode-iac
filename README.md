@@ -298,10 +298,10 @@ output "ecs_service_arn" {
 
 #### All together :
 
-| Dir                   | Cluster                 | Tasks               |
-|-----------------------|-------------------------|---------------------|
-| ![dir](code-org.png)  | ![cluster](cluster.png) | ![task](task.png)   |
-| ![root](root.png)     | ![tennant](tennant.png) |                     |
+| Dir                   | Cluster                 | Tasks                   |
+|-----------------------|-------------------------|-------------------------|
+| ![dir](code-org.png)  | ![cluster](cluster.png) | ![task](task.png)       |
+|                       | ![root](root.png)       | ![tennant](tennant.png) |
 
 
 # Modules
