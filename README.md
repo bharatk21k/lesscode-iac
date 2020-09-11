@@ -296,7 +296,10 @@ output "ecs_service_arn" {
 }
 ```
 
-| ![dir](code-org.png) | ![cluster](clusterr.png) | ![task](task.png) |
+|                       |                         |                     |
+|-----------------------|-------------------------|---------------------|
+| ![dir](code-org.png)  | ![cluster](cluster.png) | ![task](task.png)   |
+
 
 # Modules
 ## Microservice
