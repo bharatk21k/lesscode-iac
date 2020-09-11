@@ -296,7 +296,7 @@ output "ecs_service_arn" {
 }
 ```
 
-|                       |                         |                     |
+| Dir                   | Cluster                 | Tasks               |
 |-----------------------|-------------------------|---------------------|
 | ![dir](code-org.png)  | ![cluster](cluster.png) | ![task](task.png)   |
 
