@@ -37,8 +37,8 @@ Currently it only supports building a microservice in AWS.
 
 #### 1. Create an empty microservice cluster.
 
-If you want to create an empty microservice stack and deploy API, MQ services (later), create the following script files in a separate directory. 
-We recommend creating a separte directory for each environmnet/ cluster. Male sure to prefix cluster name with 'env' for readibility sake. Have 
+If you want to create an empty microservice stack and deploy API, MQ services (later), create the following script files. 
+We recommend creating a separte directory for each environmnet/ cluster. Make sure to prefix cluster name with 'env' for readibility sake. Have 
 default cluster for each envs like dev, stage, prod etc.
 
 
