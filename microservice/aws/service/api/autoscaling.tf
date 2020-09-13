@@ -2,7 +2,7 @@
 
 resource "aws_appautoscaling_target" "service" {
   service_namespace  = "ecs"
-  resource_id        = "${data.aws_ecs_cluster.ecs.arn}_${var.name}_target"
+  resource_id        = "${data.aws_ecs_cluster.ecs.cluster_name}_${var.name}_target"
   scalable_dimension = "ecs:service:DesiredCount"
   min_capacity       = 2
   max_capacity       = 6
@@ -12,7 +12,7 @@ resource "aws_appautoscaling_target" "service" {
 resource "aws_appautoscaling_policy" "service-up" {
   name               = "${var.ecs_cluster_name}_${var.name}_scale_up"
   service_namespace  = "ecs"
-  resource_id        = "${data.aws_ecs_cluster.ecs.arn}_${var.name}_service_up"
+  resource_id        = "${data.aws_ecs_cluster.ecs.cluster_name}_${var.name}_service_up"
   scalable_dimension = "ecs:service:DesiredCount"
 
   step_scaling_policy_configuration {
@@ -33,7 +33,7 @@ resource "aws_appautoscaling_policy" "service-up" {
 resource "aws_appautoscaling_policy" "service-down" {
   name               = "${var.ecs_cluster_name}_${var.name}_scale_down"
   service_namespace  = "ecs"
-  resource_id        = "${data.aws_ecs_cluster.ecs.arn}_${var.name}_service_down"
+  resource_id        = "${data.aws_ecs_cluster.ecs.cluster_name}_${var.name}_service_down"
   scalable_dimension = "ecs:service:DesiredCount"
 
   step_scaling_policy_configuration {
@@ -62,7 +62,7 @@ resource "aws_cloudwatch_metric_alarm" "service_cpu_high" {
   threshold           = "85"
 
   dimensions = {
-    ClusterName = data.aws_ecs_cluster.ecs.arn
+    ClusterName = data.aws_ecs_cluster.ecs.cluster_name
     ServiceName = aws_ecs_service.service.name
   }
 
@@ -81,7 +81,7 @@ resource "aws_cloudwatch_metric_alarm" "service_cpu_low" {
   threshold           = "10"
 
   dimensions = {
-    ClusterName = data.aws_ecs_cluster.ecs.arn
+    ClusterName = data.aws_ecs_cluster.ecs.cluster_name
     ServiceName = aws_ecs_service.service.name
   }
 
