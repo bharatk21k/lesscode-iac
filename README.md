@@ -303,9 +303,15 @@ output "ecs_service_arn" {
 | ![dir](code-org.png)  | ![cluster](cluster.png) | ![task](task.png)       |
 
 
+| Autoscaling                     |
+|---------------------------------|
+| ![autoscaling](autoscaling.png) | 
+
+
 | Root                  | API                     |
 |-----------------------|-------------------------|
 | ![root](root.png)     | ![tennant](tennant.png) |
+
 
 
 
