@@ -39,10 +39,6 @@ resource "aws_cloudwatch_log_stream" "service_log_stream" {
   log_group_name = aws_cloudwatch_log_group.service_log_group.name
 }
 
-resource "docker_image" "mydockerimage" {
-  name = "nginx:latest"
-}
-
 data "template_file" "service" {
   template = file("${path.module}/templates/ecs/taskdef.json.tpl")
 
