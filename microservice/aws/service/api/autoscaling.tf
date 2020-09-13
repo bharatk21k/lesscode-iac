@@ -10,11 +10,11 @@ resource "aws_appautoscaling_target" "target" {
 
 # Automatically scale capacity up by one
 resource "aws_appautoscaling_policy" "service-up" {
-  name               = "${data.aws_ecs_cluster.ecs.cluster_name}/${var.name-scale-up"
+  name               = "${data.aws_ecs_cluster.ecs.cluster_name}/${var.name}-scale-up"
   policy_type        = "StepScaling"
-  resource_id        = aws_appautoscaling_target.ecs_target.resource_id
-  scalable_dimension = aws_appautoscaling_target.ecs_target.scalable_dimension
-  service_namespace  = aws_appautoscaling_target.ecs_target.service_namespace
+  resource_id        = aws_appautoscaling_target.target.resource_id
+  scalable_dimension = aws_appautoscaling_target.target.scalable_dimension
+  service_namespace  = aws_appautoscaling_target.target.service_namespace
 
   step_scaling_policy_configuration {
     adjustment_type         = "ChangeInCapacity"
@@ -31,11 +31,11 @@ resource "aws_appautoscaling_policy" "service-up" {
 
 # Automatically scale capacity down by one
 resource "aws_appautoscaling_policy" "service-down" {
-  name               = "${data.aws_ecs_cluster.ecs.cluster_name}/${var.name-scale-down"
+  name               = "${data.aws_ecs_cluster.ecs.cluster_name}/${var.name}-scale-down"
   policy_type        = "StepScaling"
-  resource_id        = aws_appautoscaling_target.ecs_target.resource_id
-  scalable_dimension = aws_appautoscaling_target.ecs_target.scalable_dimension
-  service_namespace  = aws_appautoscaling_target.ecs_target.service_namespace
+  resource_id        = aws_appautoscaling_target.target.resource_id
+  scalable_dimension = aws_appautoscaling_target.target.scalable_dimension
+  service_namespace  = aws_appautoscaling_target.target.service_namespace
 
   step_scaling_policy_configuration {
     adjustment_type         = "ChangeInCapacity"
