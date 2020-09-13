@@ -85,5 +85,5 @@ resource "aws_cloudwatch_metric_alarm" "service_cpu_low" {
     ServiceName = aws_ecs_service.service.name
   }
 
-  alarm_actions = [aws_appautoscaling_policy.servicepi-down.arn]
+  alarm_actions = [aws_appautoscaling_policy.service-down.arn]
 }
