@@ -1,8 +1,8 @@
 # auto_scaling.tf
 
-resource "aws_appautoscaling_target" "service" {
+resource "aws_appautoscaling_target" "target" {
   service_namespace  = "ecs"
-  resource_id        = "${data.aws_ecs_cluster.ecs.cluster_name}_${var.name}_target"
+  resource_id        = "service/${data.aws_ecs_cluster.ecs.cluster_name}/${var.name}"
   scalable_dimension = "ecs:service:DesiredCount"
   min_capacity       = 2
   max_capacity       = 6
@@ -10,10 +10,11 @@ resource "aws_appautoscaling_target" "service" {
 
 # Automatically scale capacity up by one
 resource "aws_appautoscaling_policy" "service-up" {
-  name               = "${var.ecs_cluster_name}_${var.name}_scale_up"
-  service_namespace  = "ecs"
-  resource_id        = "${data.aws_ecs_cluster.ecs.cluster_name}_${var.name}_service_up"
-  scalable_dimension = "ecs:service:DesiredCount"
+  name               = "${data.aws_ecs_cluster.ecs.cluster_name}/${var.name-scale-up"
+  policy_type        = "StepScaling"
+  resource_id        = aws_appautoscaling_target.ecs_target.resource_id
+  scalable_dimension = aws_appautoscaling_target.ecs_target.scalable_dimension
+  service_namespace  = aws_appautoscaling_target.ecs_target.service_namespace
 
   step_scaling_policy_configuration {
     adjustment_type         = "ChangeInCapacity"
@@ -21,20 +22,20 @@ resource "aws_appautoscaling_policy" "service-up" {
     metric_aggregation_type = "Maximum"
 
     step_adjustment {
-      metric_interval_lower_bound = 0
+      metric_interval_upper_bound = 0
       scaling_adjustment          = 1
     }
   }
-
-  depends_on = [aws_appautoscaling_target.service]
+  depends_on = [aws_appautoscaling_target.target]
 }
 
 # Automatically scale capacity down by one
 resource "aws_appautoscaling_policy" "service-down" {
-  name               = "${var.ecs_cluster_name}_${var.name}_scale_down"
-  service_namespace  = "ecs"
-  resource_id        = "${data.aws_ecs_cluster.ecs.cluster_name}_${var.name}_service_down"
-  scalable_dimension = "ecs:service:DesiredCount"
+  name               = "${data.aws_ecs_cluster.ecs.cluster_name}/${var.name-scale-down"
+  policy_type        = "StepScaling"
+  resource_id        = aws_appautoscaling_target.ecs_target.resource_id
+  scalable_dimension = aws_appautoscaling_target.ecs_target.scalable_dimension
+  service_namespace  = aws_appautoscaling_target.ecs_target.service_namespace
 
   step_scaling_policy_configuration {
     adjustment_type         = "ChangeInCapacity"
@@ -47,7 +48,7 @@ resource "aws_appautoscaling_policy" "service-down" {
     }
   }
 
-  depends_on = [aws_appautoscaling_target.service]
+  depends_on = [aws_appautoscaling_target.target]
 }
 
 # CloudWatch alarm that triggers the autoscaling up policy
