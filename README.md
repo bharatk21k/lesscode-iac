@@ -202,8 +202,11 @@ module "vetoffice-api" {
     # Service port
     service_port = var.service_port
 
-    # Service Count
-    service_count = var.service_count
+    # Min Service Count (Auto scaling)
+    service_count_min = var.service_count_min
+
+    # Max Service Count (Auto scaling)
+    service_count_max = var.service_count_max
 
     # Path
     path = var.path
@@ -258,9 +261,14 @@ variable "service_port" {
     default = "8090"
 }
 
-variable "service_count" {
+variable "service_count_min" {
     type = string
     default = "2"
+}
+
+variable "service_count_max" {
+    type = string
+    default = "6"
 }
 
 variable "fargate_cpu" {
