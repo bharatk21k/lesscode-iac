@@ -68,3 +68,7 @@ variable "dependencies" {
     default =[]
 }
 
+variable "metrics" {
+    type = list
+    default =[]
+}
