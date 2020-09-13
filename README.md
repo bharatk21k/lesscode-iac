@@ -303,9 +303,9 @@ output "ecs_service_arn" {
 | ![dir](code-org.png)  |
 
 
-|  Cluster                | Service                   | Tasks                   |
-|-------------------------|---------------------------|-------------------------|
-| ![cluster](cluster.png) | [service.png](service.png) | ![task](task.png)       |
+|  Cluster                | Service                     | Tasks                   |
+|-------------------------|-----------------------------|-------------------------|
+| ![cluster](cluster.png) | ![service.png](service.png) | ![task](task.png)       |
 
 
 | Autoscaling                     |
