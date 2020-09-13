@@ -56,7 +56,7 @@ data "template_file" "service" {
 }
 
 resource "aws_ecs_task_definition" "task" {
-  family                   = "${var.name}"
+  family                   = var.name
   execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
@@ -71,7 +71,7 @@ resource "aws_ecs_service" "service" {
   name            = "${var.name}"
   cluster         = data.aws_ecs_cluster.ecs.arn
   task_definition = aws_ecs_task_definition.task.arn
-  desired_count   = var.service_count
+  desired_count   = var.service_count_min
   launch_type     = "FARGATE"
   force_new_deployment = "true"
 

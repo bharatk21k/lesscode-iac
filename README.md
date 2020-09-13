@@ -174,7 +174,7 @@ vpc_id = vpc-06fa1b6c91ef0f332
 For each service, create a new directory under each cluster/env name that you created above. 
 For each service, create the following scripts : 
 
-**main.tf******
+**main.tf**
 
 ```
 module "vetoffice-api" {
