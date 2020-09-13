@@ -305,7 +305,7 @@ output "ecs_service_arn" {
 
 |  Cluster                | Service                   | Tasks                   |
 |-------------------------|---------------------------|-------------------------|
-| ![cluster](cluster.png) | [service.png](service.png | ![task](task.png)       |
+| ![cluster](cluster.png) | [service.png](service.png) | ![task](task.png)       |
 
 
 | Autoscaling                     |
