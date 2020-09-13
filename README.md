@@ -307,19 +307,19 @@ output "ecs_service_arn" {
 
 #### All together :
 
-| Dir                   |
-|-----------------------|
-| ![dir](code-org.png)  |
+| Dir                   | Notes                                        |
+|-----------------------|----------------------------------------------|
+| ![dir](code-org.png)  | - Separate directory for clusters & services.|
 
 
-|  Cluster                | Service                     | Tasks                   |
-|-------------------------|-----------------------------|-------------------------|
-| ![cluster](cluster.png) | ![service.png](service.png) | ![task](task.png)       |
+|  Cluster                |
+|-------------------------|
+| ![cluster](cluster.png) |
 
 
-| Autoscaling                     |
-|---------------------------------|
-| ![autoscaling](autoscaling.png) | 
+| Service                     | Tasks                   | Autoscaling                     |
+|-----------------------------|-------------------------|---------------------------------|
+| ![service.png](service.png) | ![task](task.png)       | ![autoscaling](autoscaling.png) | 
 
 
 | Root                  | API                     |
