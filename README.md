@@ -298,9 +298,13 @@ output "ecs_service_arn" {
 
 #### All together :
 
-| Dir                   | Cluster                 | Tasks                   |
-|-----------------------|-------------------------|-------------------------|
-| ![dir](code-org.png)  | ![cluster](cluster.png) | ![task](task.png)       |
+| Dir                   |
+| ![dir](code-org.png)  |
+
+
+|  Cluster                | Service                   | Tasks                   |
+|-------------------------|---------------------------|-------------------------|
+| ![cluster](cluster.png) | [service.png](service.png | ![task](task.png)       |
 
 
 | Autoscaling                     |
