@@ -38,7 +38,7 @@ resource "aws_cloudwatch_dashboard" "main" {
                   "period": 60,
                   "stacked": false,
                   "stat": "Sum",
-                  "title":"count-20X"
+                  "title": "count-20X"
             }
          },
          {
@@ -57,7 +57,7 @@ resource "aws_cloudwatch_dashboard" "main" {
                   "period": 60,
                   "stacked": false,
                   "stat": "Sum",
-                  "title":"count-50X"
+                  "title": "count-50X"
             }
          },
          {
@@ -95,9 +95,9 @@ resource "aws_cloudwatch_dashboard" "main" {
                   "period": 60,
                   "stacked": false,
                   "stat": "Sum",
-                  "title":"count-401"
+                  "title": "count-401"
             }
-         },
+         }
       ]
    }
    EOF
