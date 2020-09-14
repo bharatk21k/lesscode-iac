@@ -38,8 +38,8 @@ resource "aws_cloudwatch_dashboard" "main" {
                "stat": "Sum",
                "region": "${var.region}",
                "title": "${data.aws_ecs_cluster.ecs.cluster_name}-${var.name}-400}"
-            },
-            {
+         },
+         {
             "type":"metric",
             "x":0,
             "y":0,
@@ -55,8 +55,8 @@ resource "aws_cloudwatch_dashboard" "main" {
                "stat": "Sum",
                "region": "${var.region}",
                "title": "${data.aws_ecs_cluster.ecs.cluster_name}-${var.name}-500}"
-            },
-            {
+         },
+         {
             "type":"metric",
             "x":0,
             "y":0,
@@ -72,9 +72,7 @@ resource "aws_cloudwatch_dashboard" "main" {
                "stat": "Sum",
                "region": "${var.region}",
                "title": "${data.aws_ecs_cluster.ecs.cluster_name}-${var.name}-400}"
-            }
          }
-       }
       ]
    }
    EOF
