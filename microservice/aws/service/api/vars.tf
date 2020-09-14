@@ -70,5 +70,5 @@ variable "dependencies" {
 
 variable "metrics" {
     type = list
-    default =[]
+    default =[20 , 400, 401, 500]
 }
