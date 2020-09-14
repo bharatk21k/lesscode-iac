@@ -37,7 +37,8 @@ resource "aws_cloudwatch_dashboard" "main" {
                "period": 60,
                "stat": "Sum",
                "region": "${var.region}",
-               "title": "${data.aws_ecs_cluster.ecs.cluster_name}-${var.name}-400}"
+               "title": "${data.aws_ecs_cluster.ecs.cluster_name}-${var.name}-400"
+            }
          },
          {
             "type":"metric",
@@ -54,7 +55,8 @@ resource "aws_cloudwatch_dashboard" "main" {
                "period": 60,
                "stat": "Sum",
                "region": "${var.region}",
-               "title": "${data.aws_ecs_cluster.ecs.cluster_name}-${var.name}-500}"
+               "title": "${data.aws_ecs_cluster.ecs.cluster_name}-${var.name}-500"
+            }
          },
          {
             "type":"metric",
@@ -71,7 +73,8 @@ resource "aws_cloudwatch_dashboard" "main" {
                "period": 60,
                "stat": "Sum",
                "region": "${var.region}",
-               "title": "${data.aws_ecs_cluster.ecs.cluster_name}-${var.name}-400}"
+               "title": "${data.aws_ecs_cluster.ecs.cluster_name}-${var.name}-40"
+            }
          }
       ]
    }
