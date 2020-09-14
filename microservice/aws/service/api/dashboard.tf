@@ -12,7 +12,7 @@ resource "aws_cloudwatch_dashboard" "main" {
             "height":4,
             "properties":{
                "metrics":[
-                  [ "${data.aws_ecs_cluster.ecs.cluster_name}-${var.name}-20", "latency" ]
+                  [ "${data.aws_ecs_cluster.ecs.cluster_name}-${var.name}-20-latency", "latency" ]
                ],
                "view": "timeSeries",
                "stacked": false,
@@ -30,7 +30,7 @@ resource "aws_cloudwatch_dashboard" "main" {
             "height":4,
             "properties":{
                   "metrics": [
-                     [ "${data.aws_ecs_cluster.ecs.cluster_name}-${var.name}-20", "count" ],
+                     [ "${data.aws_ecs_cluster.ecs.cluster_name}-${var.name}-20-latency", "count" ],
                      [ { "expression": "SUM(METRICS())", "label": "count", "id": "e3" } ]
                   ],
                   "view": "timeSeries",
@@ -49,8 +49,7 @@ resource "aws_cloudwatch_dashboard" "main" {
             "height":4,
             "properties":{
                   "metrics": [
-                     [ "${data.aws_ecs_cluster.ecs.cluster_name}-${var.name}-20", "count" ],
-                     [ { "expression": "SUM(METRICS())", "label": "count", "id": "e3" } ]
+                     [ "${data.aws_ecs_cluster.ecs.cluster_name}-${var.name}-20-latency", "count" ]
                   ],
                   "view": "timeSeries",
                   "region": "${var.region}",
