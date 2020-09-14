@@ -68,7 +68,7 @@ resource "aws_ecs_task_definition" "task" {
 }
 
 resource "aws_ecs_service" "service" {
-  name            = "${var.name}"
+  name            = var.name
   cluster         = data.aws_ecs_cluster.ecs.arn
   task_definition = aws_ecs_task_definition.task.arn
   desired_count   = var.service_count_min
