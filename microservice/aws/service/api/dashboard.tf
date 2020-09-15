@@ -16,7 +16,7 @@ resource "aws_cloudwatch_dashboard" "main" {
                ],
                "view": "timeSeries",
                "stacked": false,
-               "period": 60,
+               "period": 1,
                "stat": "Sum",
                "region": "${var.region}",
                "title": "latency-20"
@@ -35,7 +35,7 @@ resource "aws_cloudwatch_dashboard" "main" {
                   ],
                   "view": "timeSeries",
                   "region": "${var.region}",
-                  "period": 60,
+                  "period": 1,
                   "stacked": false,
                   "stat": "Sum",
                   "title": "count-20"
@@ -53,7 +53,7 @@ resource "aws_cloudwatch_dashboard" "main" {
                   ],
                   "view": "timeSeries",
                   "region": "${var.region}",
-                  "period": 60,
+                  "period": 1,
                   "stacked": false,
                   "stat": "p95",
                   "title": "p95-20"
