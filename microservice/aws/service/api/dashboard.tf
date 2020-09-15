@@ -19,7 +19,7 @@ resource "aws_cloudwatch_dashboard" "main" {
                "period": 60,
                "stat": "Sum",
                "region": "${var.region}",
-               "title": "latency"
+               "title": "latency-20"
             }
          },
          {
@@ -38,7 +38,7 @@ resource "aws_cloudwatch_dashboard" "main" {
                   "period": 60,
                   "stacked": false,
                   "stat": "Sum",
-                  "title": "count"
+                  "title": "count-20"
             }
          },
          {
@@ -56,7 +56,7 @@ resource "aws_cloudwatch_dashboard" "main" {
                   "period": 60,
                   "stacked": false,
                   "stat": "p95",
-                  "title": "p95"
+                  "title": "p95-20"
             }
          }
       ]

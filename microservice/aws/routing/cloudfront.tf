@@ -31,6 +31,10 @@ resource "aws_cloudfront_distribution" "default" {
       cookies {
         forward = "all"
       }
+      # for API's we do not want to cache anything
+      min_ttl                = 0
+      default_ttl            = 0
+      max_ttl                = 0
     }
 
     viewer_protocol_policy = "redirect-to-https"
