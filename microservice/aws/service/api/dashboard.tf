@@ -17,7 +17,7 @@ resource "aws_cloudwatch_dashboard" "main" {
                   ],
                   "view": "timeSeries",
                   "region": "${var.region}",
-                  "period": 1,
+                  "period": 60,
                   "stacked": false,
                   "stat": "Sum",
                   "title": "count-20"
@@ -35,7 +35,7 @@ resource "aws_cloudwatch_dashboard" "main" {
                   ],
                   "view": "timeSeries",
                   "region": "${var.region}",
-                  "period": 1,
+                  "period": 60,
                   "stacked": false,
                   "stat": "p95",
                   "title": "p95-20"
