@@ -11,24 +11,6 @@ resource "aws_cloudwatch_dashboard" "main" {
             "width":8,
             "height":4,
             "properties":{
-               "metrics":[
-                  [ "${data.aws_ecs_cluster.ecs.cluster_name}","latency-20"]
-               ],
-               "view": "timeSeries",
-               "stacked": false,
-               "period": 1,
-               "stat": "Sum",
-               "region": "${var.region}",
-               "title": "latency-20"
-            }
-         },
-         {
-            "type":"metric",
-            "x":0,
-            "y":0,
-            "width":8,
-            "height":4,
-            "properties":{
                   "metrics": [
                      [ "${data.aws_ecs_cluster.ecs.cluster_name}","count-20"],
                      [ { "expression": "SUM(METRICS())", "label": "count", "id": "e3" } ]
