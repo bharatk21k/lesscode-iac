@@ -325,7 +325,7 @@ output "ecs_service_arn" {
 
 | Root                  | API                     | Dashboard                       |
 |-----------------------|-------------------------|---------------------------------|
-| ![root](root.png)     | ![tennant](tennant.png) | !(dashboard.png)(dashboard.png) |
+| ![root](root.png)     | ![tennant](tennant.png) | ![dashboard.png](dashboard.png) |
 
 
 
