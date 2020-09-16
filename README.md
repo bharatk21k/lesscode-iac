@@ -37,6 +37,11 @@ Currently it only supports building a microservice in AWS.
 
 ### For microservice creation & deployment
 
+### Pre-requesite
+- Creatne an IAM role with the following permissions :
+![permission.png](permission.png)
+- Install 'terraform' CLi.
+
 #### 1. Create an empty microservice cluster.
 
 If you want to create an empty microservice stack and deploy API, MQ services (later), create the following script files. 
