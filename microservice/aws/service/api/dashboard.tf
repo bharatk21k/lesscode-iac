@@ -4,7 +4,7 @@ resource "aws_cloudwatch_dashboard" "main" {
    dashboard_body = <<EOF
    {
       "widgets": [
-         [{
+         {
             "type":"metric",
             "x":0,
             "y":0,
@@ -37,8 +37,8 @@ resource "aws_cloudwatch_dashboard" "main" {
                   "stacked": true,
                   "title": "CPU %"
             }
-         }],
-         [{
+         },
+         {
             "type":"metric",
             "x":0,
             "y":0,
@@ -74,7 +74,7 @@ resource "aws_cloudwatch_dashboard" "main" {
                   "stat": "p95",
                   "title": "20X - p95"
             }
-         }]
+         }
       ]
    }
    EOF
