@@ -20,11 +20,11 @@ The **microservice** stack contains :
 - **AWS ALB (Application load balancer)** for availibility, routing (via path) and service discovery (using DNS and path). Again, assumption here is that you are building a small to mid-size applications with 10s-100s of servers.
 -  **Route53** and **Cloudfront** for external discovery and CDN routing.
 -  **VPC**, **ACM**, **SecurityGroups**, **IAM** for isolation and security.
--  **Cloudwatch** for monitoring logs, metrics and dashboards.
+-  **Cloudwatch** for observability - logs, metrics and dashboards.
 -  **ECS** (Elastic container service) for container storage.
 -  **KMS** for key management.
 -  **Configuration** management, it is recommended you bake them into the container.
--  **Cloudwatch Dashboard** for monitoring metics.
+
 
 
 ![IAC](IAC.png)
