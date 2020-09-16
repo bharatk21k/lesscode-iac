@@ -38,9 +38,9 @@ Currently it only supports building a microservice in AWS.
 ### For microservice creation & deployment
 
 ### Pre-requesite
-- Create an IAM role with the following permissions :
+- Create an IAM (service) role with the following permissions :
 ![permission.png](permission.png)
-- Install [terraform](https://www.terraform.io/downloads.html) CLI.
+- Install [terraform](https://www.terraform.io/downloads.html) CLI. Use the access/ secret key to run terraform.
 
 #### 1. Create an empty microservice cluster.
 
