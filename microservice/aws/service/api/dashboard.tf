@@ -17,7 +17,7 @@ resource "aws_cloudwatch_dashboard" "main" {
                   "view": "timeSeries",
                   "region": "${var.region}",
                   "period": 60,
-                  "stacked": false,
+                  "stacked": ture,
                   "title": "CPU %"
             }
          }, 
@@ -37,7 +37,7 @@ resource "aws_cloudwatch_dashboard" "main" {
                   "period": 60,
                   "stacked": false,
                   "stat": "Sum",
-                  "title": "count-20"
+                  "title": "20X - Count"
             }
          },
          {
@@ -55,7 +55,7 @@ resource "aws_cloudwatch_dashboard" "main" {
                   "period": 60,
                   "stacked": false,
                   "stat": "p95",
-                  "title": "p95-20"
+                  "title": "20X - p95"
             }
          }
       ]
