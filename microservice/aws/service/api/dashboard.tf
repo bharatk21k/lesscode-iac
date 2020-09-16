@@ -10,9 +10,9 @@ resource "aws_cloudwatch_dashboard" "main" {
             "y":0,
             "width":8,
             "height":4,
-            "properties":{
+            "properties":{ 
                   "metrics": [
-                     [ "AWS/ECS", "CPUUtilization", "${data.aws_ecs_cluster.ecs.cluster_name}", "${var.name}" ]
+                     [ "AWS/ECS", "CPUUtilization", "ServiceName", "${var.name}", "ClusterName", "${data.aws_ecs_cluster.ecs.cluster_name}" ]
                   ],
                   "view": "timeSeries",
                   "region": "${var.region}",
