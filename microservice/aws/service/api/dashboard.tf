@@ -17,7 +17,7 @@ resource "aws_cloudwatch_dashboard" "main" {
                   "view": "timeSeries",
                   "region": "${var.region}",
                   "period": 60,
-                  "stacked": ture,
+                  "stacked": true,
                   "title": "CPU %"
             }
          }, 
