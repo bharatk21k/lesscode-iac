@@ -27,7 +27,7 @@ The **microservice** stack contains :
 
 
 
-![IAC](IAC.png)
+![IAC](arch.png)
 
 This project is a part of bigger initiative on how to build a brand new micro services with [contract 1st development](https://github.com/van001/lesscode-architecture).
 
