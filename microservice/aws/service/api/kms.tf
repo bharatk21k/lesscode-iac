@@ -7,3 +7,11 @@ resource "aws_kms_alias" "main" {
   name          = "alias/${data.aws_ecs_cluster.ecs.cluster_name}"
   target_key_id = aws_kms_key.main.key_id
 }
+
+resource "aws_kms_grant" "a" {
+  name              = "my-grant"
+  key_id            = aws_kms_key.main.key_id
+  grantee_principal = aws_iam_role.a.arn
+  operations        = ["Encrypt", "Decrypt", "GenerateDataKey"]
+
+}
