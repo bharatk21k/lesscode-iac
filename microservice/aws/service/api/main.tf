@@ -45,8 +45,8 @@ data "template_file" "service" {
   vars = {
     name                = var.name
     ecs_cluster_name    = var.ecs_cluster_name
-    service_image           = var.service_image
-    service_port            = var.service_port
+    service_image       = var.service_image
+    service_port        = var.service_port
     fargate_cpu         = var.fargate_cpu
     fargate_memory      = var.fargate_memory
     region              = var.region

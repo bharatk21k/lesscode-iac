@@ -2,6 +2,9 @@
     {
       "name": "${name}",
       "image": "${service_image}",
+      "environment": [
+            {"name": "ECS_CLUSTER_NAME", "value": "${ecs_cluster_name}"}
+        ],
       "cpu": ${fargate_cpu},
       "memory": ${fargate_memory},
       "networkMode": "awsvpc",
