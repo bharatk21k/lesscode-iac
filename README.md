@@ -41,6 +41,10 @@ Currently it only supports building a microservice in AWS.
 - Create an IAM (service) role with the following permissions :
 ![permission.png](permission.png)
 - Install [terraform](https://www.terraform.io/downloads.html) CLI. Use the access/ secret key to run terraform.
+```
+export AWS_ACCESS_KEY_ID= <key>
+export AWS_SECRET_ACCESS_KEY= <secret>
+```
 
 #### 1. Create an empty microservice cluster.
 
