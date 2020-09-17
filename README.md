@@ -55,7 +55,7 @@ default cluster for each envs like dev, stage, prod etc.
 
 **main.tf**
 ```
-# 1st create a valid cert suing ACM. 
+# 1st create a valid cert using ACM. 
 # Since we are using Clodfront to map custom domain (via route module), we have to create it in "US_EAST_1" region.
 module "cert" {
     source = "github.com/van001/lciac//microservice/aws/cert"
@@ -94,7 +94,7 @@ module "cluster" {
     acm_certificate = module.cert.acm_certificate
 }
 
-# Then map the routing via Route 53/ Cloudfront.
+# Then map the routing via Route 53/ Cloudfront. This is optional, but uisng CF as CDN improves your APIs overall latency.
 module "routing" {
     source = "github.com/van001/lciac//microservice/aws/routing"
     
