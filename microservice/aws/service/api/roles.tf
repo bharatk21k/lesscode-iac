@@ -28,12 +28,7 @@ resource "aws_iam_role" "ecs_task_execution_role" {
                   "ecr:GetDownloadUrlForLayer",
                   "ecr:BatchGetImage",
                   "logs:CreateLogStream",
-                  "logs:PutLogEvents",
-                  "kms:Encrypt",
-                  "kms:Decrypt",
-                  "kms:ReEncrypt*",
-                  "kms:GenerateDataKey*",
-                  "kms:DescribeKey"
+                  "logs:PutLogEvents"
               ],
               "Resource": "*"
           }
