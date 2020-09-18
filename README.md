@@ -318,7 +318,7 @@ output "ecs_service_arn" {
 When the service is launched, containers get the following env variables
 ```
 ECS_CLUSTER_NAME
-``
+```
 
 #### All together :
 
