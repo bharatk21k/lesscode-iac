@@ -8,14 +8,18 @@ data "aws_iam_policy_document" "ecs_task_execution_role" {
     principals {
       type        = "Service"
       identifiers = ["ecs-tasks.amazonaws.com"]
-      
+  
     }
   }
 
   statement {
     sid = "2"
-    actions   = ["kms:*"]
-    resources = ["${aws_kms_key.main.arn}"]
+    effect = "Allow"
+    actions = ["sts:AssumeRole"]
+    principals {
+      type        = "Service"
+      identifiers = ["kms.amazonaws.com"]
+    }
   }
 }
 
