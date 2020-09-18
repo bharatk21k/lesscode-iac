@@ -22,7 +22,7 @@ The **microservice** stack contains :
 -  **VPC**, **ACM**, **SecurityGroups**, **IAM** for isolation and security.
 -  **Cloudwatch** for observability - logs, metrics and dashboards.
 -  **ECS** (Elastic container service) for container storage.
--  **KMS** for key management.
+-  **KMS** for application security & key management.
 -  **Configuration** management done via environment variables.
 
 
@@ -315,6 +315,11 @@ output "ecs_service_arn" {
 }
 ```
 
+When the service is launched, containers get the following env variables
+```
+ECS_CLUSTER_NAME
+``
+
 #### All together :
 
 | Dir                   | Notes                                        |
@@ -335,6 +340,7 @@ output "ecs_service_arn" {
 | Root                  | API                     | Dashboard                       |
 |-----------------------|-------------------------|---------------------------------|
 | ![root](root.png)     | ![tennant](tennant.png) | ![dashboard.png](dashboard.png) |
+
 
 
 
