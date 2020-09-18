@@ -2,7 +2,7 @@
 data "aws_iam_policy_document" "ecs_task_execution_role" {
   version = "2012-10-17"
   statement {
-    sid = ""
+    sid = "1"
     effect = "Allow"
     actions = ["sts:AssumeRole"]
     principals {
@@ -12,12 +12,13 @@ data "aws_iam_policy_document" "ecs_task_execution_role" {
   }
 
   statement {
-    sid = ""
+    sid = "2"
     effect = "Allow"
-    actions = ["kms:*"]
-    resources = [
-      "arn:aws:kms:us-east-1:284832936816:key/8134cdaf-0f5a-44ba-92fa-c0dfd5afa59c",
-    ]
+    actions = ["sts:AssumeRole"]
+    principals {
+      type        = "Service"
+      identifiers = ["kms.amazonaws.com"]
+    }
   }
 }
 
