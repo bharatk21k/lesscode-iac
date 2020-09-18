@@ -16,8 +16,8 @@ data "aws_iam_policy_document" "ecs_task_execution_role" {
     effect = "Allow"
     actions = ["sts:AssumeRole"]
     principals {
-      type        = "Service"
-      identifiers = ["kms.amazonaws.com"]
+      type        = "AWS"
+      identifiers = ["${aws_kms_key.main.arn}"]
     }
   }
 }
