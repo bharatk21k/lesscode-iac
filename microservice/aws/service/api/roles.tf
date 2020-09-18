@@ -4,7 +4,7 @@ data "aws_iam_policy_document" "ecs_task_execution_role" {
   statement {
     sid = ""
     effect = "Allow"
-    actions = ["sts:AssumeRole","kms:Encrypt"]
+    actions = ["sts:AssumeRole"]
     principals {
       type        = "Service"
       identifiers = ["ecs-tasks.amazonaws.com"]
@@ -14,9 +14,9 @@ data "aws_iam_policy_document" "ecs_task_execution_role" {
   statement {
     sid = ""
     effect = "Allow"
-    actions = ["kms:Encrypt"]
+    actions = ["kms:*"]
     resources = [
-      "arn:aws:kms:::*",
+      "arn:aws:kms:us-east-1:284832936816:key/8134cdaf-0f5a-44ba-92fa-c0dfd5afa59c",
     ]
   }
 }
