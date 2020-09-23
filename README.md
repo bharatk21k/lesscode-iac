@@ -16,14 +16,16 @@ If you are not writing a **monolithic** application then you are either writing 
 The **microservice** stack contains :
 
 - **AWS Fargate** for orchestration and management of containers. It assumes that you are doing container (docker) based deployment.
-- **AWS Auto-scaling** for service scaling.
+- **Auto-scaling policies** for service scaling.
 - **AWS ALB (Application load balancer)** for availibility, routing (via path) and service discovery (using DNS and path). Again, assumption here is that you are building a small to mid-size applications with 10s-100s of servers.
--  **Route53** and **Cloudfront** for external discovery and CDN routing.
--  **VPC**, **ACM**, **SecurityGroups**, **IAM** for isolation and security.
--  **Cloudwatch** for observability - logs, metrics and dashboards.
--  **ECS** (Elastic container service) for container storage.
--  **KMS** for application security & key management.
--  **Configuration** management done via environment variables. Same artifacts can be deployed with a new configuration.
+- **Route53** and **Cloudfront** for external discovery and CDN routing.
+- **VPC**, **ACM**, **SecurityGroups**, **IAM** for isolation and security.
+- **Cloudwatch** for observability - logs, metrics and dashboards.
+- **ECS** (Elastic container service) for container storage.
+- **S3** for object/ blob store.
+- **DynamoDB**(coming soon) for data store (single table design).
+- **KMS** for application security & key management.
+- **Configuration** management done via environment variables. Same artifacts can be deployed with a new configuration.
 
 
 ![IAC](/assets/arch.png)
