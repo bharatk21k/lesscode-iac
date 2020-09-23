@@ -23,8 +23,7 @@ The **microservice** stack contains :
 -  **Cloudwatch** for observability - logs, metrics and dashboards.
 -  **ECS** (Elastic container service) for container storage.
 -  **KMS** for application security & key management.
--  **Configuration** management done via environment variables.
-
+-  **Configuration** management done via environment variables. Same artifacts can be deployed with a new configuration.
 
 
 ![IAC](arch.png)
