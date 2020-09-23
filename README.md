@@ -6,7 +6,7 @@ Click here to visit my other work under [lesscode](https://github.com/van001).
 *With the advancemet in cloud technology, IAC (Infrascructire As Code) was inveitable.*
 
 The goal of this project is to provide terraform modules to create/ destroy a simple microservice and serverless infrastructure stack. 
-It does not create/destroy any messaging, data (yet) stack. Feel free to clone n add modules to do that.
+It does not create/destroy any messaging & data stack (yet). Feel free to clone n add modules to do that.
 
 It is an opinionated framework/stack, which helps to automate the creation and destruction of a microservice/ serverless infrastructure for quick
 build and deployment of APIs, UIs and MQ(Message Q) services. It is currently limited to single region for availibility.
