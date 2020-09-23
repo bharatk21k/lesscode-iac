@@ -24,6 +24,7 @@ The **microservice** stack contains :
 - **ECS** (Elastic container service) for container storage.
 - **S3** for object/ blob store.
 - **DynamoDB**(coming soon) for data store (single table design).
+- **SNS/SQS**(coming soon) for asynchronous communication. Every service gets a topic.
 - **KMS** for application security & key management.
 - **Configuration** management done via environment variables. Same artifacts can be deployed with a new configuration.
 
