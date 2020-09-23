@@ -326,19 +326,19 @@ ECS_CLUSTER_NAME
 | ![dir](/assets/code-org.png)  | - Separate directory for clusters & services.|
 
 
-|  Cluster                |
-|-------------------------|
-| ![cluster](cluster.png) |
+|  Cluster                        |
+|---------------------------------|
+| ![cluster](/assets/cluster.png) |
 
 
-| Service                     | Tasks                   | Autoscaling                     |
-|-----------------------------|-------------------------|---------------------------------|
-| ![service.png](service.png) | ![task](task.png)       | ![autoscaling](autoscaling.png) | 
+| Service                             | Tasks                     | Autoscaling                             |
+|-------------------------------------|---------------------------|-----------------------------------------|
+| ![service.png](s/assets/ervice.png) | ![task](/assets/task.png) | ![autoscaling](/assets/autoscaling.png) | 
 
 
-| Root                  | API                     | Dashboard                       |
-|-----------------------|-------------------------|---------------------------------|
-| ![root](root.png)     | ![tennant](tennant.png) | ![dashboard.png](dashboard.png) |
+| Root                      | API                             | Dashboard                               |
+|---------------------------|---------------------------------|-----------------------------------------|
+| ![root](/assets/root.png) | ![tennant](/assets/tennant.png) | ![dashboard.png](/assets/dashboard.png) |
 
 
 
