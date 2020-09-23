@@ -26,7 +26,7 @@ The **microservice** stack contains :
 -  **Configuration** management done via environment variables. Same artifacts can be deployed with a new configuration.
 
 
-![IAC](arch.png)
+![IAC](/assets/arch.png)
 
 This project is a part of bigger initiative on how to build a brand new micro services with [contract 1st development](https://github.com/van001/lesscode-architecture).
 
@@ -38,7 +38,7 @@ Currently it only supports building a microservice in AWS.
 
 ### Pre-requesite
 - Create an IAM (service) role with the following permissions :
-![permission.png](permission.png)
+![permission.png](/assets/permission.png)
 - Install [terraform](https://www.terraform.io/downloads.html) CLI. Use the access/ secret key to run terraform.
 ```
 export AWS_ACCESS_KEY_ID= <key>
@@ -321,9 +321,9 @@ ECS_CLUSTER_NAME
 
 #### All together :
 
-| Dir                   | Notes                                        |
-|-----------------------|----------------------------------------------|
-| ![dir](code-org.png)  | - Separate directory for clusters & services.|
+| Dir                           | Notes                                        |
+|-------------------------------|----------------------------------------------|
+| ![dir](/assets/code-org.png)  | - Separate directory for clusters & services.|
 
 
 |  Cluster                |
