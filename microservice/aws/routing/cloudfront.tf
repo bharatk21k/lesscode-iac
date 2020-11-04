@@ -53,7 +53,7 @@ resource "aws_cloudfront_distribution" "default" {
   }
 
   viewer_certificate {
-    acm_certificate_arn = var.acm_certificate
+    acm_certificate_arn = aws_acm_certificate.default.arn
     minimum_protocol_version = "TLSv1"
     ssl_support_method       = "sni-only"
   }
