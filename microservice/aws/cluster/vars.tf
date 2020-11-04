@@ -8,6 +8,10 @@ variable "domain" {
     default = "main.dev.vethospital.io"
 }
 
+variable "zoneid" {
+    type = string
+}
+
 variable "env" {
     type = string
 }
