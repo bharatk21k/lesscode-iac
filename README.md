@@ -56,26 +56,7 @@ default cluster for each envs like dev, stage, prod etc.
 
 **main.tf**
 ```
-# 1st create a valid cert using ACM. 
-# Since we are using Clodfront to map custom domain (via route module), we have to create it in "US_EAST_1" region.
-module "cert" {
-    source = "github.com/van001/lciac//microservice/aws/cert"
-    
-    # domain name like dev.example.com
-    domain = var.domain
-    
-    # zone id of the hosted domain in route 53
-    zoneid = var.zoneid
-
-    # aws region, in which this cluster will be created. e.g. "us-west-1"
-    region = var.cert_region
-
-    # development environment .e.g dev, stage, prod etc
-    env = var.env
-
-}
-
-# Then create a new Fargate cluster
+# Create an empty Fargate cluster
 module "cluster" {
     source = "github.com/van001/lciac//microservice/aws/cluster"
     
@@ -90,9 +71,6 @@ module "cluster" {
 
     # cluster name
     ecs_cluster_name = var.ecs_cluster_name
-
-    # cert
-    acm_certificate = module.cert.acm_certificate
 }
 
 # Then map the routing via Route 53/ Cloudfront. This is optional, but uisng CF as CDN improves your APIs overall latency.
@@ -105,17 +83,11 @@ module "routing" {
     # zone id of the hosted domain in route 53
     zoneid = var.zoneid
 
-    # aws region, in whihc this cluster will be created. e.g. "us-west-1"
-    region = var.region
-
     # development environment .e.g dev, stage, prod etc
     env = var.env
 
     # Alb name
     alb_dns_name = module.ms-cluster.alb_dns_name
-
-    # ACM certificate id
-    acm_certificate = module.cert.acm_certificate
 
 }
 ```
@@ -127,10 +99,6 @@ variable "region" {
     default = "us-east-1"
 }
 
-variable "aws_cert_region" {
-    type = string
-    default = "us-east-1"
-}
 variable "env" {
     type = string
     default = "dev"
@@ -352,7 +320,7 @@ Contain all the terraform scripts to create a complete microservice environment 
 ### In AWS
 
 #### [cert](https://github.com/van001/lciac/tree/master/microservice/aws/cert)
-Cert module helps create a valid ACM. If you are going to use 'route' module, which uses cloufront to route requests to ALB, you will have to create certificate in "US_EAST_1" region only.
+Cert module helps create a valid ACM. If you are going to use 'route' module, which uses cloudfront to route requests to ALB, you will have to create certificate in "US_EAST_1" region only.
 
 1. Creates an ACM in the specified region
 2. Updates Route53 entries to auto verify the created cert.
