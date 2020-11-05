@@ -20,3 +20,7 @@ variable "alb_dns_name" {
     type = string
 }
 
+
+variable "continent" {
+    type = string
+}

@@ -5,9 +5,9 @@ resource "aws_route53_record" "default" {
   ttl     = "5"
 
   geolocation_routing_policy {
-       continent = "NA"
+       continent = var.continent
   }
 
-  set_identifier = aws_cloudfront_distribution.default.domain_name
-  records = [aws_cloudfront_distribution.default.domain_name]
+  set_identifier = var.alb_dns_name
+  records = [var.alb_dns_name]
 }
