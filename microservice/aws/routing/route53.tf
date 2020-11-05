@@ -4,8 +4,8 @@ resource "aws_route53_record" "default" {
   type    = "CNAME"
   ttl     = "5"
 
-  weighted_routing_policy {
-    weight = 10
+  geolocation_routing_policy {
+       continent = "NA"
   }
 
   set_identifier = aws_cloudfront_distribution.default.domain_name
