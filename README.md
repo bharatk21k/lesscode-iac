@@ -31,7 +31,7 @@ The **microservice** stack contains :
 ![IAC](/assets/arch.png)
 
 -----
-![MT](/assets/arch-mt.png)
+![MT](/assets/arch-mt2.png)
 
 This project is a part of bigger initiative on how to build a brand new micro services with [contract 1st development](https://github.com/van001/lesscode-architecture).
 
