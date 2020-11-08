@@ -28,7 +28,7 @@ The **microservice** stack contains :
 - **Configuration** management done via environment variables. Same artifacts can be deployed with a new configuration.
 
 
-![IAC](/assets/Architecture.png)
+![IAC](/assets/arch-new.png)
 
 This project is a part of bigger initiative on how to build a brand new micro services with [contract 1st development](https://github.com/van001/lesscode-architecture).
 
