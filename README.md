@@ -17,7 +17,8 @@ The **microservice** stack contains :
 - **AWS Fargate** for orchestration and management of containers. It assumes that you are doing container (docker) based deployment.
 - **Auto-scaling policies** for service scaling.
 - **AWS ALB (Application load balancer)** for availibility, routing (via path) and service discovery (using DNS and path). Again, assumption here is that you are building a small to mid-size applications with 10s-100s of servers.
-- **Route53** and **Cloudfront** for external discovery and CDN routing.
+- **Route53** for DNS, external discovery & geo-routing.
+- **Cloudfront** for CDN (content delivery network).
 - **VPC**, **ACM**, **SecurityGroups**, **IAM** for isolation and security.
 - **Cloudwatch** for observability - logs, metrics and dashboards.
 - **ECS** (Elastic container service) for container storage.
