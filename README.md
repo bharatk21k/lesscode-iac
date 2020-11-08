@@ -7,7 +7,7 @@ Click here to visit my other work under [lesscode](https://github.com/van001).
 The goal of this project is to provide modules (terraform) to create/ destroy a simple microservice and serverless infrastructure stack. 
 It does not create/destroy any messaging & data stack (yet). Feel free to clone and add modules to do that.
 
-It is an opinionated framework/stack (but generic enough), which helps to automate the creation and destruction of a microservice/ serverless infrastructure for quick
+It is an opinionated framework/stack (but generic enough) to automate the creation / destruction of a microservice/ serverless infrastructure for quick
 build and deployment of APIs, UIs and MQ(Message Q) services. The architecture fully supports multi-region deployment using route53 geo routing.
 
 If you are not writing a **monolithic** application then you are either writing a service oriented **(SOA)** or a **microservice** or a **serverless** application. Wouldn't it be nice if you could create/destroy those infrastructures on demand? That's the motivation behind this project.
