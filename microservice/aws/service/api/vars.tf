@@ -70,7 +70,7 @@ variable "dependencies" {
 
 variable "metrics_count" {
     type = list
-    default =["2","5"]
+    default =["2","3","4","5"]
 }
 
 variable "metrics_p95" {
