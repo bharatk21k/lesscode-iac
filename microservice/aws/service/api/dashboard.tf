@@ -42,7 +42,7 @@ resource "aws_cloudwatch_dashboard" "resource" {
                   "title": "2X- Count"
             }
          },
-         
+         {
             "type":"metric",
             "x":0,
             "y":0,
@@ -61,7 +61,7 @@ resource "aws_cloudwatch_dashboard" "resource" {
                   "title": "3X- Count"
             }
          },
-         
+         {
             "type":"metric",
             "x":0,
             "y":0,
@@ -80,7 +80,7 @@ resource "aws_cloudwatch_dashboard" "resource" {
                   "title": "4X- Count"
             }
          },
-         
+         {
             "type":"metric",
             "x":0,
             "y":0,
