@@ -68,7 +68,12 @@ variable "dependencies" {
     default =[]
 }
 
-variable "metrics" {
+variable "metrics_count" {
     type = list
-    default =["20" , "400", "401", "500"]
+    default =["2","5"]
+}
+
+variable "metrics_p95" {
+    type = list
+    default =["2"]
 }
