@@ -1,5 +1,5 @@
-resource "aws_cloudwatch_dashboard" "main" {
-   dashboard_name = "${data.aws_ecs_cluster.ecs.cluster_name}-${var.name}"
+resource "aws_cloudwatch_dashboard" "resource" {
+   dashboard_name = "${data.aws_ecs_cluster.ecs.cluster_name}-${var.name}-resources"
 
    dashboard_body = <<EOF
    {
@@ -37,9 +37,20 @@ resource "aws_cloudwatch_dashboard" "main" {
                   "stacked": true,
                   "title": "CPU %"
             }
-         },
+         }
+      ]
+   }
+   EOF
+}
+
+resource "aws_cloudwatch_dashboard" "count" {
+   dashboard_name = "${data.aws_ecs_cluster.ecs.cluster_name}-${var.name}-count"
+   count = length(var.metrics_count)
+   
+   dashboard_body = <<EOF
+   {
+      "widgets": [
          {
-            count = length(var.metrics_count)
             "type":"metric",
             "x":0,
             "y":0,
@@ -57,9 +68,19 @@ resource "aws_cloudwatch_dashboard" "main" {
                   "stat": "Sum",
                   "title": "${var.metrics_count[count.index]}X- Count"
             }
-         },
+         }
+      ]
+   }
+   EOF
+}
+resource "aws_cloudwatch_dashboard" "p95" {
+   dashboard_name = "${data.aws_ecs_cluster.ecs.cluster_name}-${var.name}-count"
+   count = length(var.metrics_p95)
+   dashboard_body = <<EOF
+   {
+      "widgets": [
          {
-            count = length(var.metrics_p95)
+       
             "type":"metric",
             "x":0,
             "y":0,
