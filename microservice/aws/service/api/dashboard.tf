@@ -31,7 +31,7 @@ resource "aws_cloudwatch_dashboard" "resource" {
             "height":4,
             "properties":{
                   "metrics": [
-                     [ "${data.aws_ecs_cluster.ecs.cluster_name}","count-2"],
+                     [ "${data.aws_ecs_cluster.ecs.cluster_name}","count-2"]
                   ],
                   "view": "timeSeries",
                   "region": "${var.region}",
@@ -49,7 +49,7 @@ resource "aws_cloudwatch_dashboard" "resource" {
             "height":4,
             "properties":{
                   "metrics": [
-                     [ "${data.aws_ecs_cluster.ecs.cluster_name}","count-3"],
+                     [ "${data.aws_ecs_cluster.ecs.cluster_name}","count-3"]
                   ],
                   "view": "timeSeries",
                   "region": "${var.region}",
@@ -67,7 +67,7 @@ resource "aws_cloudwatch_dashboard" "resource" {
             "height":4,
             "properties":{
                   "metrics": [
-                     [ "${data.aws_ecs_cluster.ecs.cluster_name}","count-4"],
+                     [ "${data.aws_ecs_cluster.ecs.cluster_name}","count-4"]
                   ],
                   "view": "timeSeries",
                   "region": "${var.region}",
@@ -85,7 +85,7 @@ resource "aws_cloudwatch_dashboard" "resource" {
             "height":4,
             "properties":{
                   "metrics": [
-                     [ "${data.aws_ecs_cluster.ecs.cluster_name}","count-5"],
+                     [ "${data.aws_ecs_cluster.ecs.cluster_name}","count-5"]
                   ],
                   "view": "timeSeries",
                   "region": "${var.region}",
