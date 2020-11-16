@@ -77,3 +77,7 @@ variable "metrics_p95" {
     type = list
     default =["2"]
 }
+
+variable "task_role_arn"{
+    type= string
+}
