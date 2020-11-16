@@ -10,7 +10,7 @@ resource "aws_kms_key" "main" {
             "Sid": "Enable IAM User Permissions",
             "Effect": "Allow",
             "Principal": {
-                "AWS": var.task_role_arn
+                "AWS": "${var.task_role_arn}"
             },
             "Action": "kms:*",
             "Resource": "*"
