@@ -1,8 +1,8 @@
 data "template_file" "kms" {
    template = file("${path.module}/templates/kms/policy.json.tpl")
-   
+
    vars = {
-     resource = var.task_role_arn
+     role = var.task_role_arn
    }
  }
 
