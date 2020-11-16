@@ -2,7 +2,7 @@
     "Sid": "Enable IAM Role Permissions",
     "Effect": "Allow",
     "Principal": {
-        "AWS": " "${role}"
+        "AWS": "${role}"
     },
     "Action": "kms:*",
     "Resource": "*"
