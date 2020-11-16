@@ -9,7 +9,6 @@ data "template_file" "kms" {
 resource "aws_kms_key" "main" {
   description             = data.aws_ecs_cluster.ecs.cluster_name
   deletion_window_in_days = 10
-  policy = data.template_file.kms.rendered
 }
 
 resource "aws_kms_alias" "main" {
