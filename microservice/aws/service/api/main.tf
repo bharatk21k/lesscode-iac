@@ -57,7 +57,7 @@ data "template_file" "service" {
 
 resource "aws_ecs_task_definition" "task" {
   family                   = var.name
-  execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
+  execution_role_arn       = "arn:aws:iam::092166348842:role/service"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu                      = var.fargate_cpu
