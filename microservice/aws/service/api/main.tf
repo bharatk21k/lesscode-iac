@@ -83,6 +83,7 @@ resource "aws_ecs_service" "service" {
   task_definition = aws_ecs_task_definition.task.arn
   desired_count   = var.service_count_min
   launch_type     = "FARGATE"
+  platform_version = "1.4.0"
   force_new_deployment = "true"
 
   network_configuration {
