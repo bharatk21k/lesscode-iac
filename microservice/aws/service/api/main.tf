@@ -64,6 +64,21 @@ resource "aws_ecs_task_definition" "task" {
   cpu                      = var.fargate_cpu
   memory                   = var.fargate_memory
   container_definitions    = data.template_file.service.rendered
+  volume {
+    name = "${var.name}-storage"
+
+    docker_volume_configuration {
+      scope         = "shared"
+      autoprovision = true
+      driver        = "local"
+
+      driver_opts = {
+        "type"   = "nfs"
+        "device" = "${var.ecs_cluster_name}:/"
+        "o"      = "addr=${var.ecs_cluster_name},rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport"
+      }
+    }
+  }
 
   depends_on =[data.aws_ecs_cluster.ecs, data.aws_lb_listener.listener]
 }
