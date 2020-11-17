@@ -69,7 +69,7 @@ resource "aws_ecs_task_definition" "task" {
     name = "${var.ecs_cluster_name}-${var.name}-storage"
 
     efs_volume_configuration {
-      file_system_id          = "dev|fs-0ecaeb0b"
+      file_system_id          = "fs-0ecaeb0b"
       root_directory          = "/"
     }
   }
