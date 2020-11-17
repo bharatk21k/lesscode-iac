@@ -112,7 +112,7 @@ resource "aws_alb_target_group" "service" {
 resource "aws_lb_listener_rule" "service" {
   
   listener_arn = data.aws_lb_listener.listener.arn
-  priority     = 99
+  priority     = var.priority
 
   action {
     type             = "forward"

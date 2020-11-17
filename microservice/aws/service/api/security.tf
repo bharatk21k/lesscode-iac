@@ -1,6 +1,6 @@
 # Traffic to the ECS cluster should only come from the ALB
 resource "aws_security_group" "ecs_tasks" {
-  name        = "${var.ecs_cluster_name}-ecs-tasks-security-group"
+  name        = "${var.ecs_cluster_name}-{var.name}-sg"
   description = "allow inbound access from the ALB only"
   vpc_id      = data.aws_alb.alb.vpc_id
 

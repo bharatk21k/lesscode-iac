@@ -81,3 +81,7 @@ variable "metrics_p95" {
 variable "task_role_arn"{
     type= string
 }
+
+variable "priority" {
+    default = 99
+}
