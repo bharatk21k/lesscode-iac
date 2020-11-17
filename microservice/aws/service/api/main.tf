@@ -64,19 +64,15 @@ resource "aws_ecs_task_definition" "task" {
   cpu                      = var.fargate_cpu
   memory                   = var.fargate_memory
   container_definitions    = data.template_file.service.rendered
+  
   volume {
-    name = "${var.name}-storage"
+    name = "${var.ecs_cluster_name}-${var.name}-storage"
 
-    docker_volume_configuration {
-      scope         = "shared"
-      autoprovision = true
-      driver        = "local"
-
-      driver_opts = {
-        "type"   = "nfs"
-        "device" = "${var.ecs_cluster_name}:/"
-        "o"      = "addr=${var.ecs_cluster_name},rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport"
-      }
+    efs_volume_configuration {
+      file_system_id          = "fs-0ecaeb0b"
+      root_directory          = "/"
+      transit_encryption      = "ENABLED"
+      transit_encryption_port = 2999
     }
   }
 
