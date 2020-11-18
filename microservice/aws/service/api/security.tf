@@ -23,6 +23,13 @@ resource "aws_security_group" "ecs_tasks" {
     protocol    = "-1"
     from_port   = 0
     to_port     = 0
+    security_groups = [data.aws_security_group.lb_security_group.id]
+  }
+
+  egress {
+    protocol    = "-1"
+    from_port   = 0
+    to_port     = 0
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
