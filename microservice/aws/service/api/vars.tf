@@ -85,3 +85,7 @@ variable "task_role_arn"{
 variable "priority" {
     default = 99
 }
+
+variable "efs_id" {
+    type = string
+}

@@ -56,7 +56,7 @@ data "template_file" "service" {
 }
 
 data "aws_efs_file_system" "fs" {
-  file_system_id = "fs-0ecaeb0b"
+  file_system_id = var.efs_id
 }
 
 resource "aws_ecs_task_definition" "task" {
