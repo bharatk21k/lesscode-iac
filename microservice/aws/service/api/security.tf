@@ -11,6 +11,14 @@ resource "aws_security_group" "ecs_tasks" {
     security_groups = [data.aws_security_group.lb_security_group.id]
   }
 
+  ingress {
+    description = "EFS mount target"
+    from_port   = 2049
+    to_port     = 2049
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   egress {
     protocol    = "-1"
     from_port   = 0
