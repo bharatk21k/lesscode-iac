@@ -69,15 +69,6 @@ resource "aws_ecs_task_definition" "task" {
   memory                   = var.fargate_memory
   container_definitions    = data.template_file.service.rendered
   
-  volume {
-    name = "${var.ecs_cluster_name}-${var.name}-efs"
-
-    efs_volume_configuration {
-      file_system_id          = data.aws_efs_file_system.fs.id
-      root_directory          = "/"
-    }
-  }
-
   depends_on =[data.aws_ecs_cluster.ecs, data.aws_lb_listener.listener]
 }
 
