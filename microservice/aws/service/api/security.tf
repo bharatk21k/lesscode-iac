@@ -16,14 +16,7 @@ resource "aws_security_group" "ecs_tasks" {
     from_port   = 2049
     to_port     = 2049
     protocol    = "tcp"
-    security_groups = [data.aws_security_group.lb_security_group.id]
-  }
-
-  egress {
-    protocol    = "-1"
-    from_port   = 0
-    to_port     = 0
-    security_groups = [data.aws_security_group.lb_security_group.id]
+    security_groups = ["sg-0b9e0d2f9b803b0a8"]
   }
 
   egress {
