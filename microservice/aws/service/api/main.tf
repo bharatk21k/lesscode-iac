@@ -55,6 +55,10 @@ data "template_file" "service" {
   }
 }
 
+data "aws_efs_file_system" "fs" {
+  file_system_id = "fs-0ecaeb0b"
+}
+
 resource "aws_ecs_task_definition" "task" {
   family                   = var.name
   task_role_arn            = var.task_role_arn
@@ -66,7 +70,7 @@ resource "aws_ecs_task_definition" "task" {
   container_definitions    = data.template_file.service.rendered
   
   volume {
-    name = "fs-0ecaeb0b"
+    name = aws_efs_file_system.fs.id
 
     efs_volume_configuration {
       file_system_id          = "fs-0ecaeb0b"
