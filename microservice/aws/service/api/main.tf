@@ -70,10 +70,10 @@ resource "aws_ecs_task_definition" "task" {
   container_definitions    = data.template_file.service.rendered
   
   volume {
-    name = aws_efs_file_system.fs.id
+    name = "${var.ecs_cluster_name}-${var.name}-efs"
 
     efs_volume_configuration {
-      file_system_id          = "fs-0ecaeb0b"
+      file_system_id          = data.aws_efs_file_system.fs.id
       root_directory          = "/"
     }
   }
