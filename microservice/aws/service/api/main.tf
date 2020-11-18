@@ -55,10 +55,6 @@ data "template_file" "service" {
   }
 }
 
-data "aws_efs_file_system" "fs" {
-  file_system_id = var.efs_id
-}
-
 resource "aws_ecs_task_definition" "task" {
   family                   = var.name
   task_role_arn            = var.task_role_arn
