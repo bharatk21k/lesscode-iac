@@ -9,6 +9,7 @@ resource "aws_vpc" "main" {
   tags = {
     Name = var.ecs_cluster_name
   }
+  enable_dns_hostnames = true
 }
 
 # Create var.az_count private subnets, each in a different AZ
