@@ -4,8 +4,8 @@ resource "aws_route53_record" "default" {
   type    = "CNAME"
   ttl     = "5"
 
-  geolocation_routing_policy {
-       continent = var.continent
+  weighted_routing_policy {
+    weight = 10
   }
 
   set_identifier = var.alb_dns_name
