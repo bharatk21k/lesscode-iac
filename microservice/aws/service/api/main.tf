@@ -96,7 +96,6 @@ resource "aws_alb_target_group" "service" {
   name        = "${var.ecs_cluster_name}-${var.name}-tg"
   port        = var.service_port
   protocol    = "HTTP"
-  protocol_version = "HTTP2"
   vpc_id      = data.aws_alb.alb.vpc_id
   target_type = "ip"
 
