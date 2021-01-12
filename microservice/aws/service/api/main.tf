@@ -41,7 +41,6 @@ resource "aws_cloudwatch_log_stream" "service_log_stream" {
 
 data "template_file" "service" {
   template = file("${path.module}/templates/ecs/taskdef.json.tpl")
-
   vars = {
     name                = var.name
     ecs_cluster_name    = var.ecs_cluster_name
