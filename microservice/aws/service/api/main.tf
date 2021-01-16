@@ -98,6 +98,7 @@ resource "aws_alb_target_group" "service" {
   protocol    = "HTTP"
   vpc_id      = data.aws_alb.alb.vpc_id
   target_type = "ip"
+  deregistration_delay = 0
 
   health_check {
     healthy_threshold   = "3"
