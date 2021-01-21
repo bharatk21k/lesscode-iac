@@ -56,7 +56,7 @@ data "template_file" "service" {
 }
 
 resource "aws_ecs_task_definition" "task" {
-  family                   = var.name
+  family                   = "${var.ecs_cluster_name}-${var.name}"
   task_role_arn            = var.task_role_arn
   execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
   network_mode             = "awsvpc"
