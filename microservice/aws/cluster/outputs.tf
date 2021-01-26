@@ -17,8 +17,4 @@ output "aws_alb_listener_arn" {
   value = "${aws_alb_listener.default.arn}"
 }
 
-output "subnets_private_ids" {
-  value = [aws_subnet.private.*.id]
-}
-
 

@@ -15,6 +15,9 @@ data "aws_availability_zones" "available" {
 data "aws_vpc" "main" {
   id = var.vpc_id
 }
+data "aws_subnet" "all" {
+  vpc_id = var.vpc_id
+}
 
 # Create var.az_count private subnets, each in a different AZ
 #resource "aws_subnet" "private" {
