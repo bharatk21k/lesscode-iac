@@ -16,7 +16,7 @@ variable "env" {
     type = string
 }
 
-vatiable "vpc_id" {
+variable "vpc_id" {
     type= string
 }
 
