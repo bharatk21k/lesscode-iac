@@ -15,7 +15,7 @@ data "aws_availability_zones" "available" {
 data "aws_vpc" "main" {
   id = var.vpc_id
 }
-data "aws_subnet" "all" {
+data "aws_subnet_ids" "all" {
   vpc_id = var.vpc_id
 }
 
