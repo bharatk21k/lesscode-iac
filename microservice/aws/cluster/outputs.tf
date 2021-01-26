@@ -1,10 +1,6 @@
 
 # outputs.tf
 
-output "vpc_id" {
-  value = "${aws_vpc.main.id}"
-}
-
 output "aws_security_group_lb_id" {
   value = "${aws_security_group.lb.id}"
 }

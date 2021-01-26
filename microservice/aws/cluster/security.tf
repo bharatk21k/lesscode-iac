@@ -4,7 +4,7 @@
 resource "aws_security_group" "lb" {
   name        = "${var.ecs_cluster_name}-load-balancer-security-group"
   description = "controls access to the ALB"
-  vpc_id      = aws_vpc.main.id
+  vpc_id      = data.aws_vpc.main.id
 
   ingress {
     protocol    = "tcp"
