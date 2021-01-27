@@ -19,7 +19,7 @@ resource "aws_subnet" "private" {
   availability_zone = data.aws_availability_zones.available.names[count.index]
   vpc_id            = aws_vpc.main.id
   tags = {
-    Name = var.ecs_cluster_name
+    Name = "${var.ecs_cluster_name}-private"
   }
 }
 
@@ -30,6 +30,9 @@ resource "aws_subnet" "public" {
   availability_zone       = data.aws_availability_zones.available.names[count.index]
   vpc_id                  = aws_vpc.main.id
   map_public_ip_on_launch = true
+  tags = {
+    Name = "${var.ecs_cluster_name}-public"
+  }
 }
 
 # Internet Gateway for the public subnet

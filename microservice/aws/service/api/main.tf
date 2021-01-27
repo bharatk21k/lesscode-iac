@@ -43,6 +43,7 @@ data "template_file" "service" {
   template = file("${path.module}/templates/ecs/taskdef.json.tpl")
   vars = {
     env                 = var.env
+    domain              = var.domain
     name                = var.name
     ecs_cluster_name    = var.ecs_cluster_name
     service_image       = var.service_image

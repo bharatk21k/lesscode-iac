@@ -3,10 +3,10 @@
       "name": "${name}",
       "image": "${service_image}",
       "environment": [
-            {
-              "name": "env", "value": "${env}",
-              "name": "ECS_CLUSTER_NAME", "value": "${ecs_cluster_name}"
-            }
+            {"name": "DOMAIN", "value": "${domain}"},
+            {"name": "NAME", "value": "${name}"},
+            {"name": "ENV", "value": "${env}"},
+            {"name": "ECS_CLUSTER_NAME", "value": "${ecs_cluster_name}"}
         ],
       "cpu": ${fargate_cpu},
       "memory": ${fargate_memory},

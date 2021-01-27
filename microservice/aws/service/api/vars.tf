@@ -1,16 +1,17 @@
 variable "region" {
     type = string
-    #default ="us-east-1"
 }
 
 variable "env" {
     type = string
-    #default = "dev"
+}
+
+variable "domain" {
+    type = string
 }
 
 variable "ecs_cluster_name" {
     type = string
-    #default = "main-dev-us-west-1"
 }
 
 variable "name" {
