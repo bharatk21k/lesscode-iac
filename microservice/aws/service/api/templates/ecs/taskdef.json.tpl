@@ -3,6 +3,7 @@
       "name": "${name}",
       "image": "${service_image}",
       "environment": [
+            {"name": "REGION", "value": "${region}"},
             {"name": "DOMAIN", "value": "${domain}"},
             {"name": "NAME", "value": "${name}"},
             {"name": "ENV", "value": "${env}"},
