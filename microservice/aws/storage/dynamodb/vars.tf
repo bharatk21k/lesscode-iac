@@ -31,7 +31,7 @@ variable "range_key" {
 }
 
 variable "gsis" {
-  type = set(object({
+  type = list(object({
     name               = string
     hash_key           = string
     range_key          = string
