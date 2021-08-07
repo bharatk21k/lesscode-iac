@@ -23,20 +23,20 @@ resource "aws_dynamodb_table" "defaults" {
    
   attribute {
     count = length(var.gsis)  
-    name = "${var.gsis[count.index].hash_key}"
+    name = var.gsis[count.index].hash_key
     type = "S"
   }
   attribute {
     count = length(var.gsis)
-    name = "${var.gsis[count.index].range_key}"
+    name = var.gsis[count.index].range_key
     type = "N"
   }
   global_secondary_index {
     count = length(var.gsis)
-    name            = "${var.gsis[count.index].name}"
-    hash_key        = "${var.gsis[count.index].hash_key}"
-    range_key       = "${var.gsis[count.index].range_key}"
-    projection_type = "${var.gsis[count.index].projection_type}"
+    name            = var.gsis[count.index].name
+    hash_key        = var.gsis[count.index].hash_key
+    range_key       = var.gsis[count.index].range_key
+    projection_type = var.gsis[count.index].projection_type
   }
 
   tags = {
