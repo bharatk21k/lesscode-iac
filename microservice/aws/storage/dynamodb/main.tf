@@ -16,27 +16,30 @@ resource "aws_dynamodb_table" "defaults" {
   }
 
   ttl {
-    attribute_name    = "expiresAt"
+    name    = "expiresAt"
     enabled = true
   }
 
-   
-  attribute {
-    count = length(var.gsis)  
-    name = var.gsis[count.index].hash_key
-    type = "S"
-  }
-  attribute {
-    count = length(var.gsis)
-    name = var.gsis[count.index].range_key
-    type = "N"
-  }
+
   global_secondary_index {
-    count = length(var.gsis)
-    name            = var.gsis[count.index].name
-    hash_key        = var.gsis[count.index].hash_key
-    range_key       = var.gsis[count.index].range_key
-    projection_type = var.gsis[count.index].projection_type
+    name            = var.GS1.name
+    hash_key        = var.GS1.hash_key
+    range_key       = var.GS1.range_key
+    projection_type = var.GS1.projection_type
+  }
+
+  global_secondary_index {
+    name            = var.GS2.name
+    hash_key        = var.GS2.hash_key
+    range_key       = var.GS2.range_key
+    projection_type = var.GS2.projection_type
+  }
+
+  global_secondary_index {
+    name            = var.GS3.name
+    hash_key        = var.GS3.hash_key
+    range_key       = var.GS3.range_key
+    projection_type = var.GS3.projection_type
   }
 
   tags = {

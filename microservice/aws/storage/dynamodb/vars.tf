@@ -30,12 +30,29 @@ variable "range_key" {
     default = "SK"
 }
 
-variable "gsis" {
-  type = list(object({
+variable "GS1" {
+  type = object({
     name               = string
     hash_key           = string
     range_key          = string
     projection_type    = string
-  }))
+  })
 } 
 
+variable "GS2" {
+  type = object({
+    name               = string
+    hash_key           = string
+    range_key          = string
+    projection_type    = string
+  })
+} 
+
+variable "GS3" {
+  type = object({
+    name               = string
+    hash_key           = string
+    range_key          = string
+    projection_type    = string
+  })
+} 
