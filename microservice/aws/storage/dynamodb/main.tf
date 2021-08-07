@@ -21,6 +21,37 @@ resource "aws_dynamodb_table" "defaults" {
   }
 
 
+  attribute {
+    name = var.GS1.hash_key
+    type = "S"
+  }
+
+  attribute {
+    name = var.GS1.range_key
+    type = "N"
+  }
+
+  attribute {
+    name = var.GS2.hash_key
+    type = "S"
+  }
+
+  attribute {
+    name = var.GS2.range_key
+    type = "N"
+  }
+
+  attribute {
+    name = var.GS3.hash_key
+    type = "S"
+  }
+
+  attribute {
+    name = var.GS3.range_key
+    type = "N"
+  }
+
+
   global_secondary_index {
     name            = var.GS1.name
     hash_key        = var.GS1.hash_key
