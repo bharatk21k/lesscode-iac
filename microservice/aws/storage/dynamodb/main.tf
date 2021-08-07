@@ -20,20 +20,23 @@ resource "aws_dynamodb_table" "defaults" {
     enabled = true
   }
 
-  for_each = { for gsi in var.gsis : gsi.name => gsi }
+   
   attribute {
-    name = each.value.hash_key
+    count = length(var.gsis)  
+    name = "${var.gsis[count.index].hash_key}"
     type = "S"
   }
   attribute {
-    name = each.value.range_key
-    type = "S"
+    count = length(var.gsis)
+    name = "${var.gsis[count.index].range_key}"
+    type = "N"
   }
   global_secondary_index {
-    name            = each.value.name
-    hash_key        = each.value.hash_key
-    range_key       = each.value.range_key
-    projection_type = each.value.projection_type
+    count = length(var.gsis)
+    name            = "${var.gsis[count.index].name}"
+    hash_key        = "${var.gsis[count.index].hash_key}"
+    range_key       = "${var.gsis[count.index].range_key}"
+    projection_type = "${var.gsis[count.index].projection_type}"
   }
 
   tags = {
