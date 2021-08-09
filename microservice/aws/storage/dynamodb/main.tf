@@ -28,7 +28,7 @@ resource "aws_dynamodb_table" "defaults" {
 
   attribute {
     name = var.GS1.range_key
-    type = "N"
+    type = "S"
   }
 
   attribute {
@@ -38,7 +38,7 @@ resource "aws_dynamodb_table" "defaults" {
 
   attribute {
     name = var.GS2.range_key
-    type = "N"
+    type = "S"
   }
 
   attribute {
@@ -48,7 +48,7 @@ resource "aws_dynamodb_table" "defaults" {
 
   attribute {
     name = var.GS3.range_key
-    type = "N"
+    type = "S"
   }
 
 
