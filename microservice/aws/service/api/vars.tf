@@ -90,3 +90,8 @@ variable "priority" {
 variable "efs_id" {
     type = string
 }
+
+variable "log_retention" {
+    description = "cloud watch log retention in days. 0 mean never expire"
+    default = 0
+}
