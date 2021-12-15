@@ -27,7 +27,7 @@ data "aws_security_group" "lb_security_group" {
 # Set up CloudWatch group and log stream and retain logs for 30 days
 resource "aws_cloudwatch_log_group" "service_log_group" {
   name              = "service/${var.ecs_cluster_name}/${var.name}"
-  retention_in_days = 30
+  retention_in_days = var.log_retention
 
   tags = {
     Name = "service/${var.name}"
