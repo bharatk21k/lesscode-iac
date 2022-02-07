@@ -16,7 +16,21 @@ variable "ecs_cluster_name" {
 
 variable "name" {
     type = string
-    default = "dlq"
+    default = "test"
+}
+
+variable "dlq"{
+    type= bool
+    default = false
+}
+
+variable "dlq_arn"{
+    type= string
+    default = "arn:aws:sqs:us-west-2:092166348842:dev-dlq"
+}
+
+variable "dlq_max_reeceive_count" {
+    default = 4
 }
 
 variable "delay_seconds" {
