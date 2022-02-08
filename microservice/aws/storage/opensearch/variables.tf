@@ -1,7 +1,3 @@
-####################################################################################################
-# General
-####################################################################################################
-
 variable "tags" {
   type = map
   default = {}
@@ -21,21 +17,13 @@ variable "ecs_cluster_name" {
     default = "dev"
 }
 
-variable "domain_name" {
-    type = string
-}
-
 variable "task_role_arn"{
     type = string
     default ="arn:aws:iam::092166348842:role/service"
 }
-##########################################################################################
-# Opensearch
-##########################################################################################
 
 variable "opensearch_version" {
   type = string
-  default = "OpenSearch_1.1"
 }
 
 variable "data_instance_count" {
