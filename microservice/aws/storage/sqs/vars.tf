@@ -19,7 +19,7 @@ variable "name" {
     default = "test"
 }
 
-variable "visibility_timeout_seconds"{
+variable "visibility_timeout_seconds" {
     default = 60
 }
 
