@@ -42,7 +42,7 @@ data "aws_iam_role" "service_linked_role" {
 }
 
 resource "aws_elasticsearch_domain" "aos" {
-  domain_name = "${var.ecs_cluster_name}-albert"
+  domain_name = "${var.ecs_cluster_name}-${var.name}"
   elasticsearch_version = var.opensearch_version
 
   cluster_config {
