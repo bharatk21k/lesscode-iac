@@ -19,6 +19,10 @@ variable "name" {
     default = "test"
 }
 
+variable "visibility_timeout_seconds"{
+    default = 60
+}
+
 variable "dlq"{
     type= bool
     default = false
