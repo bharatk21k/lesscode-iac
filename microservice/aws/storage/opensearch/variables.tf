@@ -14,7 +14,6 @@ variable "region" {
 
 variable "name" {
     type = string
-    default = "albert"
 }
 
 variable "ecs_cluster_name" {
