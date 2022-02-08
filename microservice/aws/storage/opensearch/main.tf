@@ -1,6 +1,3 @@
-
-
-
 data "aws_caller_identity" "current" {}
 data "aws_availability_zones" "available" {
 }
@@ -45,7 +42,7 @@ data "aws_iam_role" "service_linked_role" {
 }
 
 resource "aws_elasticsearch_domain" "opensearch" {
-  domain_name = "${var.ecs_cluster_name}-${var.domain_name}"
+  domain_name = "${var.ecs_cluster_name}-${var.name}"
   elasticsearch_version = var.opensearch_version
 
   cluster_config {
@@ -132,10 +129,6 @@ CONFIG
   depends_on = [data.aws_iam_role.service_linked_role]
 }
 
-####################################################################################################
-# Security Group
-####################################################################################################
-
 resource "aws_security_group" "opensearch" {
   name = "${var.ecs_cluster_name}-${var.name}-opensearch-sg"
   description = "${var.ecs_cluster_name}-${var.name}-security-group"
@@ -161,10 +154,6 @@ resource "aws_security_group_rule" "opensearch" {
   protocol = "tcp"
   cidr_blocks = ["0.0.0.0/0"]
 }
-
-####################################################################################################
-# Logs
-####################################################################################################
 
 resource "aws_cloudwatch_log_group" "opensearch_logs" {
   name = "opensearch/${var.ecs_cluster_name}-${var.name}"
