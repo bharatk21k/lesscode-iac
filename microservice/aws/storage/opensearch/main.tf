@@ -1,3 +1,6 @@
+
+
+
 data "aws_caller_identity" "current" {}
 data "aws_availability_zones" "available" {
 }
@@ -41,7 +44,7 @@ data "aws_iam_role" "service_linked_role" {
   ]
 }
 
-resource "aws_elasticsearch_domain" "aos" {
+resource "aws_elasticsearch_domain" "opensearch" {
   domain_name = "${var.ecs_cluster_name}-${var.name}"
   elasticsearch_version = var.opensearch_version
 
@@ -165,11 +168,11 @@ resource "aws_security_group_rule" "opensearch" {
 ####################################################################################################
 
 resource "aws_cloudwatch_log_group" "opensearch_logs" {
-  name = "opensearch/${var.ecs_cluster_name}-${var.name}-aos-logs"
+  name = "opensearch/${var.ecs_cluster_name}-${var.name}"
 }
 
 resource "aws_cloudwatch_log_resource_policy" "opensearch_logs" {
-  policy_name = "${var.ecs_cluster_name}-${var.name}-aos-policy"
+  policy_name = "${var.ecs_cluster_name}-${var.name}"
   policy_document = data.aws_iam_policy_document.opensearch_logs.json
 }
 
