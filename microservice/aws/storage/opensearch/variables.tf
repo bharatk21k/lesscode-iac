@@ -35,11 +35,6 @@ variable "task_role_arn"{
 # Opensearch
 ##########################################################################################
 
-variable "domain_name" {
-  type = string
-  description = "Name for Opensearch domain, also used as prefix for related resources."
-}
-
 variable "opensearch_version" {
   type = string
   default = "OpenSearch_1.1"
