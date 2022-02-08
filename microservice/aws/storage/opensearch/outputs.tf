@@ -1,7 +1,3 @@
-#######################################################
-# Opensearch
-#######################################################
-
 output "elasticsearch_domain_arn" {
   value = aws_elasticsearch_domain.opensearch.arn
 }
@@ -48,4 +44,3 @@ output "caller_arn" {
 output "caller_user" {
   value = data.aws_caller_identity.current.user_id
 }
-
