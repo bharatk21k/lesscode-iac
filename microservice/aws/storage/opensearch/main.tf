@@ -45,7 +45,7 @@ data "aws_iam_role" "service_linked_role" {
 }
 
 resource "aws_elasticsearch_domain" "opensearch" {
-  domain_name = "${var.domain_name}"
+  domain_name = "${var.ecs_cluster_name}-${var.domain_name}"
   elasticsearch_version = var.opensearch_version
 
   cluster_config {
