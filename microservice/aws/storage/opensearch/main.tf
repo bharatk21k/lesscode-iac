@@ -91,7 +91,7 @@ resource "aws_elasticsearch_domain" "opensearch" {
               "Action": "es:*",
               "Principal": "*",
               "Effect": "Allow",
-              "Resource": "arn:aws:es:us-west-2:${data.aws_caller_identity.current.account_id}:domain/${var.domain}/*"
+              "Resource": "arn:aws:es:us-west-2:${data.aws_caller_identity.current.account_id}:domain/${var.ecs_cluster_name}-${var.name}/*"
           }
       ]  
   }
