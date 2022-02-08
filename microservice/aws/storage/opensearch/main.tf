@@ -147,7 +147,6 @@ resource "aws_security_group" "opensearch" {
     to_port = 0
     protocol = "-1"
     cidr_blocks = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
   }
 
   tags = var.tags
@@ -160,7 +159,7 @@ resource "aws_security_group_rule" "opensearch" {
   from_port = 443
   to_port = 443
   protocol = "tcp"
-  cidr_blocks = var.proxy_inbound_cidr_blocks
+  cidr_blocks = ["0.0.0.0/0"]
 }
 
 ####################################################################################################
