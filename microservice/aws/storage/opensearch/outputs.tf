@@ -3,23 +3,23 @@
 #######################################################
 
 output "elasticsearch_domain_arn" {
-  value = aws_elasticsearch_domain.aos.arn
+  value = aws_elasticsearch_domain.opensearch.arn
 }
 
 output "elasticsearch_domain_id" {
-  value = aws_elasticsearch_domain.aos.domain_id
+  value = aws_elasticsearch_domain.opensearch.domain_id
 }
 
 output "elasticsearch_domain_name" {
-  value = aws_elasticsearch_domain.aos.domain_name
+  value = aws_elasticsearch_domain.opensearch.domain_name
 }
 
 output "elasticsearch_domain_endpoint" {
-  value = aws_elasticsearch_domain.aos.endpoint
+  value = aws_elasticsearch_domain.opensearch.endpoint
 }
 
 output "elasticsearch_domain_kibana_endpoint" {
-  value = aws_elasticsearch_domain.aos.kibana_endpoint
+  value = aws_elasticsearch_domain.opensearch.kibana_endpoint
 }
 
 output "elasticsearch_security_group_id" {
