@@ -14,7 +14,6 @@ variable "name" {
 
 variable "ecs_cluster_name" {
     type = string
-    default = "dev"
 }
 
 variable "task_role_arn"{
