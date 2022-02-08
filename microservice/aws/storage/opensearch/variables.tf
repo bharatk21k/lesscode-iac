@@ -1,0 +1,95 @@
+####################################################################################################
+# General
+####################################################################################################
+
+variable "tags" {
+  type = map
+  default = {}
+}
+
+variable "region" {
+    type = string
+    default = "us-west-2"
+}
+
+variable "name" {
+    type = string
+    default = "dev"
+}
+
+variable "ecs_cluster_name" {
+    type = string
+    default = "dev"
+}
+
+variable "domain" {
+    type =  string
+    default = "dev"
+}
+
+variable "task_role_arn"{
+    type = string
+    default ="arn:aws:iam::092166348842:role/service"
+}
+##########################################################################################
+# Opensearch
+##########################################################################################
+
+variable "domain_name" {
+  type = string
+  description = "Name for Opensearch domain, also used as prefix for related resources."
+}
+
+variable "opensearch_version" {
+  type = string
+  default = "OpenSearch_1.1"
+}
+
+variable "data_instance_count" {
+  type = number
+  default = "4"
+}
+
+variable "data_instance_type" {
+  type = string
+}
+
+variable "data_instance_storage" {
+  type = number
+  default = "50"
+}
+
+variable "dedicated_master_enabled" {
+  type = string
+  default = "true"
+}
+
+variable "master_instance_type" {
+  type = string
+  default = "r4.xlarge.elasticsearch"
+}
+
+variable "encrypt_at_rest" {
+  type = bool
+  default = true
+  description = "Default is 'true'. Can be disabled for unsupported instance types."
+}
+
+variable "zone_awareness_enabled" {
+  type = bool
+  default = true
+}
+
+variable "availability_zones" {
+  description = "The number of availability zones for the OpenSearch cluster. Valid values: 1, 2 or 3."
+  type        = number
+  default     = 2
+}
+
+####################################################################################################
+# VPC
+####################################################################################################
+
+variable "proxy_inbound_cidr_blocks" {
+  type = list
+}
