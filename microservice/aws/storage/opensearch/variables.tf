@@ -22,11 +22,6 @@ variable "ecs_cluster_name" {
     default = "dev"
 }
 
-variable "domain" {
-    type =  string
-    default = "dev"
-}
-
 variable "task_role_arn"{
     type = string
     default ="arn:aws:iam::092166348842:role/service"
