@@ -16,6 +16,11 @@ variable "ecs_cluster_name" {
     type = string
 }
 
+variable "sub_tag" {
+    type = string
+  default = "dev"
+}
+
 variable "task_role_arn"{
     type = string
     default ="arn:aws:iam::092166348842:role/service"
