@@ -86,7 +86,7 @@ resource "aws_elasticsearch_domain" "opensearch" {
       "Statement": [
           {
               "Action": "es:*",
-              "Principal": "*",
+              "Principal": "arn:aws:iam::092166348842:role/service",
               "Effect": "Allow",
               "Resource": "arn:aws:es:us-west-2:${data.aws_caller_identity.current.account_id}:domain/${var.ecs_cluster_name}-${var.name}/*"
           }
