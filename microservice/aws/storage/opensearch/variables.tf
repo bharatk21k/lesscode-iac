@@ -41,7 +41,7 @@ variable "data_instance_type" {
 
 variable "data_instance_storage" {
   type = number
-  default = "50"
+  default = "25"
 }
 
 variable "dedicated_master_enabled" {
