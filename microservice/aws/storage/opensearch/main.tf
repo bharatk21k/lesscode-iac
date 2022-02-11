@@ -60,10 +60,10 @@ resource "aws_elasticsearch_domain" "opensearch" {
 
   advanced_security_options {
     enabled                        = true
-    internal_user_database_enabled = false
-
+    internal_user_database_enabled = true
     master_user_options {
-      master_user_arn = (var.task_role_arn != "") ? var.task_role_arn : data.aws_caller_identity.current.arn
+      master_user_name = "admin"
+      master_user_password = "Admin@1231!"
     }
   }
 
