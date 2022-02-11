@@ -8,10 +8,7 @@ terraform {
 }
 
 provider "aws" {
-  region = var.region
-  profile = "default"
-  assume_role {
-  role_arn = var.task_role_arn
-  session_name = "${var.ecs_cluster_name}-${var.name}-${var.region}-session"
- }
+  shared_credentials_file = "$HOME/.aws/credentials"
+  profile                 = "default"
+  region                  = var.region
 }
