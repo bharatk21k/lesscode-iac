@@ -20,27 +20,6 @@ data "aws_subnet_ids" "private" {
  }
 }
 
-resource "aws_iam_service_linked_role" "os" {
-  aws_service_name = "es.amazonaws.com"
-}
-
-resource "null_resource" "service_linked_role" {
-  provisioner "local-exec" {
-    interpreter = ["/bin/bash", "-c"]
-    command = <<-COMMAND
-      aws iam create-service-linked-role --aws-service-name es.amazonaws.com
-    COMMAND
-    on_failure = continue
-  }
-}
-
-data "aws_iam_role" "service_linked_role" {
-  name = "AWSServiceRoleForAmazonOpenSearchService"
-  depends_on = [
-    null_resource.service_linked_role
-  ]
-}
-
 resource "aws_elasticsearch_domain" "opensearch" {
   domain_name = "${var.ecs_cluster_name}-${var.name}"
   elasticsearch_version = var.opensearch_version
@@ -48,7 +27,7 @@ resource "aws_elasticsearch_domain" "opensearch" {
   cluster_config {
     instance_count = var.data_instance_count
     instance_type = var.data_instance_type
-    zone_awareness_enabled = (var.availability_zones > 1) ? true : false
+    zone_awareness_enabled = (var.availability_zones > 1) ? true : false     
 
     dynamic "zone_awareness_config" {
       for_each = (var.availability_zones > 1) ? [var.availability_zones] : []
@@ -86,15 +65,13 @@ resource "aws_elasticsearch_domain" "opensearch" {
       "Statement": [
           {
               "Action": "es:*",
-              "Principal": "arn:aws:iam::092166348842:role/service",
+              "Principal": "*",
               "Effect": "Allow",
               "Resource": "arn:aws:es:us-west-2:${data.aws_caller_identity.current.account_id}:domain/${var.ecs_cluster_name}-${var.name}/*"
           }
-      ]  
+      ]
   }
 CONFIG
-
-    #depends_on = [aws_iam_service_linked_role.es]
 
   encrypt_at_rest {
     enabled = var.encrypt_at_rest
@@ -125,8 +102,6 @@ CONFIG
   }
 
   tags = var.tags
-
-  depends_on = [data.aws_iam_role.service_linked_role]
 }
 
 resource "aws_security_group" "opensearch" {
