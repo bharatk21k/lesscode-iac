@@ -3,6 +3,6 @@
 
 # Specify the provider and access details
 provider "aws" {
-  profile                 = "default"
+  profile                 = var.env
   region                  = var.region
 }
