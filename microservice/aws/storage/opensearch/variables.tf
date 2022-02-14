@@ -54,6 +54,16 @@ variable "master_instance_type" {
   default = "r4.xlarge.elasticsearch"
 }
 
+variable "user_name" {
+    type = string
+  default = "admin"
+}
+
+variable "user_password" {
+    type = string
+  default = "Admin@1231!"
+}
+
 variable "encrypt_at_rest" {
   type = bool
   default = true
