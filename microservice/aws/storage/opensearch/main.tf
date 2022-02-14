@@ -41,8 +41,8 @@ resource "aws_elasticsearch_domain" "opensearch" {
     enabled                        = true
     internal_user_database_enabled = true
     master_user_options {
-      master_user_name = "admin"
-      master_user_password = "Admin@1231!"
+      master_user_name = var.user_name
+      master_user_password = var.user_password
     }
   }
 
