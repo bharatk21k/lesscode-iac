@@ -106,7 +106,6 @@ CONFIG
 
 resource "aws_security_group" "opensearch" {
   name = "${var.ecs_cluster_name}-${var.name}-opensearch-sg"
-  description = "${var.ecs_cluster_name}-${var.name}-security-group"
   vpc_id = data.aws_vpc.vpc.id
 
   egress {

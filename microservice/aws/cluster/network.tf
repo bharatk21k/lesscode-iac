@@ -20,6 +20,7 @@ resource "aws_subnet" "private" {
   vpc_id            = aws_vpc.main.id
   tags = {
     Name = var.ecs_cluster_name
+    Type = 'priavte'
   }
 }
 
