@@ -56,3 +56,21 @@ variable "GS3" {
     projection_type    = string
   })
 } 
+
+variable "GS4" {
+  type = object({
+    name               = string
+    hash_key           = string
+    range_key          = string
+    projection_type    = string
+  })
+}
+
+variable "GS5" {
+  type = object({
+    name               = string
+    hash_key           = string
+    range_key          = string
+    projection_type    = string
+  })
+}

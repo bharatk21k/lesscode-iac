@@ -1,5 +1,5 @@
 resource "aws_dynamodb_table" "defaults" {
-  name         = var.name
+  name         = "${var.name}-${ecs_cluster_name}"
   billing_mode = var.billing_mode
   hash_key     = var.hash_key
   range_key    = var.range_key
@@ -51,6 +51,26 @@ resource "aws_dynamodb_table" "defaults" {
     type = "S"
   }
 
+  attribute {
+    name = var.GS4.hash_key
+    type = "S"
+  }
+
+  attribute {
+    name = var.GS4.range_key
+    type = "S"
+  }
+
+  attribute {
+    name = var.GS5.hash_key
+    type = "S"
+  }
+
+  attribute {
+    name = var.GS5.range_key
+    type = "S"
+  }
+
 
   global_secondary_index {
     name            = var.GS1.name
@@ -73,8 +93,21 @@ resource "aws_dynamodb_table" "defaults" {
     projection_type = var.GS3.projection_type
   }
 
+  global_secondary_index {
+    name            = var.GS4.name
+    hash_key        = var.GS4.hash_key
+    range_key       = var.GS4.range_key
+    projection_type = var.GS4.projection_type
+  }
+
+  global_secondary_index {
+    name            = var.GS5.name
+    hash_key        = var.GS5.hash_key
+    range_key       = var.GS5.range_key
+    projection_type = var.GS5.projection_type
+  }
+
   tags = {
-    Name        = "dynamodb-table"
-    Environment = "${var.ecs_cluster_name}"
+    Name        = "${var.ecs_cluster_name}"
   }
 }
