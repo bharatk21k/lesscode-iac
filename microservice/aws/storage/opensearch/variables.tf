@@ -1,87 +1,103 @@
-variable "tags" {
-  type = map
-  default = {}
+variable "region" {
+  description = "The name of the OpenSearch cluster."
+  type        = string
 }
 
 variable "env" {
+  description = "The name of the OpenSearch cluster."
+  type        = string
+}
+
+variable "cluster_name" {
+  description = "The name of the OpenSearch cluster."
+  type        = string
+}
+
+variable "cluster_version" {
+  description = "The version of OpenSearch to deploy."
+  type        = string
+}
+
+variable "cluster_domain" {
+  description = "The hosted zone name of the OpenSearch cluster."
+  type        = string
+}
+
+variable "master_role_arn"{
     type = string
-    default = "dev"
 }
 
-variable "region" {
-    type = string
-    default = "us-west-2"
+variable "create_service_role" {
+  description = "Indicates whether to create the service-linked role."
+  type        = bool
+  default     = true
 }
 
-variable "name" {
-    type = string
+variable "instance_type" {
+  description = "The type of EC2 instances to run for each hot node."
+  type        = string
+  default     = "r6g.xlarge.elasticsearch"
 }
 
-variable "ecs_cluster_name" {
-    type = string
+variable "instance_count" {
+  description = "The number of dedicated hot nodes in the cluster."
+  type        = number
+  default     = 3 
 }
 
-variable "sub_tag" {
-    type = string
-  default = "dev"
+variable "encrypt_kms_key_id" {
+  description = "The KMS key ID to encrypt the OpenSearch cluster with."
+  type        = string
+  default     = ""
 }
 
-variable "task_role_arn"{
-    type = string
-    default ="arn:aws:iam::092166348842:role/service"
+variable "tags" {
+  description = "A map of tags to add to all resources."
+  type        = map(string)
+  default     = {}
 }
 
-variable "opensearch_version" {
-  type = string
-}
-
-variable "data_instance_count" {
-  type = number
-  default = "4"
-}
-
-variable "data_instance_type" {
-  type = string
-}
-
-variable "data_instance_storage" {
-  type = number
-  default = "25"
-}
-
-variable "dedicated_master_enabled" {
-  type = string
-  default = "true"
+variable "master_instance_enabled" {
+  description = "Indicates whether dedicated master nodes are enabled for the cluster."
+  type        = bool
 }
 
 variable "master_instance_type" {
-  type = string
-  default = "r4.xlarge.elasticsearch"
+  description = "The type of EC2 instances to run for each master node."
+  type        = string
 }
 
-variable "user_name" {
-    type = string
-  default = "admin"
+variable "master_instance_count" {
+  description = "The number of dedicated master nodes in the cluster."
+  type        = number
 }
 
-variable "user_password" {
-    type = string
-  default = "Admin@1231!"
+variable "hot_instance_type" {
+  description = "The type of EC2 instances to run for each hot node."
+  type        = string
 }
 
-variable "encrypt_at_rest" {
-  type = bool
-  default = true
-  description = "Default is 'true'. Can be disabled for unsupported instance types."
+variable "hot_instance_count" {
+  description = "The number of dedicated hot nodes in the cluster."
+  type        = number
 }
 
-variable "zone_awareness_enabled" {
-  type = bool
-  default = true
+variable "warm_instance_enabled" {
+  description = "Indicates whether ultrawarm nodes are enabled for the cluster."
+  type        = bool
+}
+
+variable "warm_instance_type" {
+  description = "The type of EC2 instances to run for each warm node."
+  type        = string
+}
+
+variable "warm_instance_count" {
+  description = "The number of dedicated warm nodes in the cluster."
+  type        = number
 }
 
 variable "availability_zones" {
   description = "The number of availability zones for the OpenSearch cluster. Valid values: 1, 2 or 3."
   type        = number
-  default     = 2
 }
