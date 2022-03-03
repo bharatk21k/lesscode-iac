@@ -23,7 +23,7 @@ variable "cluster_domain" {
   type        = string
 }
 
-variable "master_role_arn"{
+variable "task_role_arn"{
     type = string
 }
 
