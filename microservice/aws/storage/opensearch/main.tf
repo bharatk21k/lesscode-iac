@@ -21,14 +21,21 @@ data "aws_subnet_ids" "private" {
 }
 
 resource "aws_elasticsearch_domain" "opensearch" {
-  domain_name = "${var.ecs_cluster_name}-${var.name}"
-  elasticsearch_version = var.opensearch_version
-
+  domain_name           = "${var.cluster_name}-search"
+  elasticsearch_version = "OpenSearch_${var.cluster_version}"
   cluster_config {
-    instance_count = var.data_instance_count
-    instance_type = var.data_instance_type
-    zone_awareness_enabled = (var.availability_zones > 1) ? true : false     
+    dedicated_master_enabled = var.master_instance_enabled
+    dedicated_master_count   = var.master_instance_enabled ? var.master_instance_count : null
+    dedicated_master_type    = var.master_instance_enabled ? var.master_instance_type : null
 
+    instance_count = var.instance_count
+    instance_type  = var.instance_type
+
+    warm_enabled = var.warm_instance_enabled
+    warm_count   = var.warm_instance_enabled ? var.warm_instance_count : null
+    warm_type    = var.warm_instance_enabled ? var.warm_instance_type : null
+
+    zone_awareness_enabled = (var.availability_zones > 1) ? true : false
     dynamic "zone_awareness_config" {
       for_each = (var.availability_zones > 1) ? [var.availability_zones] : []
       content {
