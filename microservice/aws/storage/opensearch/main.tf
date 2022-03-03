@@ -1,23 +1,16 @@
-data "aws_caller_identity" "current" {}
-data "aws_availability_zones" "available" {
+module "acm" {
+  source  = "terraform-aws-modules/acm/aws"
+  version = "~> 3.2.0"
+  domain_name = "${var.cluster_name}-search.${data.aws_route53_zone.opensearch.name}"
+  zone_id     = data.aws_route53_zone.opensearch.id
+  wait_for_validation = true
+  tags = var.tags
 }
 
-data "aws_ecs_cluster" "ecs_cluster_name" {
-  cluster_name = "${var.ecs_cluster_name}-cluster"
-}
-
-data "aws_vpc" "vpc" {
-  tags = {
-    Name = var.ecs_cluster_name
-  }
-}
-
-data "aws_subnet_ids" "private" {
- vpc_id = data.aws_vpc.vpc.id
- filter {
-    name = "tag:subId"
-    values = ["${var.ecs_cluster_name}-private-*"]
- }
+resource "aws_iam_service_linked_role" "es" {
+    count            = var.create_service_role ? 1 : 0
+    aws_service_name = "es.amazonaws.com"
+    description      = "Allows Amazon ES to manage AWS resources for a domain on your behalf."
 }
 
 resource "aws_elasticsearch_domain" "opensearch" {
@@ -46,52 +39,51 @@ resource "aws_elasticsearch_domain" "opensearch" {
 
   advanced_security_options {
     enabled                        = true
-    internal_user_database_enabled = true
+    internal_user_database_enabled = false
+    
     master_user_options {
-      master_user_name = var.user_name
-      master_user_password = var.user_password
+      master_user_arn = var.master_role_arn
     }
   }
 
   ebs_options {
     ebs_enabled = true
-    volume_size = var.data_instance_storage
+    volume_size = "50"
   }
 
-  vpc_options {
-    subnet_ids = "${data.aws_subnet_ids.private.ids}"
-    security_group_ids = [aws_security_group.opensearch.id]
+  domain_endpoint_options {
+    enforce_https       = true
+    tls_security_policy = "Policy-Min-TLS-1-2-2019-07"
+    custom_endpoint_enabled         = true
+    custom_endpoint                 = "${var.cluster_name}-search.${data.aws_route53_zone.opensearch.name}"
+    custom_endpoint_certificate_arn = module.acm.acm_certificate_arn
   }
-
-    advanced_options = {
-      "rest.action.multi.allow_explicit_index" = "true"
-  }
-    access_policies = <<CONFIG
-  {
-      "Version": "2012-10-17",
-      "Statement": [
-          {
-              "Action": "es:*",
-              "Principal": "*",
-              "Effect": "Allow",
-              "Resource": "arn:aws:es:us-west-2:${data.aws_caller_identity.current.account_id}:domain/${var.ecs_cluster_name}-${var.name}/*"
-          }
-      ]
-  }
-CONFIG
-
-  encrypt_at_rest {
-    enabled = var.encrypt_at_rest
-  }
-
+  
   node_to_node_encryption {
     enabled = true
   }
 
-  domain_endpoint_options {
-    enforce_https = true
-    tls_security_policy = "Policy-Min-TLS-1-0-2019-07"
+  encrypt_at_rest {
+    enabled    = true
+    kms_key_id = var.encrypt_kms_key_id
   }
+
+  advanced_options = {
+    "rest.action.multi.allow_explicit_index" = "true"
+}
+  access_policies = <<CONFIG
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": "es:*",
+            "Principal": "*",
+            "Effect": "Allow",
+            "Resource": "arn:aws:es:us-west-2:092166348842:domain/${var.cluster_name}-search/*"
+        }
+    ]
+}
+CONFIG
 
   log_publishing_options {
     cloudwatch_log_group_arn = aws_cloudwatch_log_group.opensearch_logs.arn
@@ -107,12 +99,11 @@ CONFIG
     cloudwatch_log_group_arn = aws_cloudwatch_log_group.opensearch_logs.arn
     log_type = "ES_APPLICATION_LOGS"
   }
-
   tags = var.tags
 }
 
 resource "aws_security_group" "opensearch" {
-  name = "${var.ecs_cluster_name}-${var.name}-opensearch-sg"
+  name = "${var.cluster_name}-search-sg"
   vpc_id = data.aws_vpc.vpc.id
 
   egress {
@@ -137,11 +128,11 @@ resource "aws_security_group_rule" "opensearch" {
 }
 
 resource "aws_cloudwatch_log_group" "opensearch_logs" {
-  name = "opensearch/${var.ecs_cluster_name}-${var.name}"
+  name = "opensearch/${var.cluster_name}-search"
 }
 
 resource "aws_cloudwatch_log_resource_policy" "opensearch_logs" {
-  policy_name = "${var.ecs_cluster_name}-${var.name}"
+  policy_name = "${var.cluster_name}-search"
   policy_document = data.aws_iam_policy_document.opensearch_logs.json
 }
 
@@ -161,4 +152,12 @@ data "aws_iam_policy_document" "opensearch_logs" {
       "arn:aws:logs:*"
     ]
   }
+}
+
+resource "aws_route53_record" "opensearch" {
+  zone_id = data.aws_route53_zone.opensearch.id
+  name    = "${var.cluster_name}-search"
+  type    = "CNAME"
+  ttl     = "60"
+  records = [aws_elasticsearch_domain.opensearch.endpoint]
 }

@@ -1,46 +1,19 @@
-output "elasticsearch_domain_arn" {
-  value = aws_elasticsearch_domain.opensearch.arn
+output "cluster_name" {
+  description = "The name of the OpenSearch cluster."
+  value       = aws_elasticsearch_domain.opensearch.domain_name
 }
 
-output "elasticsearch_domain_id" {
-  value = aws_elasticsearch_domain.opensearch.domain_id
+output "cluster_version" {
+  description = "The version of the OpenSearch cluster."
+  value       = replace(aws_elasticsearch_domain.opensearch.elasticsearch_version, "OpenSearch_", "")
 }
 
-output "elasticsearch_domain_name" {
-  value = aws_elasticsearch_domain.opensearch.domain_name
+output "cluster_endpoint" {
+  description = "The endpoint URL of the OpenSearch cluster."
+  value       = "https://${aws_route53_record.opensearch.fqdn}"
 }
 
-output "elasticsearch_domain_endpoint" {
-  value = aws_elasticsearch_domain.opensearch.endpoint
-}
-
-output "elasticsearch_domain_kibana_endpoint" {
-  value = aws_elasticsearch_domain.opensearch.kibana_endpoint
-}
-
-output "elasticsearch_security_group_id" {
-  value = aws_security_group.opensearch.id
-}
-
-output "vpc" {
-  value = data.aws_vpc.vpc.id
-}
-
-output "private-subs" {
-    value = [data.aws_subnet_ids.private.ids]
-}
-
-output "ecs_cluster_arn" {
-  value = data.aws_ecs_cluster.ecs_cluster_name.arn
-}
-output "account_id" {
-  value = data.aws_caller_identity.current.account_id
-}
-
-output "caller_arn" {
-  value = data.aws_caller_identity.current.arn
-}
-
-output "caller_user" {
-  value = data.aws_caller_identity.current.user_id
+output "kibana_endpoint" {
+  description = "The endpoint URL of Kibana."
+  value       = "https://${aws_route53_record.opensearch.fqdn}/_dashboards/"
 }
