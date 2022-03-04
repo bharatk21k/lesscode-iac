@@ -60,44 +60,53 @@ variable "tags" {
 variable "master_instance_enabled" {
   description = "Indicates whether dedicated master nodes are enabled for the cluster."
   type        = bool
+  default     = true
 }
 
 variable "master_instance_type" {
   description = "The type of EC2 instances to run for each master node."
   type        = string
+  default     = "r6g.xlarge.elasticsearch"
 }
 
 variable "master_instance_count" {
   description = "The number of dedicated master nodes in the cluster."
   type        = number
+  default     = 3
 }
 
 variable "hot_instance_type" {
   description = "The type of EC2 instances to run for each hot node."
   type        = string
+  default     = "r6gd.xlarge.search"
 }
 
 variable "hot_instance_count" {
   description = "The number of dedicated hot nodes in the cluster."
   type        = number
+  default     = 3
 }
 
 variable "warm_instance_enabled" {
   description = "Indicates whether ultrawarm nodes are enabled for the cluster."
   type        = bool
+  default     = false
 }
 
 variable "warm_instance_type" {
   description = "The type of EC2 instances to run for each warm node."
   type        = string
+  default     = "ultrawarm1.large.search"
 }
 
 variable "warm_instance_count" {
   description = "The number of dedicated warm nodes in the cluster."
   type        = number
+  default     = 3
 }
 
 variable "availability_zones" {
   description = "The number of availability zones for the OpenSearch cluster. Valid values: 1, 2 or 3."
   type        = number
+  default     = 3
 }
