@@ -7,6 +7,8 @@ module "acm" {
   tags = var.tags
 }
 
+data "aws_caller_identity" "current" {}
+
 resource "aws_iam_service_linked_role" "es" {
     count            = var.create_service_role ? 1 : 0
     aws_service_name = "es.amazonaws.com"
