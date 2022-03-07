@@ -19,8 +19,7 @@ resource "aws_subnet" "private" {
   availability_zone = data.aws_availability_zones.available.names[count.index]
   vpc_id            = aws_vpc.main.id
   tags = {
-    Name = var.ecs_cluster_name
-    Type = "private"
+    Name = "${var.ecs_cluster_name}-private"
   }
 }
 
