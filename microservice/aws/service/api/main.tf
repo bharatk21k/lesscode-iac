@@ -3,6 +3,12 @@ data "aws_ecs_cluster" "ecs" {
 
 }
 
+data "aws_vpc" "vpc" {
+  tags = {
+    Name = var.ecs_cluster_name
+  }
+}
+
 data "aws_alb" "alb" {
   name = "${var.ecs_cluster_name}-load-balancer"
 }
@@ -22,7 +28,6 @@ data "aws_subnet_ids" "private" {
 data "aws_security_group" "lb_security_group" {
   name = "${var.ecs_cluster_name}-load-balancer-security-group"
 }
-
 
 # Set up CloudWatch group and log stream and retain logs for 30 days
 resource "aws_cloudwatch_log_group" "service_log_group" {
@@ -57,6 +62,48 @@ data "template_file" "service" {
   }
 }
 
+resource "aws_efs_file_system" "efs" {
+  creation_token = "${var.ecs_cluster_name}-${var.service_name}-efs"
+  performance_mode = "generalPurpose"
+  throughput_mode = "bursting"
+  encrypted  = var.encrypted
+  kms_key_id = var.kms_key_id
+  lifecycle_policy {
+    transition_to_ia = "AFTER_30_DAYS"
+  }
+  tags = {
+    Name    = "${var.ecs_cluster_name}-${var.service_name}-efs"
+  }
+}
+
+resource "aws_efs_access_point" "efs" {
+  file_system_id = aws_efs_file_system.efs.id
+  posix_user {
+    gid = var.gid
+    uid = var.uid
+  }
+
+  root_directory {
+    path = "/app"
+    creation_info {
+      owner_gid   = var.gid
+      owner_uid   = var.uid
+      permissions = var.permissions
+    }
+  }
+  tags = {
+    Name    = "${var.ecs_cluster_name}-${var.service_name}-ap"
+  }
+}
+
+
+resource "aws_efs_mount_target" "efs" {
+  count           = length(data.aws_subnet_ids.private.ids)
+  file_system_id  = aws_efs_file_system.efs.id
+  subnet_id       = tolist(data.aws_subnet_ids.private.ids)[count.index]
+  security_groups = [aws_security_group.mount_target.id]
+}
+
 resource "aws_ecs_task_definition" "task" {
   family                   = "${var.ecs_cluster_name}-${var.name}"
   task_role_arn            = var.task_role_arn
@@ -67,6 +114,18 @@ resource "aws_ecs_task_definition" "task" {
   memory                   = var.fargate_memory
   container_definitions    = data.template_file.service.rendered
   
+  volume {
+    name = "${var.ecs_cluster_name}-${var.name}-efs"
+    efs_volume_configuration {
+      file_system_id          = aws_efs_file_system.efs.id
+      transit_encryption      = "ENABLED"
+      transit_encryption_port = 2049
+      authorization_config {
+        access_point_id = aws_efs_access_point.efs.id
+        iam             = "ENABLED"
+      }
+    }
+  }
   depends_on =[data.aws_ecs_cluster.ecs, data.aws_lb_listener.listener]
 }
 
@@ -129,3 +188,4 @@ resource "aws_lb_listener_rule" "service" {
     }
   }
 }
+

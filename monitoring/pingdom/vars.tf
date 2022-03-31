@@ -11,7 +11,7 @@ variable "ecs_cluster_name" {
 }
 
 variable "service_name" {
-    type = string
+    type = list
 }
 
 variable "tls_port" {
@@ -24,7 +24,7 @@ variable "pingdom_api_token" {
 }
 
 variable "url" {
-   type = string
+   type = list 
    description = "Health Check Path of the Service"
 }
 
@@ -34,7 +34,7 @@ variable "integrationids" {
 }
 
 variable "userids" {
-   type = list
+  type = list
    description = "User Ids of the Pingdom Notifications"
 }
 
@@ -57,12 +57,7 @@ variable "status" {
 EOF
 }
 
-variable "cmes" {
+variable "custom_message" {
   type = string
-  description = "CMessage"
-  default = <<EOF
-Please contact Albert - Platform Team
-EOF
+  description = "Customized Message"
 }
-
-

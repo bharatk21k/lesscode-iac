@@ -18,3 +18,64 @@ resource "aws_security_group" "ecs_tasks" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
+
+resource "aws_security_group" "mount_target" {
+  name        = "${var.name}-mount-target"
+  description = "Allow traffic from EFS to ECS"
+  vpc_id      = data.aws_vpc.vpc.id
+  tags = {
+    Name    = "${var.ecs_cluster_name}-${var.service_name}-efs"
+  }
+}
+
+resource "aws_security_group_rule" "nfs_egress" {
+  description              = "Allow NFS traffic out from ECS to mount EFS"
+  type                     = "egress"
+  from_port                = 2049
+  to_port                  = 2049
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.ecs_tasks.id
+  source_security_group_id = aws_security_group.mount_target.id
+}
+
+resource "aws_security_group_rule" "nfs_ingress" {
+  description              = "Allow NFS traffic into EFS from ECS"
+  type                     = "ingress"
+  from_port                = 2049
+  to_port                  = 2049
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.mount_target.id
+  source_security_group_id = aws_security_group.ecs_tasks.id
+}
+
+resource "aws_efs_file_system_policy" "policy" {
+  file_system_id = aws_efs_file_system.efs.id
+  policy = <<POLICY
+{
+    "Version": "2012-10-17",
+    "Id": "Policy01",
+    "Statement": [
+        {
+            "Sid": "Statement",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "*"
+            },
+            "Resource": "${aws_efs_file_system.efs.arn}",
+            "Action": [
+                "elasticfilesystem:ClientMount",
+                "elasticfilesystem:ClientRootAccess",
+                "elasticfilesystem:ClientWrite"
+            ],
+            "Condition": {
+                "Bool": {
+                    "aws:SecureTransport": "false"
+                }
+            }
+        }
+    ]
+}
+POLICY
+}
+

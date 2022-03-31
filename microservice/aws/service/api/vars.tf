@@ -14,6 +14,11 @@ variable "ecs_cluster_name" {
     type = string
 }
 
+variable "service_name" {
+    type = string
+    default = "api-propmodels"
+}
+
 variable "name" {
     type = string
     #default = "test-api"
@@ -87,11 +92,60 @@ variable "priority" {
     default = 99
 }
 
-variable "efs_id" {
-    type = string
-}
-
 variable "log_retention" {
     description = "cloud watch log retention in days. 0 mean never expire"
     default = 0
+}
+
+variable "tags" {
+  type    = map(any)
+  default = {}
+}
+
+variable "encrypted" {
+  description = "If true, the disk will be encrypted"
+  type        = bool
+  default     = "true"
+}
+
+variable "kms_key_id" {
+  type        = string
+  description = "The ARN of the key that you wish to use if encrypting at rest."
+  default     = ""
+}
+
+variable "uid" {
+  description = "UID Of the unix User to access EFS Mount"
+}
+
+variable "gid" {
+  description = "GID Of the unix User to access EFS Mount1~"
+}
+
+variable "permissions" {
+  description = "Permissions Of the unix User to access EFS Mount1~"
+}
+
+variable "backup_kms_key_id" {
+  default     = null
+  description = "KMS Key to use for backups (Specify `aws/backup` to use the default key, leave null to have a key generated automatically)"
+  type        = string
+}
+
+variable "backup_schedule" {
+  default     = "cron(0 0 * * ? *)"
+  description = "Cron schedule to run backups on"
+  type        = string
+}
+
+variable "enable_backups" {
+  default     = true
+  description = "Should AWS Backup be configured for this file system?"
+  type        = bool
+}
+
+variable "backup_role_permissions_boundary" {
+  default     = null
+  description = "An optional IAM permissions boundary to use when creating the IAM role for backups"
+  type        = string
 }
