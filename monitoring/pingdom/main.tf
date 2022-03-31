@@ -10,7 +10,7 @@ resource "pingdom_check" "test" {
       pingdom_team.monitor.id,
       pingdom_team.infra.id
     ]
-    #userids        = var.userids
+    userids        = var.userids
     shouldcontain  = var.status
     tags           = var.ecs_cluster_name
     resolution     = 1
