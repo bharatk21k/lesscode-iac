@@ -25,6 +25,13 @@ data "aws_subnet_ids" "private" {
   }
 }
 
+data "aws_subnet_ids" "public" {
+  vpc_id = data.aws_vpc.vpc.id
+  tags = {
+    Name = "${var.ecs_cluster_name}"
+  }
+}
+
 data "aws_security_group" "lb_security_group" {
   name = "${var.ecs_cluster_name}-load-balancer-security-group"
 }
@@ -62,6 +69,10 @@ data "template_file" "service" {
   }
 }
 
+data "template_file" "efs" {
+  template = file("${path.module}/deep_learning_instance_west2.pem")
+}
+
 resource "aws_efs_file_system" "efs" {
   creation_token = "${var.ecs_cluster_name}-${var.service_name}-efs"
   performance_mode = "generalPurpose"
@@ -96,12 +107,30 @@ resource "aws_efs_access_point" "efs" {
   }
 }
 
-
 resource "aws_efs_mount_target" "efs" {
   count           = length(data.aws_subnet_ids.private.ids)
   file_system_id  = aws_efs_file_system.efs.id
   subnet_id       = tolist(data.aws_subnet_ids.private.ids)[count.index]
   security_groups = [aws_security_group.mount_target.id]
+}
+
+resource "null_resource" "configure_nfs" {
+depends_on = [aws_efs_mount_target.efs]
+connection {
+type     = "ssh"
+user     = "ec2-user"
+private_key = data.template_file.efs.rendered
+host     = "ec2-44-229-164-204.us-west-2.compute.amazonaws.com"
+ }
+ 
+provisioner "remote-exec" {
+inline = [
+   "sudo mkdir -p /app",
+   "sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport ${aws_efs_file_system.efs.dns_name}:/ /app",
+   "echo ${aws_efs_file_system.efs.dns_name}:/ /app nfs4 defaults,_netdev 0 0  | sudo cat >> /etc/fstab " ,
+   "sudo chmod go+rw /app",
+  ]
+ }
 }
 
 resource "aws_ecs_task_definition" "task" {

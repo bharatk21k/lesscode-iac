@@ -21,7 +21,7 @@ resource "aws_security_group" "ecs_tasks" {
 
 
 resource "aws_security_group" "mount_target" {
-  name        = "${var.name}-mount-target"
+  name        = "${var.ecs_cluster_name}-${var.name}-target"
   description = "Allow traffic from EFS to ECS"
   vpc_id      = data.aws_vpc.vpc.id
   tags = {
@@ -29,24 +29,47 @@ resource "aws_security_group" "mount_target" {
   }
 }
 
+resource "aws_security_group" "mount_target_client" {
+  name        = "${var.ecs_cluster_name}-${var.name}-client"
+  description = "Allow traffic out to NFS for ${var.ecs_cluster_name}-${var.name}-mnt."
+  vpc_id      = data.aws_vpc.vpc.id
+  depends_on = [aws_efs_mount_target.efs]
+  tags = {
+    Name    = "${var.ecs_cluster_name}-${var.service_name}-efs"
+  }
+}
+
 resource "aws_security_group_rule" "nfs_egress" {
-  description              = "Allow NFS traffic out from ECS to mount EFS"
+  description              = "Allow NFS traffic out from EC2 to mount target"
   type                     = "egress"
   from_port                = 2049
   to_port                  = 2049
   protocol                 = "tcp"
-  security_group_id        = aws_security_group.ecs_tasks.id
+  security_group_id        = aws_security_group.mount_target_client.id
   source_security_group_id = aws_security_group.mount_target.id
 }
 
 resource "aws_security_group_rule" "nfs_ingress" {
-  description              = "Allow NFS traffic into EFS from ECS"
+  description              = "Allow NFS traffic into mount target from EC2"
   type                     = "ingress"
   from_port                = 2049
   to_port                  = 2049
   protocol                 = "tcp"
   security_group_id        = aws_security_group.mount_target.id
-  source_security_group_id = aws_security_group.ecs_tasks.id
+  source_security_group_id = aws_security_group.mount_target_client.id
+}
+
+resource "aws_security_group" "efs-ec2" {
+  name        = "${var.ecs_cluster_name}-${var.service_name}-ec2"
+  description = "Allow ssh inbound traffic"
+  vpc_id      = data.aws_vpc.vpc.id
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 resource "aws_efs_file_system_policy" "policy" {
