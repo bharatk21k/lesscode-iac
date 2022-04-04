@@ -3,6 +3,7 @@
 
 # Specify the provider and access details
 provider "aws" {
-  profile                 = var.env
+  shared_credentials_file = "$HOME/.aws/credentials"
+  profile                 = "default"
   region                  = var.region
 }
