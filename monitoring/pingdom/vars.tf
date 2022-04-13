@@ -53,7 +53,7 @@ variable "status" {
   type = string
   description = "Status Contains"
   default = <<EOF
-"status":"OK"
+"status:":"OK"
 EOF
 }
 
