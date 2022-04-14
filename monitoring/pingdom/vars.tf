@@ -53,11 +53,11 @@ variable "status" {
   type = string
   description = "Status Contains"
   default = <<EOF
-"status":"ok"
+ok
 EOF
 }
 
-variable "custom_message" {
+variable "cmessage" {
   type = string
   description = "Customized Message"
 }

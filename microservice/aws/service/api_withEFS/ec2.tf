@@ -12,7 +12,7 @@ resource "aws_key_pair" "user-ssh-key" {
   key_name   = "efs-mount-key"
   public_key = tls_private_key.efs.public_key_openssh
   provisioner "local-exec" {
-    command = "echo '${tls_private_key.efs.private_key_pem}' > $HOME/${var.ecs_cluster_name}-efs-ec2.pem"
+    command = "echo '${tls_private_key.efs.private_key_pem}' > $HOME/lesscode-iac/microservice/aws/service/api_withEFS/${var.ecs_cluster_name}-efs-ec2.pem"
   }
 }
 
@@ -31,20 +31,22 @@ resource "aws_instance" "efs" {
     aws_security_group.mount_target.id
   ]
 
-  instance_type          = "t2.micro"
+  instance_type          = "p3.2xlarge"
   key_name = aws_key_pair.user-ssh-key.key_name
   provisioner "local-exec" {
    command = "echo ${aws_instance.efs[0].public_ip} > $HOME/${var.ecs_cluster_name}-efs-ec2-publicIP.txt"
   }
+  
   provisioner "remote-exec" {
     inline = [
-      "sudo mkdir -p /app",
-      "sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport ${aws_efs_file_system.efs.dns_name}:/ /app",
-      "sudo su -c \"echo '${aws_efs_file_system.efs.dns_name}:/ /app nfs4 defaults,vers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport 0 0' >> /etc/fstab\"",
-      "sudo mkdir -p /app/data"
+      "sudo mkdir -p /data",
+      "sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport ${aws_efs_file_system.efs.dns_name}:/ /data",
+      "sudo su -c \"echo '${aws_efs_file_system.efs.dns_name}:/ /data nfs4 defaults,vers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport 0 0' >> /etc/fstab\"",
+      "sudo chmod go+rw /data"
     ]
   }
-  connection {
+ 
+ connection {
     host        = self.public_ip
     type        = "ssh"
     user        = "ec2-user"

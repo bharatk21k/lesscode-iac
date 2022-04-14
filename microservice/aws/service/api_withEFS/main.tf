@@ -70,7 +70,7 @@ data "template_file" "service" {
 }
 
 data "template_file" "efs" {
-  template = file("${path.module}/deep_learning_instance_west2.pem")
+  template = file("${path.module}/test-efs-ec2.pem")
 }
 
 resource "aws_efs_file_system" "efs" {
@@ -95,7 +95,7 @@ resource "aws_efs_access_point" "efs" {
   }
 
   root_directory {
-    path = "/app"
+    path = "/data"
     creation_info {
       owner_gid   = var.gid
       owner_uid   = var.uid
@@ -117,18 +117,18 @@ resource "aws_efs_mount_target" "efs" {
 resource "null_resource" "configure_nfs" {
 depends_on = [aws_efs_mount_target.efs]
 connection {
-type     = "ssh"
-user     = "ec2-user"
+type        = "ssh"
+user        = "ec2-user"
 private_key = data.template_file.efs.rendered
-host     = "ec2-44-229-164-204.us-west-2.compute.amazonaws.com"
+host        = aws_instance.efs[0].public_dns
  }
  
 provisioner "remote-exec" {
 inline = [
-   "sudo mkdir -p /app",
-   "sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport ${aws_efs_file_system.efs.dns_name}:/ /app",
-   "echo ${aws_efs_file_system.efs.dns_name}:/ /app nfs4 defaults,_netdev 0 0  | sudo cat >> /etc/fstab " ,
-   "sudo chmod go+rw /app",
+   "sudo mkdir -p /data",
+   "sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport ${aws_efs_file_system.efs.dns_name}:/ /data",
+   "echo ${aws_efs_file_system.efs.dns_name}:/ /data nfs4 defaults,_netdev 0 0  | sudo cat >> /etc/fstab",
+   "sudo chmod go+rw /data",
   ]
  }
 }
