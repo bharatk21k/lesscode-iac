@@ -5,6 +5,6 @@ resource "aws_kms_external_key" "main" {
 }
 
 resource "aws_kms_alias" "main" {
-  name          = "alias/${data.aws_ecs_cluster.ecs.cluster_name}"
-  target_key_id = aws_kms_external_key.main.key_id
+  name          = "alias/${var.ecs_cluster_name}"
+  target_key_id = aws_kms_external_key.main.id
 }
