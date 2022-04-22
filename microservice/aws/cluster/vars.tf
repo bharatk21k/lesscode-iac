@@ -29,6 +29,3 @@ variable "tls_port" {
   default     = 443
 }
 
-variable "task_role_arn"{
-    type= string
-}
