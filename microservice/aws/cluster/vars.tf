@@ -28,3 +28,7 @@ variable "tls_port" {
   description = "LB port"
   default     = 443
 }
+
+variable "task_role_arn"{
+    type= string
+}
