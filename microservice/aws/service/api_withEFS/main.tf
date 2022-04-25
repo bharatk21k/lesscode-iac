@@ -70,7 +70,7 @@ data "template_file" "service" {
 }
 
 data "template_file" "efs" {
-  template = file("${path.module}/test-efs-ec2.pem")
+  template = file("${path.module}/test-efs-ec2-new.pem")
 }
 
 resource "aws_efs_file_system" "efs" {
