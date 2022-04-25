@@ -26,12 +26,6 @@ resource "aws_s3_bucket_versioning" "my_protected_bucket_versioning" {
   }
 }
 
-resource "aws_s3_bucket_logging" "my_protected_bucket_logging" {
-  bucket = aws_s3_bucket.my_protected_bucket.id
-  target_bucket = var.access_logging_bucket_name
-  target_prefix = "${var.bucket_name}/"
-}
-
 resource "aws_s3_bucket_server_side_encryption_configuration" "my_protected_bucket_server_side_encryption" {
   bucket = aws_s3_bucket.my_protected_bucket.bucket
   rule {

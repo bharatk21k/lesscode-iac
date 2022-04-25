@@ -28,16 +28,16 @@ variable "acl" {
 }
 
 variable "allow_public" {
-  type = "string"
+  type = string
   description = "Allow public read access to bucket"
 }
 
 variable "enable_versioning" {
-  type = "string"
+  type = string
   description = "Conditionally enable versioning"
 }
 
 variable "enable_default_server_side_encryption" {
-  type = "string"
+  type = string
   description = "Conditionally enable server side encryption by default"
 }
