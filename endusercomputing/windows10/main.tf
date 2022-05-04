@@ -36,21 +36,16 @@ data "template_file" "windows-userdata" {
   template = <<EOF
 <powershell>
 Rename-Computer -NewName "${var.windows_instance_name}" -Force;
-
 $service = get-wmiObject -query 'select * from SoftwareLicensingService'
 if($key = $service.OA3xOriginalProductKey){
-	Write-Host 'Activating using product Key:' $service.OA3xOriginalProductKey
-	$service.InstallProductKey($key)
+  Write-Host 'Activating using product Key:' $service.OA3xOriginalProductKey
+  $service.InstallProductKey($key)
 }
-
 else
-
 {
-
-	Write-Host 'Key not found., using Volume license'
-        $service.InstallProductKey('VOLUME LICENSE KEY')
+  Write-Host 'Key not found., using Volume license'
+  $service.InstallProductKey('VOLUME LICENSE KEY')
 }
-
 $Localuseraccount = @{
    Name = 'AdminUser'
    Password = ("Admin@1231" | ConvertTo-SecureString -AsPlainText -Force)
@@ -58,7 +53,6 @@ $Localuseraccount = @{
    PasswordNeverExpires = $true
    Verbose = $true
 }
-
 New-LocalUser @Localuseraccount
 Add-LocalGroupMember -Group "Administrators" -Member "AdminUser"
 Add-LocalGroupMember -Group "Remote Desktop Users" -Member "AdminUser"
