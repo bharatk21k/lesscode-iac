@@ -1,6 +1,6 @@
 output "public_subnets" {
     description = "Public Subnets"
-    value = [data.aws_subnet_ids.public.ids]
+    value = [aws_subnet.public-subnet.id]
 }
 
 output "vm_windows_server_instance_name" {

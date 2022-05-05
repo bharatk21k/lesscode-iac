@@ -7,14 +7,33 @@ variable "env" {
   description = "env name"
 }
 
+variable "product_key" {
+  type        = string
+}
+
 variable "user" {
   type        = string
   description = "End user name"
 }
 
-variable "user_domain_name" {
+variable "customer_name" {
   type        = string
-  description = "user_domain_name"
+  description = "customer_name"
+}
+
+variable "aws_az" {
+  type        = string
+  description = "AWS AZ"
+}
+
+variable "vpc_cidr" {
+  type        = string
+  description = "CIDR for the VPC"
+}
+
+variable "public_subnet_cidr" {
+  type        = string
+  description = "CIDR for the public subnet"
 }
 
 variable "windows_instance_type" {

@@ -1,20 +1,50 @@
-data "aws_ecs_cluster" "ecs" {
-  cluster_name = "${var.user_domain_name}-cluster"
-
+# network.tf
+# Fetch AZs in the current region
+data "aws_availability_zones" "available" {
 }
 
-data "aws_vpc" "vpc" {
+resource "aws_vpc" "vpc" {
+  cidr_block           = var.vpc_cidr
+  enable_dns_hostnames = true
   tags = {
-    Name = var.user_domain_name
+    Name        = "${var.env}-${var.customer_name}-${var.windows_instance_name}-windows10-eip"
+    Environment = var.env
   }
 }
 
-data "aws_subnet_ids" "public" {
- vpc_id = data.aws_vpc.vpc.id
- filter {
-    name = "tag:Name"
-    values = ["${var.user_domain_name}"] 
- }
+resource "aws_subnet" "public-subnet" {
+  vpc_id            = aws_vpc.vpc.id
+  cidr_block        = var.public_subnet_cidr
+  availability_zone = var.aws_az
+  tags = {
+    Name        = "${var.env}-${var.customer_name}-${var.windows_instance_name}-windows10-eip"
+    Environment = var.env
+  }
+}
+
+resource "aws_internet_gateway" "gw" {
+  vpc_id = aws_vpc.vpc.id
+  tags = {
+    Name        = "${var.env}-${var.customer_name}-${var.windows_instance_name}-windows10-eip"
+    Environment = var.env
+  }
+}
+
+resource "aws_route_table" "public-rt" {
+  vpc_id = aws_vpc.vpc.id
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.gw.id
+  }
+  tags = {
+    Name        = "${var.env}-${var.customer_name}-${var.windows_instance_name}-windows10-eip"
+    Environment = var.env
+  }
+}
+
+resource "aws_route_table_association" "public-rt-association" {
+  subnet_id      = aws_subnet.public-subnet.id
+  route_table_id = aws_route_table.public-rt.id
 }
 
 resource "tls_private_key" "key_pair" {
@@ -23,7 +53,7 @@ resource "tls_private_key" "key_pair" {
 }
 
 resource "aws_key_pair" "key_pair" {
-  key_name   = "${var.user_domain_name}-${var.user}-windows10-${lower(var.region)}"  
+  key_name   = "${var.customer_name}-${var.windows_instance_name}-windows10-${lower(var.region)}"  
   public_key = tls_private_key.key_pair.public_key_openssh
 }
 
@@ -36,21 +66,16 @@ data "template_file" "windows-userdata" {
   template = <<EOF
 <powershell>
 Rename-Computer -NewName "${var.windows_instance_name}" -Force;
-
 $service = get-wmiObject -query 'select * from SoftwareLicensingService'
 if($key = $service.OA3xOriginalProductKey){
-	Write-Host 'Activating using product Key:' $service.OA3xOriginalProductKey
-	$service.InstallProductKey($key)
+  Write-Host 'Activating using product Key:' $service.OA3xOriginalProductKey
+  $service.InstallProductKey($key)
 }
-
 else
-
 {
-
-	Write-Host 'Key not found., using Volume license'
-        $service.InstallProductKey('VOLUME LICENSE KEY')
+  Write-Host 'Key not found., using Volume license'
+  $service.InstallProductKey('VOLUME LICENSE KEY')
 }
-
 $Localuseraccount = @{
    Name = 'AdminUser'
    Password = ("Admin@1231" | ConvertTo-SecureString -AsPlainText -Force)
@@ -58,7 +83,6 @@ $Localuseraccount = @{
    PasswordNeverExpires = $true
    Verbose = $true
 }
-
 New-LocalUser @Localuseraccount
 Add-LocalGroupMember -Group "Administrators" -Member "AdminUser"
 Add-LocalGroupMember -Group "Remote Desktop Users" -Member "AdminUser"
@@ -74,7 +98,7 @@ EOF
 resource "aws_instance" "windows10" {
   ami                         = "ami-03bcb434b3d4de60d"
   instance_type               = var.windows_instance_type
-  subnet_id                   = "subnet-08e058374b4f9ba9a" 
+  subnet_id                   = aws_subnet.public-subnet.id 
   vpc_security_group_ids      = [aws_security_group.aws-windows10-sg.id]
   associate_public_ip_address = var.windows_associate_public_ip_address
   source_dest_check           = false
@@ -97,7 +121,7 @@ resource "aws_instance" "windows10" {
   }
   
   tags = {
-    Name        = "${var.user_domain_name}-${var.user}-windows10"
+    Name        = "${var.env}-${var.customer_name}-${var.windows_instance_name}-windows10"
     Environment = var.env
   }
 }
@@ -106,7 +130,7 @@ resource "aws_instance" "windows10" {
 resource "aws_eip" "windows-eip" {
   vpc  = true
   tags = {
-    Name        = "${var.user_domain_name}-${var.user}-windows10-eip"
+    Name        = "${var.env}-${var.customer_name}-${var.windows_instance_name}-windows10-eip"
     Environment = var.env
   }
 }
@@ -119,9 +143,9 @@ resource "aws_eip_association" "windows-eip-association" {
 
 # Define the security group for the Windows server
 resource "aws_security_group" "aws-windows10-sg" {
-  name        = "${var.user_domain_name}-${var.user}-windows10-sg"
+  name        = "${var.customer_name}-${var.windows_instance_name}-windows10-sg"
   description = "Allow incoming connections"
-  vpc_id      = data.aws_vpc.vpc.id
+  vpc_id      = aws_vpc.vpc.id
 
   ingress {
     from_port   = 80
@@ -147,8 +171,7 @@ resource "aws_security_group" "aws-windows10-sg" {
   }
 
   tags = {
-    Name        = "${var.user_domain_name}-${var.user}-windows10-sg"
+    Name        = "${var.env}-${var.customer_name}-${var.windows_instance_name}-windows10-sg"
     Environment = var.env
   }
 }
-
