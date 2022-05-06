@@ -7,7 +7,7 @@ resource "aws_vpc" "vpc" {
   cidr_block           = var.vpc_cidr
   enable_dns_hostnames = true
   tags = {
-    Name        = "${var.env}-${var.customer_name}-${var.windows_instance_name}-windows10-eip"
+    Name        = "${var.env}-${var.customer_name}-${var.windows_instance_name}-windows10-vpc"
     Environment = var.env
   }
 }
@@ -17,7 +17,7 @@ resource "aws_subnet" "public-subnet" {
   cidr_block        = var.public_subnet_cidr
   availability_zone = var.aws_az
   tags = {
-    Name        = "${var.env}-${var.customer_name}-${var.windows_instance_name}-windows10-eip"
+    Name        = "${var.env}-${var.customer_name}-${var.windows_instance_name}-windows10-psub"
     Environment = var.env
   }
 }
@@ -25,7 +25,7 @@ resource "aws_subnet" "public-subnet" {
 resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.vpc.id
   tags = {
-    Name        = "${var.env}-${var.customer_name}-${var.windows_instance_name}-windows10-eip"
+    Name        = "${var.env}-${var.customer_name}-${var.windows_instance_name}-windows10-gw"
     Environment = var.env
   }
 }
@@ -37,7 +37,7 @@ resource "aws_route_table" "public-rt" {
     gateway_id = aws_internet_gateway.gw.id
   }
   tags = {
-    Name        = "${var.env}-${var.customer_name}-${var.windows_instance_name}-windows10-eip"
+    Name        = "${var.env}-${var.customer_name}-${var.windows_instance_name}-windows10-rt"
     Environment = var.env
   }
 }
