@@ -15,7 +15,7 @@ data "aws_lb_listener" "listener" {
 data "aws_subnet_ids" "private" {
   vpc_id = data.aws_alb.alb.vpc_id
   tags = {
-    Name = "${var.ecs_cluster_name}"
+    Name = var.ecs_cluster_name
   }
 }
 
