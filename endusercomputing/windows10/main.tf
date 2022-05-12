@@ -109,7 +109,7 @@ resource "aws_instance" "windows10" {
     volume_size           = var.windows_root_volume_size
     volume_type           = var.windows_root_volume_type
     delete_on_termination = true
-    encrypted             = true
+    encrypted             = false
   }
 
   ebs_block_device {
@@ -117,7 +117,7 @@ resource "aws_instance" "windows10" {
     volume_size           = var.windows_data_volume_size
     volume_type           = var.windows_data_volume_type
     encrypted             = true
-    delete_on_termination = true
+    delete_on_termination = false
   }
   
   tags = {
