@@ -74,7 +74,7 @@ if($key = $service.OA3xOriginalProductKey){
 else
 {
   Write-Host 'Key not found., using Volume license'
-  $service.InstallProductKey('VOLUME LICENSE KEY')
+  $service.InstallProductKey('${var.product_key}')
 }
 $Localuseraccount = @{
    Name = 'AdminUser'
