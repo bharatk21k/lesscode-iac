@@ -4,7 +4,7 @@ terraform {
       source = "hashicorp/aws"
     }
     docker = {
-      source = "terraform-providers/docker"
+      source = "kreuzwerker/docker"
     }
     template = {
       source = "hashicorp/template"
