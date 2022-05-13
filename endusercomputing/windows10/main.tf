@@ -52,6 +52,24 @@ resource "tls_private_key" "key_pair" {
   rsa_bits  = 4096
 }
 
+resource "aws_kms_key" "key" {
+  description = "Key for ${var.env}-${var.customer_name}-${var.windows_instance_name}-windows10"
+  is_enabled  = true
+  customer_master_key_spec = "SYMMETRIC_DEFAULT"
+  key_usage                = "ENCRYPT_DECRYPT"
+  deletion_window_in_days = 30
+  enable_key_rotation     = true
+  tags = {
+    Name        = "${var.env}-${var.customer_name}-${var.windows_instance_name}-windows10-key"
+    Environment = var.env
+  }
+}
+
+resource "aws_kms_alias" "alias" {
+  name          = "alias/${var.env}-${var.customer_name}-${var.windows_instance_name}-windows10-key"
+  target_key_id = aws_kms_key.key.key_id
+}
+
 resource "aws_key_pair" "key_pair" {
   key_name   = "${var.customer_name}-${var.windows_instance_name}-windows10-${lower(var.region)}"  
   public_key = tls_private_key.key_pair.public_key_openssh
@@ -101,8 +119,9 @@ resource "aws_instance" "windows10" {
   root_block_device {
     volume_size           = var.windows_root_volume_size
     volume_type           = var.windows_root_volume_type
-    delete_on_termination = true
-    encrypted             = false
+    delete_on_termination = false
+    encrypted             = true
+    throughput  = 200  
   }
 
   ebs_block_device {
@@ -111,6 +130,8 @@ resource "aws_instance" "windows10" {
     volume_type           = var.windows_data_volume_type
     encrypted             = true
     delete_on_termination = false
+    troughput  = 200
+    kms_key_id  = aws_kms_key.this.arn
   }
   
   tags = {
