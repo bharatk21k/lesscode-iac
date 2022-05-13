@@ -16,6 +16,10 @@ variable "user" {
   description = "End user name"
 }
 
+variable "image_id" {
+  type        = string
+}
+
 variable "customer_name" {
   type        = string
   description = "customer_name"
