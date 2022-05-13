@@ -67,15 +67,8 @@ data "template_file" "windows-userdata" {
 <powershell>
 Rename-Computer -NewName "${var.windows_instance_name}" -Force;
 $service = get-wmiObject -query 'select * from SoftwareLicensingService'
-if($key = $service.OA3xOriginalProductKey){
-  Write-Host 'Activating using product Key:' $service.OA3xOriginalProductKey
-  $service.InstallProductKey($key)
-}
-else
-{
-  Write-Host 'Key not found., using Volume license'
-  $service.InstallProductKey('${var.product_key}')
-}
+Write-Host 'Installing The Product Key...'
+$service.InstallProductKey('${var.product_key}')
 $Localuseraccount = @{
    Name = 'AdminUser'
    Password = ("Admin@1231" | ConvertTo-SecureString -AsPlainText -Force)
