@@ -131,7 +131,7 @@ resource "aws_instance" "windows10" {
     encrypted             = true
     delete_on_termination = false
     troughput  = 200
-    kms_key_id  = aws_kms_key.this.arn
+    kms_key_id  = aws_kms_key.key.arn
   }
   
   tags = {
