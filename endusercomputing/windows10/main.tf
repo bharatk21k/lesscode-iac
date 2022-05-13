@@ -130,7 +130,7 @@ resource "aws_instance" "windows10" {
     volume_type           = var.windows_data_volume_type
     encrypted             = true
     delete_on_termination = false
-    troughput  = 200
+    throughput  = 200
     kms_key_id  = aws_kms_key.key.arn
   }
   
