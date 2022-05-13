@@ -107,7 +107,7 @@ EOF
 
 #Create EC2 Instance
 resource "aws_instance" "windows10" {
-  ami                         = "ami-03bcb434b3d4de60d"
+  ami                         = var.image_id
   instance_type               = var.windows_instance_type
   subnet_id                   = aws_subnet.public-subnet.id 
   vpc_security_group_ids      = [aws_security_group.aws-windows10-sg.id]
