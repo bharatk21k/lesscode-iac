@@ -60,13 +60,13 @@ variable "windows_data_volume_size" {
 variable "windows_root_volume_type" {
   type        = string
   description = "Volumen type of root volumen of Windows 10. Can be standard, gp3, gp2, io1, sc1 or st1"
-  default     = "gp2"
+  default     = "gp3"
 }
 
 variable "windows_data_volume_type" {
   type        = string
   description = "Volumen type of data volumen of Windows 10. Can be standard, gp3, gp2, io1, sc1 or st1"
-  default     = "gp2"
+  default     = "gp3"
 }
 
 variable "windows_instance_name" {
