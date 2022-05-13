@@ -106,7 +106,7 @@ resource "aws_instance" "windows10" {
   }
 
   ebs_block_device {
-    device_name           = "/dev/xvda"
+    device_name           = "/dev/sdf"
     volume_size           = var.windows_data_volume_size
     volume_type           = var.windows_data_volume_type
     encrypted             = true
