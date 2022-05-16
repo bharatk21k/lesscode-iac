@@ -141,6 +141,29 @@ resource "aws_instance" "windows10" {
   }
 }
 
+data "template_file" "tf" {
+    template = "${file("FormatDisk.ps1")}"
+} 
+
+resource "azurerm_virtual_machine_extension" "disk_init" {
+  name                 = "vm-disk-init-ext"
+  virtual_machine_id   = azurerm_windows_virtual_machine.vm.id
+  publisher            = "Microsoft.Compute"
+  type                 = "CustomScriptExtension"
+  type_handler_version = "1.10"
+
+  settings = <<SETTINGS
+    {
+          "commandToExecute": "powershell -command \"[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('${base64encode(data.template_file.tf.rendered)}')) | Out-File -filepath FormatDisk.ps1\" && powershell -ExecutionPolicy Unrestricted -File FormatDisk.ps1"
+    }
+SETTINGS
+
+  tags = {
+    Name        = "${var.env}-${var.customer_name}-${var.windows_instance_name}-windows10"
+    Environment = var.env
+  }
+}
+
 # Create Elastic IP for the EC2 instance
 resource "aws_eip" "windows-eip" {
   vpc  = true
