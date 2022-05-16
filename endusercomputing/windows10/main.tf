@@ -71,7 +71,7 @@ resource "aws_kms_alias" "alias" {
 }
 
 resource "aws_key_pair" "key_pair" {
-  key_name   = "${var.customer_name}-${var.windows_instance_name}-windows10-${lower(var.region)}"  
+  key_name   = "${var.customer_name}-${var.windows_instance_name}-windows10-${lower(var.region)}"
   public_key = tls_private_key.key_pair.public_key_openssh
 }
 
@@ -110,19 +110,19 @@ EOF
 resource "aws_instance" "windows10" {
   ami                         = var.image_id
   instance_type               = var.windows_instance_type
-  subnet_id                   = aws_subnet.public-subnet.id 
+  subnet_id                   = aws_subnet.public-subnet.id
   vpc_security_group_ids      = [aws_security_group.aws-windows10-sg.id]
   associate_public_ip_address = var.windows_associate_public_ip_address
   source_dest_check           = false
   key_name                    = aws_key_pair.key_pair.key_name
   user_data                   = data.template_file.windows-userdata.rendered
-  
+
   root_block_device {
     volume_size           = var.windows_root_volume_size
     volume_type           = var.windows_root_volume_type
     delete_on_termination = false
     encrypted             = true
-    throughput  = 200  
+    throughput  = 200
   }
 
   ebs_block_device {
@@ -134,29 +134,6 @@ resource "aws_instance" "windows10" {
     throughput  = 200
     kms_key_id  = aws_kms_key.key.arn
   }
-  
-  tags = {
-    Name        = "${var.env}-${var.customer_name}-${var.windows_instance_name}-windows10"
-    Environment = var.env
-  }
-}
-
-data "template_file" "tf" {
-    template = "${file("FormatDisk.ps1")}"
-} 
-
-resource "azurerm_virtual_machine_extension" "disk_init" {
-  name                 = "vm-disk-init-ext"
-  virtual_machine_id   = azurerm_windows_virtual_machine.vm.id
-  publisher            = "Microsoft.Compute"
-  type                 = "CustomScriptExtension"
-  type_handler_version = "1.10"
-
-  settings = <<SETTINGS
-    {
-          "commandToExecute": "powershell -command \"[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('${base64encode(data.template_file.tf.rendered)}')) | Out-File -filepath FormatDisk.ps1\" && powershell -ExecutionPolicy Unrestricted -File FormatDisk.ps1"
-    }
-SETTINGS
 
   tags = {
     Name        = "${var.env}-${var.customer_name}-${var.windows_instance_name}-windows10"
