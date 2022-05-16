@@ -102,6 +102,7 @@ Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 Initialize-Disk -Number 1
 New-Partition -DiskNumber 1 -UseMaximumSize -DriveLetter D | format-volume -NewFileSystemLabel data
 shutdown -r -t 10;
+Get-WindowsUpdate -AcceptAll -Install -AutoReboot  
 </powershell>
 EOF
 }
