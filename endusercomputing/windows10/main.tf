@@ -71,7 +71,7 @@ resource "aws_kms_alias" "alias" {
 }
 
 resource "aws_key_pair" "key_pair" {
-  key_name   = "${var.customer_name}-${var.windows_instance_name}-windows10-${lower(var.region)}"  
+  key_name   = "${var.customer_name}-${var.windows_instance_name}-windows10-${lower(var.region)}"
   public_key = tls_private_key.key_pair.public_key_openssh
 }
 
@@ -102,6 +102,7 @@ Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 Initialize-Disk -Number 1
 New-Partition -DiskNumber 1 -UseMaximumSize -DriveLetter D | format-volume -NewFileSystemLabel data
 shutdown -r -t 10;
+Get-WindowsUpdate -AcceptAll -Install -AutoReboot  
 </powershell>
 EOF
 }
@@ -110,19 +111,19 @@ EOF
 resource "aws_instance" "windows10" {
   ami                         = var.image_id
   instance_type               = var.windows_instance_type
-  subnet_id                   = aws_subnet.public-subnet.id 
+  subnet_id                   = aws_subnet.public-subnet.id
   vpc_security_group_ids      = [aws_security_group.aws-windows10-sg.id]
   associate_public_ip_address = var.windows_associate_public_ip_address
   source_dest_check           = false
   key_name                    = aws_key_pair.key_pair.key_name
   user_data                   = data.template_file.windows-userdata.rendered
-  
+
   root_block_device {
     volume_size           = var.windows_root_volume_size
     volume_type           = var.windows_root_volume_type
     delete_on_termination = false
     encrypted             = true
-    throughput  = 200  
+    throughput  = 200
   }
 
   ebs_block_device {
@@ -134,7 +135,7 @@ resource "aws_instance" "windows10" {
     throughput  = 200
     kms_key_id  = aws_kms_key.key.arn
   }
-  
+
   tags = {
     Name        = "${var.env}-${var.customer_name}-${var.windows_instance_name}-windows10"
     Environment = var.env

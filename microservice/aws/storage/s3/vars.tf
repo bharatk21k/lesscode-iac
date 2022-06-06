@@ -27,6 +27,10 @@ variable "acl" {
     type = string
 }
 
+variable "service_name" {
+    type = string
+}
+
 variable "allow_public" {
   type = string
   description = "Allow public read access to bucket"
