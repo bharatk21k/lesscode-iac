@@ -99,7 +99,8 @@ Add-LocalGroupMember -Group "Administrators" -Member "AdminUser"
 Add-LocalGroupMember -Group "Remote Desktop Users" -Member "AdminUser"
 Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
 Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
-Install-WindowsFeature -name Web-Server -IncludeManagementTools;
+Initialize-Disk -Number 1
+New-Partition -DiskNumber 1 -UseMaximumSize -DriveLetter D | format-volume -NewFileSystemLabel data
 shutdown -r -t 10;
 </powershell>
 EOF
@@ -189,3 +190,4 @@ resource "aws_security_group" "aws-windows10-sg" {
     Environment = var.env
   }
 }
+
