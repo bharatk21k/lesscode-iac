@@ -4,6 +4,6 @@ resource "aws_kms_key" "main" {
 }
 
 resource "aws_kms_alias" "main" {
-  name          = "alias/${data.aws_ecs_cluster.ecs.cluster_name}"
+  name          = "alias/${data.aws_ecs_cluster.ecs.cluster_name}-${service_name}"
   target_key_id = aws_kms_key.main.key_id
 }
