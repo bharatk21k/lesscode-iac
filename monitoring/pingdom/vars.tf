@@ -52,16 +52,12 @@ variable "enabled" {
 variable "status" {
   type = string
   description = "Status Contains"
-<<<<<<< HEAD
   default = <<EOF
 ok
 EOF
-=======
-  default = ""
->>>>>>> 4a364d6a4da1e41d01c7d33ebc99148d8f36fb6f
 }
 
-variable "cmessage" {
-  type = string
-  description = "Customized Message"
-}
+#variable "cmessage" {
+#  type = string
+#  description = "Customized Message"
+#}
