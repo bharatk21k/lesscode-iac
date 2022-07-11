@@ -5,13 +5,13 @@ resource "pingdom_check" "test" {
     name           = element(concat(var.service_name, [""]), count.index)
     url            = element(concat(var.url, [""]), count.index)
     host           = var.domain
-    shouldcontain  = var.status
     integrationids = var.integrationids
     teamids        = [
       pingdom_team.monitor.id,
       pingdom_team.infra.id
     ]
     userids        = var.userids
+    shouldcontain  = var.status
     tags           = var.ecs_cluster_name
     resolution     = 1
     sendnotificationwhendown = 1
