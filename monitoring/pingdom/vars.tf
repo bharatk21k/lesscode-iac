@@ -57,7 +57,7 @@ ok
 EOF
 }
 
-variable "cmessage" {
+variable "custom_message" {
   type = string
   description = "Customized Message"
 }
