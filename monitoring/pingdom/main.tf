@@ -11,7 +11,7 @@ resource "pingdom_check" "test" {
       pingdom_team.infra.id
     ]
     userids        = var.userids
-    shouldcontain  = var.status
+    #shouldcontain  = var.status
     tags           = var.ecs_cluster_name
     resolution     = 1
     sendnotificationwhendown = 1
