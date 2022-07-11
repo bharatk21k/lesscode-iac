@@ -57,7 +57,7 @@ ok
 EOF
 }
 
-#variable "cmessage" {
-#  type = string
-#  description = "Customized Message"
-#}
+variable "cmessage" {
+  type = string
+  description = "Customized Message"
+}
