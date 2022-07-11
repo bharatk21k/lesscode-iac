@@ -5,7 +5,6 @@ resource "pingdom_check" "test" {
     name           = element(concat(var.service_name, [""]), count.index)
     url            = element(concat(var.url, [""]), count.index)
     host           = var.domain
-    custom_message = var.custom_message
     integrationids = var.integrationids
     teamids        = [
       pingdom_team.monitor.id,
