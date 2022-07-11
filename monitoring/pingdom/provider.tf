@@ -13,5 +13,5 @@ provider "aws" {
 }
 
 provider "pingdom" {
-  api_token = "${var.pingdom_api_token}"
+  api_token = var.pingdom_api_token
 }
