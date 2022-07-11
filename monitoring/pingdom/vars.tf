@@ -52,9 +52,9 @@ variable "enabled" {
 variable "status" {
   type = string
   description = "Status Contains"
-  default = <<EOF
-ok
-EOF
+#  default = <<EOF
+#ok
+#EOF
 }
 
 variable "custom_message" {
