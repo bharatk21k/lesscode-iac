@@ -55,7 +55,7 @@ variable "status" {
   default = ""
 }
 
-variable "custom_message" {
-  type = string
-  description = "Customized Message"
-}
+#variable "custom_message" {
+#  type = string
+#  description = "Customized Message"
+#}
