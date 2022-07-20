@@ -118,6 +118,6 @@ resource "aws_dynamodb_table" "defaults" {
 
   server_side_encryption{
     enabled = true
-    kms_key_arn = data.aws_kms_alias.partition.arn
+    kms_key_arn = data.aws_kms_key.partition.arn
   }
 }
