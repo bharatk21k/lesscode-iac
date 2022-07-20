@@ -1,5 +1,5 @@
 data "aws_kms_alias" "partition" {
-  name = "alias/${var.partition_name}"
+  name = var.partition_name
 }
 
 resource "aws_dynamodb_table" "defaults" {
