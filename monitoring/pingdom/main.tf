@@ -12,7 +12,7 @@ resource "pingdom_check" "test" {
     host           = var.domain
     integrationids = var.integrationids
     teamids        = [
-      pingdom_team.monitor.ids,
+      pingdom_team.monitor.id,
     ]
     userids        = var.userids
     shouldcontain  = var.status
