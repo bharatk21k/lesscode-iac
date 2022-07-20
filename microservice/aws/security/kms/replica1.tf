@@ -15,6 +15,6 @@ resource "aws_kms_replica_key" "replica1" {
 
 resource "aws_kms_alias" "replica1" {
   provider = aws.replica1
-  name          = "alias/${var.tenant_id}"
+  name          = "alias/${var.partition_name}"
   target_key_id = aws_kms_replica_key.replica1.key_id
 }
