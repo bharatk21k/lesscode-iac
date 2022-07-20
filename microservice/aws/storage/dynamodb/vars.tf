@@ -19,7 +19,7 @@ variable "partition_name" {
     type = string
 }
 
-variable "partition_kms_arn {
+variable "partition_kms_arn" {
     type = string
 }
 
