@@ -19,7 +19,7 @@ variable "replica2_region" {
     default ="ap-southeast-1"
 }
 
-variable "tenant_id" {
+variable "partition_name" {
     type = string
     default = "TEN1"
 }
