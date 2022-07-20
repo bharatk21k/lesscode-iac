@@ -5,7 +5,7 @@ provider "aws" {
 
 resource "aws_kms_replica_key" "replica1" {
   provider = aws.replica1
-  description             = "Multi-Region replica key for ${var.tenant_id}"
+  description             = "Multi-Region replica key for ${var.partition_name}"
   deletion_window_in_days = 7
   primary_key_arn         = aws_kms_key.primary.arn
   //enabled = true
