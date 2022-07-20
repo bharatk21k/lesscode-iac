@@ -1,5 +1,5 @@
-data "aws_kms_alias" "partition" {
-  name = var.partition_name
+data "aws_kms_key" "partition" {
+  key_id = var.partition_name
 }
 
 resource "aws_dynamodb_table" "defaults" {
