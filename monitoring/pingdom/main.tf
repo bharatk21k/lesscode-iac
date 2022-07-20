@@ -1,3 +1,8 @@
+resource "pingdom_team" "monitor" {
+  name = "Monitoring Team"
+  member_ids = var.userids
+}
+
 resource "pingdom_check" "test" {
     count          = length(var.url)
     type           = "http"
@@ -7,8 +12,7 @@ resource "pingdom_check" "test" {
     host           = var.domain
     integrationids = var.integrationids
     teamids        = [
-      pingdom_team.monitor.id,
-      pingdom_team.infra.id
+      pingdom_team.monitor.ids,
     ]
     userids        = var.userids
     shouldcontain  = var.status
