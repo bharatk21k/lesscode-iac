@@ -1,3 +1,4 @@
+
 # variables
 variable "region" {
     type = string
@@ -21,7 +22,7 @@ variable "replica2_region" {
 
 variable "partition_name" {
     type = string
-    default = "TEN1"
+    default = "TEN123"
 }
 
 
