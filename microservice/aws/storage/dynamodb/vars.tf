@@ -15,6 +15,10 @@ variable "ecs_cluster_name" {
     type = string
 }
 
+variable "partition_name" {
+    type = string
+}
+
 variable "billing_mode" {
     type = string
     default = "PAY_PER_REQUEST"
