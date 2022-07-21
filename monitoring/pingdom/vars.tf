@@ -33,10 +33,10 @@ variable "integrationids" {
    description = "Team Ids of Pingdom Notifications"
 }
 
-variable "userids" {
-  type = list
-   description = "User Ids of the Pingdom Notifications"
-}
+#variable "userids" {
+#  type = list
+#   description = "User Ids of the Pingdom Notifications"
+#}
 
 variable "teamids" {
    type = list
