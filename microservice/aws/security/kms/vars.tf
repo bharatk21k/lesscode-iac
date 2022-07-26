@@ -5,11 +5,6 @@ variable "region" {
     default ="us-west-2"
 }
 
-variable "env" {
-    type = string
-    default ="dev"
-}
-
 variable "replica1_region" {
     type = string
     default ="eu-west-1"
