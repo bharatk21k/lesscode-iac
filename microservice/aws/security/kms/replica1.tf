@@ -11,6 +11,7 @@ resource "aws_kms_replica_key" "replica1" {
   //enabled = true
 
   //key_material_base64 = var.key
+  depends_on = [aws_kms_key.primary]
 }
 
 resource "aws_kms_alias" "replica1" {
