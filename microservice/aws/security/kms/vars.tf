@@ -22,7 +22,7 @@ variable "replica2_region" {
 
 variable "partition_name" {
     type = string
-    default = "TEN123"
+    default = "TEN1234"
 }
 
 
