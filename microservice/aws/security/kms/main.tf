@@ -10,5 +10,5 @@ resource "aws_kms_key" "primary" {
 
 resource "aws_kms_alias" "alias" {
   name          = "alias/${var.partition_name}"
-  target_key_id = aws_kms_key.primary.id
+  target_key_id = aws_kms_key.primary.key_id
 }
