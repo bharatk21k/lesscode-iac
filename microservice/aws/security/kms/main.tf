@@ -1,5 +1,6 @@
 provider "aws" {
   alias  = "primary"
+  profile = var.env
   region = var.region
 }
 
