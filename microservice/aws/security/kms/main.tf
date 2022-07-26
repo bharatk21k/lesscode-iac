@@ -6,7 +6,6 @@ provider "aws" {
 
 
 resource "aws_kms_key" "primary" {
-  provider = aws.primary
   description             = "Multi-Region primary key for ${var.partition_name}"
   deletion_window_in_days = 7
   multi_region            = true
