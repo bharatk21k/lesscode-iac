@@ -1,9 +1,3 @@
-provider "aws" {
-  alias  = "primary"
-  profile = var.env
-  region = var.region
-}
-
 
 resource "aws_kms_key" "primary" {
   description             = "Multi-Region primary key for ${var.partition_name}"
