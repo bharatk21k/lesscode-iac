@@ -26,29 +26,11 @@ resource "aws_lb_listener" "redirect" {
   }
 }
 
-resource "aws_alb_listener" "report" {
-  load_balancer_arn = aws_alb.main.id
-  port              = "3000"
-  protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = aws_acm_certificate_validation.default.certificate_arn
-
-  default_action {
-    type = "fixed-response"
-
-    fixed_response {
-      content_type = "text/html"
-      message_body = "<html><h2>Powered by <a href='https://github.com/van001/lesscode-iac'> Lesscode! </a></h2></html>"
-      status_code  = "200"
-    }
-  }
-}
-
 resource "aws_alb_listener" "default" {
   load_balancer_arn = aws_alb.main.id
   port              = "443"
   protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  ssl_policy        = "ELBSecurityPolicy-FS-2018-06"
   certificate_arn   = aws_acm_certificate_validation.default.certificate_arn
 
   default_action {
