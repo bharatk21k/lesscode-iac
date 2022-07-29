@@ -19,7 +19,7 @@ resource "aws_globalaccelerator_endpoint_group" "alb" {
   listener_arn = aws_globalaccelerator_listener.https.id
 
   endpoint_configuration {
-    endpoint_id = aws_alb_listener.default.arn
+    endpoint_id = aws_alb.main.arn
     weight      = 100
   }
 }
