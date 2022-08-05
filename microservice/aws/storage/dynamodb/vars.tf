@@ -15,13 +15,13 @@ variable "ecs_cluster_name" {
     type = string
 }
 
-variable "partition_name" {
-    type = string
-}
+#variable "partition_name" {
+ #   type = string
+#}
 
-variable "partition_kms_arn" {
-    type = string
-}
+#variable "partition_kms_arn" {
+ #   type = string
+#}
 
 variable "billing_mode" {
     type = string
