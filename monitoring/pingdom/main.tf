@@ -1,4 +1,9 @@
-resource "pingdom_check" "test" {
+resource "pingdom_team" "monitor" {
+  name = "Monitoring Team"
+  member_ids = var.userids
+}
+
+resource "pingdom_check" "prod" {
     count          = length(var.url)
     type           = "http"
     encryption     = "true"
@@ -7,10 +12,9 @@ resource "pingdom_check" "test" {
     host           = var.domain
     integrationids = var.integrationids
     teamids        = [
-      pingdom_team.monitor.id,
-      pingdom_team.infra.id
+      pingdom_team.monitor.id
     ]
-    userids        = var.userids
+    #userids        = var.userids
     shouldcontain  = var.status
     tags           = var.ecs_cluster_name
     resolution     = 1
