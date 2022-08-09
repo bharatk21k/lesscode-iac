@@ -1,8 +1,5 @@
-data "aws_kms_alias" "partition" {
-  name = "alias/${var.partition_name}"
-}
-
 resource "aws_dynamodb_table" "defaults" {
+  #name         = "${var.name}-${var.partition_name}-${var.ecs_cluster_name}"
   name         = "${var.name}-${var.ecs_cluster_name}"
   billing_mode = var.billing_mode
   hash_key     = var.hash_key
@@ -116,8 +113,8 @@ resource "aws_dynamodb_table" "defaults" {
     Name        = "${var.ecs_cluster_name}"
   }
 
-  server_side_encryption{
-    enabled = true
-    kms_key_arn = data.aws_kms_alias.partition.arn
-  }
+  #server_side_encryption{
+    #enabled = true
+    #kms_key_arn = var.partition_kms_arn
+  #}
 }

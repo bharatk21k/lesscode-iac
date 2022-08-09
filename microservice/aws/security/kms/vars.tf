@@ -1,12 +1,8 @@
+
 # variables
 variable "region" {
     type = string
     default ="us-west-2"
-}
-
-variable "env" {
-    type = string
-    default ="dev"
 }
 
 variable "replica1_region" {
@@ -21,7 +17,7 @@ variable "replica2_region" {
 
 variable "partition_name" {
     type = string
-    default = "TEN1"
+    default = "TEN1234"
 }
 
 
