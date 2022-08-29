@@ -1,3 +1,3 @@
 output "arns" {
-  value = "${aws_sqs_queue.queue_wo_dql}"
+  value = "${aws_sns_topic.sns}"
 }
